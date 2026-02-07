@@ -1,0 +1,15 @@
+python>=3.12
+
+# Core NLP Libraries
+spacy>=3.7.2
+sklearn-crfsuite>=0.3.6
+
+# Data Handling
+numpy>=1.26.0
+pandas>=2.2.0
+
+# GUI (Built-in with Python)
+# tkinter is included with standard Python installations
+
+# spaCy English Model
+en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1-py3-none-any.whl
