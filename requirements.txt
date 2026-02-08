@@ -1,4 +1,4 @@
-python>=3.12
+
 
 # Core NLP Libraries
 spacy>=3.7.2
