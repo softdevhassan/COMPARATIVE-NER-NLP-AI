@@ -134,27 +134,4 @@ Handled by: Saad
 - Developer documentation
 - Architecture, classes, workflows
 
-Handled by: Hassan + Mudassir
-
----
-
-## Teacher-friendly one-liner
-
-Agar sir pooche:
-
-"Structure kaise design ki?"
-
-Bolo:
-
-"We followed a modular OOP-based structure separating GUI, models, and comparison logic, with clearly assigned responsibilities for each team member."
-
----
-
-Agar chaho next:
-
-- `README.md` ready likh deta hoon
-- CRF `features.py` ka actual Week-3 code
-- spaCy class code
-- Tkinter GUI skeleton
-
-Bas bolo
+Handled by: Hassan + Mudassir + Saad
