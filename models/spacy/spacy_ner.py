@@ -1,10 +1,6 @@
 import spacy
 import time
 
-
-# spaCy integration for Mudassir (semester project)
-# This file does NOT depend on CRF code. spaCy pre-trained model + heuristics used.
-# Comments are casual pakistani-english, small grammar slips (as requested)
 class SpacyNER:
     def __init__(self):
         # load small english model, keep it light
@@ -78,7 +74,7 @@ class SpacyNER:
                 e = e + 1
             final_spans.append((s, e, lab))
 
-        # build result entities (no CRF dependency)
+        # build result entities
         seen = set()
         entities = []
         for s, e, lab in final_spans:
