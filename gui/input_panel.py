@@ -30,7 +30,9 @@ class InputPanel:
         tk.Label(self.opts, text="Model:").pack(side="left")
 
         self.choice = tk.StringVar(value="spaCy Model")
-        self.menu = tk.OptionMenu(self.opts, self.choice, "spaCy Model")
+        self.menu = tk.OptionMenu(
+            self.opts, self.choice, "spaCy Model", "CRF Model", "Compare Both"
+        )
         self.menu.pack(side="left", padx=5)
 
         # Buttons

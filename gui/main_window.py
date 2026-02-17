@@ -4,11 +4,13 @@ import re
 from gui.input_panel import InputPanel
 from gui.result_panel import ResultPanel
 
-# Mudassir note: abhi sirif spaCy connect kiya ha
+# Mudassir ne spaCy kiya, ab me Hassan bhai ka CRF connect kar raha hoon
 from models.spacy.spacy_ner import SpacyNER
+from models.crf.crf_model import CRFModel
+from models.crf.features import extract_features
 
 
-# main user interfacce (Mudassir's version - Week 4)
+# main user interfacce
 class MainWindow:
     def __init__(self):
         # window setup
@@ -17,6 +19,17 @@ class MainWindow:
         self.root.geometry("1100x650")
 
         # Models initialize kar rahe yahan
+
+        # [SAAD'S TASK]: Hassan bhai ka CRF Model connect kiya
+        print("Saad: Loading Hassan bhai's CRF Model...")
+        self.crf = CRFModel()
+        model_path = os.path.join("data", "processed", "crf_model.joblib")
+        if os.path.exists(model_path):
+            self.crf.load(model_path)
+            print("Saad: CRF Loaded successfully!")
+        else:
+            print("Saad Error: CRF Model not found in data/processed!")
+
         # [MUDASSIR'S TASK]: Mere spaCy Model ki initialization
         print("Mudassir: Loading my spaCy Model...")
         self.spacy_m = SpacyNER()
@@ -58,11 +71,38 @@ class MainWindow:
         self.status.config(text="Processing... please wait")
         results = {"entities": [], "processing_time": 0}
 
-        # --- PROCESSING LOGIC (Mudassir Only for now) ---
+        # --- PROCESSING LOGIC (Split Work) ---
 
         if ml == "spaCy Model":
-            # [MUDASSIR]: I connected my spaCy process here
             results = self.spacy_m.process(txt)
+
+        elif ml == "CRF Model":
+            # dots aur abbreviations ko sahi se handle karne ke liye regex se words extract kar rahe hain
+            words = re.findall(r"[A-Z]\.(?:[A-Z]\.)+|[\w']+|[^\w\s]", txt)
+            import time
+
+            start_t = time.time()
+
+            # Features extract karein ge har word k liye
+            feats = [extract_features(words, i) for i in range(len(words))]
+            preds = self.crf.predict([feats])[0]
+
+            # Entities list banai gui k liye
+            ents_list = []
+            for w, p in zip(words, preds):
+                if p != "O":
+                    ents_list.append({"text": w, "label": p})
+
+            end_t = time.time()
+            results = {
+                "entities": ents_list,
+                "processing_time": round(end_t - start_t, 4),
+            }
+
+        elif ml == "Compare Both":
+            self.status.config(text="Compare Both: Coming soon in Week 5!")
+            return
+
         else:
             self.status.config(text="Model not supported yet!")
             return
