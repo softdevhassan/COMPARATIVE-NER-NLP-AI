@@ -2,24 +2,25 @@
 
 ### `app.py`
 
-- Purpose: Ye poori desktop application ka entry point hai.
-- Kaam: GUI launch karta hai aur backend modules ko connect karta hai.
-- Responsible: Hassan
+- Target: Ye poori application ka entry point hai.
+- Role: GUI ko launch karna aur backend modules ko connect karna.
+- Task Lead: Hassan
 
 ---
 
 ### `requirements.txt`
 
-- Purpose: Project ke liye zaroori saari Python libraries define karta hai.
-- Kaam: Environment setup easy banana. aaj kal standard ha. better to use it.
-- Responsible: Hassan
+- Target: Project ki zaroori Python libraries list karna.
+- Role: Environment setup asaan banana.
+- Task Lead: Hassan
 
 ---
 
 ### `README.md`
 
-- Purpose: Project overview, features, aur quick setup instructions.
-- Responsible: Team
+- Target: Project overview, features aur quick setup instructions.
+- Role: Team project background.
+- Task Lead: Team
 
 ---
 
@@ -27,21 +28,18 @@
 
 ### `main_window.py`
 
-- Main application window ka layout
-- Buttons, headings, overall structure
+- Window layout aur menu structure.
 
 ### `input_panel.py`
 
-- User ka text input area
-- Model selection (CRF / spaCy)
+- Text input area aur model select karne ka option.
 
 ### `result_panel.py`
 
-- Side-by-side NER results display
-- Highlighted entities + metrics
+- Result display karne k liye side area.
 
-Handled by: Saad Ilyas
-Focus: User experience aur interface
+Lead: Saad Ilyas
+Focus: Interface design aur experience.
 
 ---
 
@@ -49,21 +47,18 @@ Focus: User experience aur interface
 
 ### `features.py`
 
-- CRF ke liye feature engineering
-- Capitalization, prefix/suffix, word shape, context words
+- Feature engineering logic (capitalization, context, shapes).
 
 ### `crf_model.py`
 
-- CRF model class
-- Predict function + inference logic
+- Model class aur prediction logic.
 
 ### `trainer.py`
 
-- CoNLL2003 dataset se model training
-- Feature extraction + fitting
+- Dataset se model train karne ka script.
 
-Handled by: Hassan Ali
-Focus: Transparent, interpretable ML
+Lead: Hassan Ali
+Focus: Backend ML processing.
 
 ---
 
@@ -71,24 +66,20 @@ Focus: Transparent, interpretable ML
 
 ### `spacy_ner.py`
 
-- spaCy `en_core_web_sm` model load
-- Text processing + entity extraction
+- spaCy model load karna aur text process karna.
 
-Handled by: Mudassir
-Focus: Pre-trained neural NER integration
+Lead: Mudassir
+Focus: Neural network model integration.
 
 ---
 
-## `comparison/` – Model Comparison (Week-5)
+## `comparison/` – Model Comparison
 
 ### `comparator.py`
 
-- CRF vs spaCy results comparison
-- Processing time
-- Confidence score
-- Entity overlap
+- Dono models ka result compare karna.
 
-Handled by: Team (lead Hassan)
+Lead: Team (lead Hassan)
 
 ---
 
@@ -96,13 +87,13 @@ Handled by: Team (lead Hassan)
 
 ### `raw/`
 
-- Kaggle se downloaded CoNLL2003 dataset
+- Mehnge dataset (CoNLL2003) k raw files.
 
 ### `processed/`
 
-- Cleaned / parsed dataset for training
+- Cleaned files training k liye.
 
-Handled by: Hassan
+Lead: Hassan
 
 ---
 
@@ -110,13 +101,13 @@ Handled by: Hassan
 
 ### `timer.py`
 
-- Processing time measurement
+- Execution time measure karne k liye.
 
 ### `highlighter.py`
 
-- Text mein entities ko highlight karna (GUI ke liye)
+- Entities ko color code highlight karna.
 
-Handled by: Hassan (support to GUI)
+Lead: Hassan
 
 ---
 
@@ -124,14 +115,12 @@ Handled by: Hassan (support to GUI)
 
 ### `UsageGuide.md`
 
-- User ke liye step-by-step guide
-- Installation + usage
+- Installation aur use karne ka tarika.
 
-Handled by: Saad
+Lead: Saad
 
 ### `CodingGuide.md`
 
-- Developer documentation
-- Architecture, classes, workflows
+- Technical documentation developers k liye.
 
-Handled by: Hassan + Mudassir + Saad
+Lead: Everyone

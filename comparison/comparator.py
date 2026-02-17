@@ -1,0 +1,1 @@
+# isme dono models ka result compare kareinge. ye last weeks mein dekheingay pehle dono models complete kro

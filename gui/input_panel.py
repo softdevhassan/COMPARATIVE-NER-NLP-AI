@@ -1,58 +1,61 @@
 import tkinter as tk
 
 
+# very big box for text input
 class InputPanel:
     def __init__(self, parent):
-        # expose frame for PanedWindow
-        self.frame = tk.Frame(parent, bd=2, relief=tk.GROOVE)
-        self.frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=10, pady=10)
+        # input box frame
+        self.frame = tk.Frame(parent, bd=2, relief="groove") # parent is liye becuase isko main window k andar place karna hai
 
-        tk.Label(self.frame, text="Input Text", font=("Helvetica", 12, "bold")).pack(anchor="w")
+        tk.Label(self.frame, text="Paste Text Here:", font=("Arial", 11)).pack(
+            anchor="w", padx=5, pady=2
+        )
 
-        # Text area with a scrollbar
-        text_container = tk.Frame(self.frame)
-        text_container.pack(fill=tk.BOTH, expand=True)
-        self.text_area = tk.Text(text_container, height=18, wrap=tk.WORD)
-        scrollbar = tk.Scrollbar(text_container, command=self.text_area.yview)
-        self.text_area.configure(yscrollcommand=scrollbar.set)
-        self.text_area.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+        text_frame = tk.Frame(self.frame)
+        text_frame.pack(fill="both", expand=True, padx=5)
 
-        # Controls: model select and buttons
-        controls = tk.Frame(self.frame)
-        controls.pack(fill=tk.X, pady=6)
+        self.txt = tk.Text(text_frame, height=18, width=60)
+        self.sbar = tk.Scrollbar(text_frame)
+        self.txt.config(yscrollcommand=self.sbar.set)
+        self.sbar.config(command=self.txt.yview)
 
-        tk.Label(controls, text="Model:", font=("Helvetica", 10)).pack(side=tk.LEFT, padx=(2,6))
-        self.model_var = tk.StringVar(value="spaCy (Mudassir)")
-        choices = ["spaCy (Mudassir)", "CRF (Hassan)", "Both"]
-        self.model_menu = tk.OptionMenu(controls, self.model_var, *choices)
-        self.model_menu.config(width=16)
-        self.model_menu.pack(side=tk.LEFT)
+        self.txt.pack(side="left", fill="both", expand=True)
+        self.sbar.pack(side="right", fill="y")
+
+        self.opts = tk.Frame(self.frame)
+        self.opts.pack(fill="x", pady=20) # below space for buttons
+
+        tk.Label(self.opts, text="Model:").pack(side="left")
+
+        self.choice = tk.StringVar(value="spaCy Model")
+        self.menu = tk.OptionMenu(
+            self.opts, self.choice, "spaCy Model", "CRF Model", "Compare Both"
+        )
+        self.menu.pack(side="left", padx=5)
 
         # Buttons
-        self.run_button = tk.Button(controls, text="Run Comparison")
-        self.run_button.pack(side=tk.RIGHT, padx=4)
+        self.run_button = tk.Button(self.opts, text="RUN", width=12, bg="lightblue")
+        self.run_button.pack(side="right", padx=5)
 
-        self.clear_button = tk.Button(controls, text="Clear", command=self.clear_text)
-        self.clear_button.pack(side=tk.RIGHT)
+        self.clr_btn = tk.Button(self.opts, text="Clear", command=self.saaf_karo)
+        self.clr_btn.pack(side="right", padx=5)
 
-        self.sample_button = tk.Button(controls, text="Insert Sample", command=self.insert_sample)
-        self.sample_button.pack(side=tk.RIGHT, padx=(0,6))
+        self.sample_btn = tk.Button(
+            self.opts, text="Sample Text", command=self.add_sample
+        )
+        self.sample_btn.pack(side="right", padx=5)
+
+    def add_sample(self): # default text hassan bhai ka order ha...
+        s = "Apple is looking at buying U.K. startup for $1 billion in 2026. "
+        s += "Hassan Ali from Google is visiting London."
+        self.txt.delete("1.0", "end")
+        self.txt.insert("end", s)
 
     def get_text(self):
-        return self.text_area.get("1.0", tk.END)
+        return self.txt.get("1.0", "end-1c")
 
-    def clear_text(self):
-        self.text_area.delete("1.0", tk.END)
-
-    def insert_sample(self):
-        sample = (
-            "John Doe visited New York in April to attend a conference at Columbia University. "
-            "He met with Dr. Alice Smith from Google."
-        )
-        self.text_area.delete("1.0", tk.END)
-        self.text_area.insert(tk.END, sample)
+    def saaf_karo(self):
+        self.txt.delete("1.0", "end")
 
     def get_model_choice(self):
-        return self.model_var.get()
-
+        return self.choice.get()
