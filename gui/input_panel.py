@@ -5,7 +5,9 @@ import tkinter as tk
 class InputPanel:
     def __init__(self, parent):
         # input box frame
-        self.frame = tk.Frame(parent, bd=2, relief="groove") # parent is liye becuase isko main window k andar place karna hai
+        self.frame = tk.Frame(
+            parent, bd=2, relief="groove"
+        )  # parent is liye becuase isko main window k andar place karna hai
 
         tk.Label(self.frame, text="Paste Text Here:", font=("Arial", 11)).pack(
             anchor="w", padx=5, pady=2
@@ -23,14 +25,12 @@ class InputPanel:
         self.sbar.pack(side="right", fill="y")
 
         self.opts = tk.Frame(self.frame)
-        self.opts.pack(fill="x", pady=20) # below space for buttons
+        self.opts.pack(fill="x", pady=20)  # below space for buttons
 
         tk.Label(self.opts, text="Model:").pack(side="left")
 
         self.choice = tk.StringVar(value="spaCy Model")
-        self.menu = tk.OptionMenu(
-            self.opts, self.choice, "spaCy Model", "CRF Model", "Compare Both"
-        )
+        self.menu = tk.OptionMenu(self.opts, self.choice, "spaCy Model")
         self.menu.pack(side="left", padx=5)
 
         # Buttons
@@ -45,7 +45,7 @@ class InputPanel:
         )
         self.sample_btn.pack(side="right", padx=5)
 
-    def add_sample(self): # default text hassan bhai ka order ha...
+    def add_sample(self):  # default text hassan bhai ka order ha...
         s = "Apple is looking at buying U.K. startup for $1 billion in 2026. "
         s += "Hassan Ali from Google is visiting London."
         self.txt.delete("1.0", "end")

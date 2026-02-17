@@ -1,29 +1,43 @@
 import tkinter as tk
+import os
+import re
 from gui.input_panel import InputPanel
 from gui.result_panel import ResultPanel
 
+# Mudassir note: abhi sirif spaCy connect kiya ha
+from models.spacy.spacy_ner import SpacyNER
 
-# main user interfacce
+
+# main user interfacce (Mudassir's version - Week 4)
 class MainWindow:
     def __init__(self):
+        # window setup
         self.root = tk.Tk()
         self.root.title("Comparative NER System NLP SEMESTER PROJECT")
-        self.root.geometry("1100x650") # q k bara text bhi add karna hoskta ha...
+        self.root.geometry("1100x650")
+
+        # Models initialize kar rahe yahan
+        # [MUDASSIR'S TASK]: Mere spaCy Model ki initialization
+        print("Mudassir: Loading my spaCy Model...")
+        self.spacy_m = SpacyNER()
 
         # Heading label for project
         self.heading = tk.Label(
-            self.root, text="Comparative NER System NLP SEMESTER PROJECT", font=("Arial", 18, "bold")
+            self.root,
+            text="Comparative NER System NLP SEMESTER PROJECT",
+            font=("Arial", 18, "bold"),
         )
         self.heading.grid(row=0, column=0, columnspan=2, pady=10)
-        # grid mein rows/columns ki madad sy 70/30 wala layout banaya
+
+        # grid setup
         self.root.columnconfigure(0, weight=7, uniform="group1")
         self.root.columnconfigure(1, weight=3, uniform="group1")
-        self.root.rowconfigure(1, weight=1) 
+        self.root.rowconfigure(1, weight=1)
 
-        self.in_p = InputPanel(self.root) # input panel add kiya
+        self.in_p = InputPanel(self.root)
         self.in_p.frame.grid(row=1, column=0, sticky="nsew", padx=10, pady=5)
 
-        self.res_p = ResultPanel(self.root) # result panel add kiya
+        self.res_p = ResultPanel(self.root)
         self.res_p.frame.grid(row=1, column=1, sticky="nsew", padx=10, pady=5)
 
         self.status = tk.Label(
@@ -42,7 +56,18 @@ class MainWindow:
             return
 
         self.status.config(text="Processing... please wait")
-        self.res_p.display_results(ml, txt)
+        results = {"entities": [], "processing_time": 0}
+
+        # --- PROCESSING LOGIC (Mudassir Only for now) ---
+
+        if ml == "spaCy Model":
+            # [MUDASSIR]: I connected my spaCy process here
+            results = self.spacy_m.process(txt)
+        else:
+            self.status.config(text="Model not supported yet!")
+            return
+
+        self.res_p.display_results(ml, results)
         self.status.config(text="Done!")
 
     def run(self):

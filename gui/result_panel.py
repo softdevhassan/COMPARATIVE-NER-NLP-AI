@@ -11,15 +11,25 @@ class ResultPanel:
         self.out = tk.Text(self.frame, height=20, width=25, bg="#f0f0f0")
         self.out.pack(fill="both", expand=True)
 
-    def display_results(self, choice, text):
+    def display_results(self, model_choice, result_data):
+        # spacy model now working with gui
         self.out.delete("1.0", "end")
 
-        self.out.insert("end", f"Results for: {choice}\n")
-        self.out.insert("end", "=" * 30 + "\n")
-        words = text.split()
-        for w in words:
-            if len(w) > 0 and w[0].isupper():
-                self.out.insert("end", f"Entity Found: {w}\n")
+        entities = result_data.get("entities", [])
+        p_time = result_data.get("processing_time", 0)
 
-        self.out.insert("end", "\n(Note: actual models will be connected soon)\n")
-        self.out.insert("end", "Developed by Saad Ilyas 😍")
+        self.out.insert("end", f"MODEL: {model_choice}\n")
+        self.out.insert("end", f"TIME: {p_time} seconds\n")
+        self.out.insert("end", "=" * 30 + "\n\n")
+
+        if not entities:
+            self.out.insert("end", "No entities found in this text.\n")
+        else:
+            for ent in entities:
+                # Entity format: {'text': '...', 'label': '...'}
+                txt = ent.get("text", ent.get("word", ""))
+                lbl = ent.get("label", "O")
+                self.out.insert("end", f" - {txt:15} | {lbl}\n")
+
+        self.out.insert("end", "\n" + "-" * 30 + "\n")
+        self.out.insert("end", "Developed by Saad & Mudassir 😍")
