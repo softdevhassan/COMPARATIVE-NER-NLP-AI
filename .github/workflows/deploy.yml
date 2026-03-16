@@ -25,7 +25,6 @@ jobs:
       - name: Deploy via rsync
         uses: burnett01/rsync-deployments@7.0.0
         with:
-          # Exclude environment files, virtual environments, and git data
           switches: -avz --delete --exclude='.env' --exclude='venv' --exclude='.git' --exclude='.github' --exclude='__pycache__' --exclude='*.pyc'
           path: ./
           remote_path: /var/www/html/ner.orbin.dev/
@@ -42,15 +41,10 @@ jobs:
           script: |
             cd /var/www/html/ner.orbin.dev
 
-            # Setup/Activate virtual environment
             python3 -m venv ner
             source ner/bin/activate
 
-            # Install updated requirements
             pip install --upgrade pip
             pip install -r requirements.txt
 
-            # Restart the service (Assuming systemd/gunicorn setup)
-            sudo systemctl restart gunicorn
-            # Alternatively, if using a simple process manager or reload:
-            # sudo systemctl restart ner_tool
+            sudo systemctl restart ner-flask
