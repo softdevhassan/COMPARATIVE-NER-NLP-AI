@@ -22,15 +22,26 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Test SSH Connection
+        run: |
+          echo "Testing connectivity to ${{ secrets.SSH_HOST }} on port 22..."
+          nc -zv -w 5 ${{ secrets.SSH_HOST }} 22
+
       - name: Deploy via rsync
-        uses: burnett01/rsync-deployments@7.0.0
-        with:
-          switches: -avz --delete --exclude='.env' --exclude='ner' --exclude='.git' --exclude='.github' --exclude='__pycache__' --exclude='*.pyc'
-          path: ./
-          remote_path: /var/www/html/ner.orbin.dev/
-          remote_host: ${{ secrets.SSH_HOST }}
-          remote_user: ${{ secrets.SSH_USER }}
-          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/deploy_key
+          chmod 600 ~/deploy_key
+          
+          # Use rsync with explicit SSH options for better debugging and reliability
+          rsync -avz --delete -vv \
+            -e "ssh -i ~/deploy_key -o StrictHostKeyChecking=no -o ConnectTimeout=10" \
+            --exclude='.env' --exclude='ner' --exclude='.git' --exclude='.github' --exclude='__pycache__' --exclude='*.pyc' \
+            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/html/ner.orbin.dev/
+          
+          rm ~/deploy_key
 
       - name: Post-deployment
         uses: appleboy/ssh-action@v1.2.0
