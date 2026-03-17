@@ -17,7 +17,7 @@ jobs:
           python-version: "3.12"
           cache: "pip"
 
-      - name: Install dependencies
+      - name: Install dependencies (for caching)
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
@@ -34,28 +34,36 @@ jobs:
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/deploy_key
           chmod 600 ~/deploy_key
-          
-          # Use rsync with explicit SSH options for better debugging and reliability
+
           rsync -avz --delete -vv \
             -e "ssh -i ~/deploy_key -o StrictHostKeyChecking=no -o ConnectTimeout=10" \
             --exclude='.env' --exclude='ner' --exclude='.git' --exclude='.github' --exclude='__pycache__' --exclude='*.pyc' \
             ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/html/ner.orbin.dev/
-          
+
           rm ~/deploy_key
 
-      - name: Post-deployment
+      - name: Post-deployment (Setup and Start Service)
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            set -e
             cd /var/www/html/ner.orbin.dev
 
-            python3 -m venv ner
-            source ner/bin/activate
+            # Create virtual environment if it doesn't exist
+            if [ ! -d "ner" ]; then
+                echo "Creating virtual environment..."
+                python3 -m venv ner
+            else
+                echo "Virtual environment already exists."
+            fi
 
+            # Activate and install dependencies
+            source ner/bin/activate
             pip install --upgrade pip
             pip install -r requirements.txt
 
+            # Restart the service (service file already exists on server)
             sudo systemctl restart ner-flask

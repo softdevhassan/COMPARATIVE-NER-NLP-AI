@@ -11,28 +11,35 @@ from models.crf.features import extract_features
 
 app = Flask(__name__)
 
-# --- Initialize Models Safely ---
-# Note: Models are loaded at startup to ensure optimal performance.
-# Load SpaCy Model
-try:
-    spacy_model = SpacyNER()
-    print("SpaCy model loaded successfully.")
-except Exception as e:
-    print(f"Error loading SpaCy model: {e}")
-    spacy_model = None
+# --- Global Model Variables (Initialized Lazily) ---
+_spacy_model = None
+_crf_model = None
+_crf_loaded = False
 
-# Load CRF Model
-crf_model_path = os.path.join("models", "crf", "crf_model.joblib")
-crf_model = CRFModel()
-crf_loaded = False
-try:
-    crf_model.load(crf_model_path)
-    crf_loaded = True
-    print("CRF model loaded successfully.")
-except FileNotFoundError:
-    print(f"CRF model not found at {crf_model_path}. Please train it first.")
-except Exception as e:
-    print(f"Error loading CRF model: {e}")
+def get_spacy_model():
+    global _spacy_model
+    if _spacy_model is None:
+        try:
+            print("Loading SpaCy model lazily...")
+            _spacy_model = SpacyNER()
+            print("SpaCy model loaded successfully.")
+        except Exception as e:
+            print(f"Error loading SpaCy model: {e}")
+    return _spacy_model
+
+def get_crf_model():
+    global _crf_model, _crf_loaded
+    if _crf_model is None:
+        try:
+            print("Loading CRF model lazily...")
+            _crf_model = CRFModel()
+            crf_model_path = os.path.join("models", "crf", "crf_model.joblib")
+            _crf_model.load(crf_model_path)
+            _crf_loaded = True
+            print("CRF model loaded successfully.")
+        except Exception as e:
+            print(f"Error loading CRF model: {e}")
+    return _crf_model, _crf_loaded
 
 # --- Frontend Page Routes ---
 
@@ -117,6 +124,10 @@ def api_compare():
         "spacy": {"entities": [], "processing_time": 0},
         "crf": {"entities": [], "processing_time": 0, "error": None}
     }
+
+    # Get models (Lazy Load if not already in memory)
+    spacy_model = get_spacy_model()
+    crf_model, crf_loaded = get_crf_model()
 
     # Process with SpaCy
     if spacy_model:
