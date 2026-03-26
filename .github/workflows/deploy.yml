@@ -37,7 +37,7 @@ jobs:
 
           rsync -avz --delete -vv \
             -e "ssh -i ~/deploy_key -o StrictHostKeyChecking=no -o ConnectTimeout=10" \
-            --exclude='.env' --exclude='ner' --exclude='.git' --exclude='.github' --exclude='__pycache__' --exclude='*.pyc' \
+            --exclude='.env' --exclude='entify-env' --exclude='ner' --exclude='.git' --exclude='.github' --exclude='__pycache__' --exclude='*.pyc' \
             ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/html/entify.orbin.dev/
 
           rm ~/deploy_key
@@ -56,19 +56,49 @@ jobs:
             echo "Stopping MySQL..."
             sudo systemctl stop mysql || true
 
-            # Create virtual environment if it doesn't exist
-            if [ ! -d "ner" ]; then
-                echo "Creating virtual environment..."
-                python3 -m venv ner
-            else
-                echo "Virtual environment already exists."
+            # Cleanup old venv if it exists
+            if [ -d "ner" ]; then
+                echo "Deleting legacy ner venv..."
+                rm -rf ner
             fi
 
-            # Activate and install dependencies
-            source ner/bin/activate
-            pip install --upgrade pip
-            pip install -r requirements.txt
+            # Create new entify-env venv if it doesn't exist
+            if [ ! -d "entify-env" ]; then
+                echo "Creating entify-env virtual environment..."
+                python3 -m venv entify-env
+            else
+                echo "entify-env virtual environment already exists."
+            fi
 
-            # Restart the Flask service
-            echo "Restarting ner-flask..."
-            sudo systemctl restart ner-flask
+            # Upgrade and install dependencies using entify-env pip
+            ./entify-env/bin/python3 -m pip install --upgrade pip
+            ./entify-env/bin/python3 -m pip install -r requirements.txt
+
+            # Create/Update the systemd service file for Entify
+            echo "Configuring entify.service..."
+            sudo bash -c 'cat <<EOF > /etc/systemd/system/entify.service
+[Unit]
+Description=Gunicorn instance to serve Entify NER
+After=network.target
+
+[Service]
+User=${{ secrets.SSH_USER }}
+Group=www-data
+WorkingDirectory=/var/www/html/entify.orbin.dev
+Environment="PATH=/var/www/html/entify.orbin.dev/entify-env/bin"
+ExecStart=/var/www/html/entify.orbin.dev/entify-env/bin/gunicorn --workers 3 --bind unix:entify.sock -m 007 app:app
+
+[Install]
+WantedBy=multi-user.target
+EOF'
+
+            # Reload systemd and switch services
+            sudo systemctl daemon-reload
+            
+            echo "Stopping legacy ner-flask service..."
+            sudo systemctl stop ner-flask || true
+            sudo systemctl disable ner-flask || true
+            
+            echo "Starting new entify service..."
+            sudo systemctl enable entify
+            sudo systemctl restart entify
