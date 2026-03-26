@@ -406,6 +406,20 @@
                     <i class="ri-terminal-box-line text-accent-600"></i>
                     Developer Guide
                   </a>
+                  <a
+                    href="{{ url_for('docs_api') }}"
+                    class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 hover:bg-brand-50 hover:text-brand-600 rounded-xl transition-colors"
+                  >
+                    <i class="ri-code-s-slash-line text-accent-600"></i>
+                    API Reference
+                  </a>
+                  <a
+                    href="{{ url_for('docs_tests') }}"
+                    class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-600 hover:bg-brand-50 hover:text-brand-600 rounded-xl transition-colors"
+                  >
+                    <i class="ri-test-tube-line text-accent-600"></i>
+                    Tests Performed
+                  </a>
                 </div>
               </div>
             </div>
@@ -469,7 +483,7 @@
             </button>
           </div>
 
-          <div class="space-y-1">
+          <div class="space-y-1" x-data="{ openSection: null }">
             <a
               href="{{ url_for('home') }}"
               class="block px-4 py-3 rounded-xl font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition-colors"
@@ -480,27 +494,39 @@
               class="block px-4 py-3 rounded-xl font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition-colors"
               >Try Tool</a
             >
-            <a
-              href="{{ url_for('about') }}"
-              class="block px-4 py-3 rounded-xl font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition-colors"
-              >About Project</a
-            >
-            <a
-              href="{{ url_for('timeline') }}"
-              class="block px-4 py-3 rounded-xl font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition-colors"
-              >Project Timeline</a
-            >
+            
+            <!-- About Accordion -->
+            <div>
+              <button 
+                @click="openSection = (openSection === 'about' ? null : 'about')"
+                class="w-full flex items-center justify-between px-4 py-3 rounded-xl font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition-colors"
+              >
+                <span>About</span>
+                <i class="ri-arrow-down-s-line transition-transform duration-300" :class="{'rotate-180': openSection === 'about'}"></i>
+              </button>
+              <div x-show="openSection === 'about'" x-collapse class="pl-4 space-y-1 mt-1">
+                <a href="{{ url_for('about') }}" class="block px-4 py-2 text-sm font-bold text-slate-500 hover:text-brand-600">The Story</a>
+                <a href="{{ url_for('timeline') }}" class="block px-4 py-2 text-sm font-bold text-slate-500 hover:text-brand-600">Timeline</a>
+              </div>
+            </div>
 
-            <a
-              href="{{ url_for('docs_user') }}"
-              class="block px-4 py-3 rounded-xl font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition-colors"
-              >User Guide</a
-            >
-            <a
-              href="{{ url_for('docs_dev') }}"
-              class="block px-4 py-3 rounded-xl font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition-colors"
-              >Developer Guide</a
-            >
+            <!-- Docs Accordion -->
+            <div>
+              <button 
+                @click="openSection = (openSection === 'docs' ? null : 'docs')"
+                class="w-full flex items-center justify-between px-4 py-3 rounded-xl font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition-colors"
+              >
+                <span>Docs</span>
+                <i class="ri-arrow-down-s-line transition-transform duration-300" :class="{'rotate-180': openSection === 'docs'}"></i>
+              </button>
+              <div x-show="openSection === 'docs'" x-collapse class="pl-4 space-y-1 mt-1">
+                <a href="{{ url_for('docs_user') }}" class="block px-4 py-2 text-sm font-bold text-slate-500 hover:text-brand-600">User Guide</a>
+                <a href="{{ url_for('docs_dev') }}" class="block px-4 py-2 text-sm font-bold text-slate-500 hover:text-brand-600">Dev Guide</a>
+                <a href="{{ url_for('docs_api') }}" class="block px-4 py-2 text-sm font-bold text-slate-500 hover:text-brand-600">API Docs</a>
+                <a href="{{ url_for('docs_tests') }}" class="block px-4 py-2 text-sm font-bold text-slate-500 hover:text-brand-600">Test Labs</a>
+              </div>
+            </div>
+
             <a
               href="{{ url_for('contact') }}"
               class="block px-4 py-3 rounded-xl font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-600 transition-colors"
@@ -568,23 +594,17 @@
               </div>
             </div>
             <p class="text-slate-500 text-sm leading-loose mb-2 font-medium">
-              {{ APP_NAME }} is a Comparative NER Project to monitor differences
-              between Statistical and Neural Network Models, built by University
-              Students as a Semester Project.
+              {{ APP_NAME }} is a specialized Comparative NER Project designed to analyze and monitor the performance differences
+              between Statistical (CRF) and Neural Network (spaCy) models. Developed as a Semester Project, it focuses on 
+              delivering an experimental laboratory interface for real-time NLP benchmarking, featuring automated CI/CD pipelines 
+              and production-grade AWS deployment.
             </p>
-            <a
-              href="{{ APP_GITHUB_REPO_URL }}"
-              target="_blank"
-              class="rounded-xl bg-white border border-black/10 flex items-center justify-center text-slate-500 hover:text-white hover:bg-slate-900 hover:border-slate-900 transition-all duration-300 w-fit px-4 py-2 font-bold text-sm group"
-            >
-              <i class="ri-github-fill text-xl mr-2"></i> View on Github
-            </a>
           </div>
 
-          <!-- Quick Links -->
+          <!-- Project & Legal -->
           <div class="lg:col-span-2" data-aos="fade-up" data-aos-delay="100">
             <h4 class="text-sm font-bold text-brand-600 uppercase mb-5">
-              Quick Links
+              Project & Legal
             </h4>
             <ul class="space-y-4">
               <li>
@@ -615,6 +635,20 @@
                   >Project Timeline</a
                 >
               </li>
+              <li>
+                <a
+                  href="{{ url_for('privacy') }}"
+                  class="text-slate-500 hover:text-brand-600 hover:translate-x-1 inline-block transition-all duration-300 text-sm font-bold"
+                  >Privacy Policy</a
+                >
+              </li>
+              <li>
+                <a
+                  href="{{ url_for('terms') }}"
+                  class="text-slate-500 hover:text-brand-600 hover:translate-x-1 inline-block transition-all duration-300 text-sm font-bold"
+                  >Terms of Use</a
+                >
+              </li>
             </ul>
           </div>
 
@@ -631,11 +665,25 @@
                   >User Guide</a
                 >
               </li>
-              <li>
+               <li>
                 <a
                   href="{{ url_for('docs_dev') }}"
                   class="text-slate-500 hover:text-accent-600 hover:translate-x-1 inline-block transition-all duration-300 text-sm font-bold"
                   >Developer Guide</a
+                >
+              </li>
+              <li>
+                <a
+                  href="{{ url_for('docs_api') }}"
+                  class="text-slate-500 hover:text-accent-600 hover:translate-x-1 inline-block transition-all duration-300 text-sm font-bold"
+                  >API Documentation</a
+                >
+              </li>
+              <li>
+                <a
+                  href="{{ url_for('docs_tests') }}"
+                  class="text-slate-500 hover:text-accent-600 hover:translate-x-1 inline-block transition-all duration-300 text-sm font-bold"
+                  >Technical Lab</a
                 >
               </li>
               <li>
@@ -709,6 +757,21 @@
                   >
                 </div>
               </a>
+
+              <!-- GitHub Link Styled as Box -->
+              <a
+                href="{{ APP_GITHUB_REPO_URL }}"
+                target="_blank"
+                class="flex items-center gap-4"
+              >
+                <div class="w-14 h-14 rounded-xl bg-slate-900 flex items-center justify-center text-white shrink-0 group-hover:scale-95 transition-transform">
+                  <i class="ri-github-fill text-3xl"></i>
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-[11px] font-black text-slate-500 uppercase">Open Source</span>
+                  <span class="text-sm font-bold text-slate-900 underline decoration-slate-200 group-hover:text-brand-600 transition-colors">View on GitHub <i class="ri-external-link-line"></i></span>
+                </div>
+              </a>
             </div>
           </div>
         </div>
@@ -725,16 +788,6 @@
               class="h-1 w-1 rounded-full bg-slate-300 hidden md:block"
             ></div>
             <div class="flex items-center gap-6">
-              <a
-                href="{{ url_for('privacy') }}"
-                class="text-[11px] font-black text-slate-500 hover:text-brand-600 uppercase transition-colors"
-                >Privacy Policy</a
-              >
-              <a
-                href="{{ url_for('terms') }}"
-                class="text-[11px] font-black text-slate-500 hover:text-brand-600 uppercase transition-colors"
-                >Terms of Use</a
-              >
             </div>
           </div>
           <div class="flex items-center gap-3">

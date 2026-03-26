@@ -119,6 +119,16 @@ def docs_dev():
     return render_template("docs_dev.html")
 
 
+@app.route("/docs/api")
+def docs_api():
+    return render_template("docs_api.html")
+
+
+@app.route("/docs/tests")
+def docs_tests():
+    return render_template("docs_tests.html")
+
+
 @app.route("/sitemap")
 def sitemap_page():
     return render_template("sitemap.html")
@@ -144,6 +154,8 @@ def sitemap():
         ("/contact", "0.7", "monthly"),
         ("/docs/user", "0.7", "monthly"),
         ("/docs/dev", "0.7", "monthly"),
+        ("/docs/api", "0.7", "monthly"),
+        ("/docs/tests", "0.7", "monthly"),
         ("/privacy-policy", "0.5", "monthly"),
         ("/terms-of-use", "0.5", "monthly"),
         ("/sitemap", "0.6", "monthly"),
@@ -172,8 +184,16 @@ def api_compare():
     data = request.get_json()
     text = data.get("text", "")
 
-    if not text.strip():
+    # Input Validation & Sanitization
+    if not text or not text.strip():
         return jsonify({"error": "No text provided"}), 400
+
+    if len(text) > 5000:
+        return jsonify({"error": "Input exceeds 5000 characters"}), 413
+
+    # Simple HTML stripping
+    import re
+    text = re.sub(r'<[^>]*>', '', text)
 
     results = {
         "text": text,
@@ -203,10 +223,10 @@ def api_compare():
         try:
             start_t = time.time()
             sentence = text.split()
-            # Extract features for prediction
-            features = [extract_features(sentence, i) for i in range(len(sentence))]
-            # Predict
+            # Predict labels
             predictions = crf_model.predict([features])[0]
+            # Predict marginal probabilities for confidence scores
+            marginals = crf_model.predict_marginals([features])[0]
             end_t = time.time()
 
             # Map predictions to entities layout
@@ -216,11 +236,15 @@ def api_compare():
             # Reconstruct character offsets for CRF based purely on word splits (approximate)
             current_char_idx = 0
 
-            for i, (word, pred) in enumerate(zip(sentence, predictions)):
+            for i, (word, pred, prob_dist) in enumerate(zip(sentence, predictions, marginals)):
                 # Find start char index of the word in original text
                 start_char = text.find(word, current_char_idx)
+                if start_char == -1: start_char = current_char_idx
                 end_char = start_char + len(word)
                 current_char_idx = end_char
+
+                # Get confidence for the predicted label
+                confidence = round(prob_dist.get(pred, 0) * 100, 1)
 
                 if pred != "O":
                     # Remove B- or I- prefixes if present
@@ -238,11 +262,14 @@ def api_compare():
                             "label": label,
                             "start": start_char,
                             "end": end_char,
+                            "confidence": confidence
                         }
                     else:
                         # Append to current entity
                         current_entity["text"] += " " + word
                         current_entity["end"] = end_char
+                        # Track minimum confidence in multi-word entity
+                        current_entity["confidence"] = min(current_entity.get("confidence", 100), confidence)
                 else:
                     if current_entity:
                         entities.append(current_entity)

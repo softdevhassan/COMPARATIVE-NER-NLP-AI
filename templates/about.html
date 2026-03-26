@@ -135,7 +135,7 @@
                 </div>
                 <h4 class="text-lg font-display font-black text-slate-900 uppercase mb-1">Hassan Ali</h4>
                 <span class="block text-[10px] font-black text-brand-600 uppercase mb-4">Team Lead</span>
-                <a href="https://github.com/{{ TEAM_HANDLES[0] }}" target="_blank" class="inline-flex items-center gap-2 text-xs font-black text-slate-600 hover:text-slate-900 transition-colors uppercase border-t border-black/5 pt-4 w-full">
+                <a href="https://github.com/softdevhassan" target="_blank" class="inline-flex items-center gap-2 text-xs font-black text-slate-600 hover:text-slate-900 transition-colors uppercase border-t border-black/5 pt-4 w-full">
                     <i class="ri-github-fill text-lg"></i> Follow Profile
                 </a>
             </div>
@@ -147,7 +147,7 @@
                 </div>
                 <h4 class="text-lg font-display font-black text-slate-900 uppercase mb-1">Mudassir Ali</h4>
                 <span class="block text-[10px] font-black text-slate-600 uppercase mb-4">Member</span>
-                <a href="https://github.com/{{ TEAM_HANDLES[1] }}" target="_blank" class="inline-flex items-center gap-2 text-xs font-black text-slate-600 hover:text-slate-900 transition-colors uppercase border-t border-black/5 pt-4 w-full">
+                <a href="https://github.com/mudassir81cs" target="_blank" class="inline-flex items-center gap-2 text-xs font-black text-slate-600 hover:text-slate-900 transition-colors uppercase border-t border-black/5 pt-4 w-full">
                     <i class="ri-github-fill text-lg"></i> Follow Profile
                 </a>
             </div>
@@ -159,12 +159,48 @@
                 </div>
                 <h4 class="text-lg font-display font-black text-slate-900 uppercase mb-1">Saad Ilyas</h4>
                 <span class="block text-[10px] font-black text-slate-600 uppercase mb-4">Member</span>
-                <a href="https://github.com/{{ TEAM_HANDLES[2] }}" target="_blank" class="inline-flex items-center gap-2 text-xs font-black text-slate-600 hover:text-slate-900 transition-colors uppercase border-t border-black/5 pt-4 w-full">
+                <a href="https://github.com/saadilyas124" target="_blank" class="inline-flex items-center gap-2 text-xs font-black text-slate-600 hover:text-slate-900 transition-colors uppercase border-t border-black/5 pt-4 w-full">
                     <i class="ri-github-fill text-lg"></i> Follow Profile
                 </a>
             </div>
         </div>
     </div>
 
+    <!-- Limitations & Future Work -->
+    <div class="mt-24 pt-20 border-t border-black/5" data-aos="fade-up">
+        <span class="block text-[10px] font-black text-brand-600 uppercase mb-4 text-center tracking-widest">Self-Critical Analysis</span>
+        <h2 class="text-3xl font-display font-black text-slate-900 uppercase text-center mb-12">Known Limitations & <span class="text-gradient">Future Work</span></h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-slate-50 border border-black/5 p-8 rounded-2xl relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-red-500/5 blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
+                <h3 class="text-sm font-black text-slate-900 uppercase mb-4 flex items-center gap-2 font-display">
+                    <i class="ri-error-warning-line text-red-500"></i> Current Boundaries
+                </h3>
+                <ul class="space-y-3">
+                    <li class="flex gap-3 text-sm font-bold text-slate-500 leading-relaxed font-sans">
+                        <span class="text-red-500">•</span> CRF is sentence-level only; global paragraph context is not yet fully utilized.
+                    </li>
+                    <li class="flex gap-3 text-sm font-bold text-slate-500 leading-relaxed font-sans">
+                        <span class="text-red-500">•</span> Comparisons use a pre-trained spaCy baseline rather than equal-split fine-tuning.
+                    </li>
+                </ul>
+            </div>
+            <div class="bg-slate-50 border border-black/5 p-8 rounded-2xl relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
+                <h3 class="text-sm font-black text-slate-900 uppercase mb-4 flex items-center gap-2 font-display">
+                    <i class="ri-rocket-line text-emerald-500"></i> Next Horizons
+                </h3>
+                <ul class="space-y-3">
+                    <li class="flex gap-3 text-sm font-bold text-slate-500 leading-relaxed font-sans">
+                        <span class="text-emerald-500">•</span> Integration of Transformer-based models (BERT-NER) for SOTA benchmarks.
+                    </li>
+                    <li class="flex gap-3 text-sm font-bold text-slate-500 leading-relaxed font-sans">
+                        <span class="text-emerald-500">•</span> Supporting multilingual datasets beyond the English CoNLL2003 corpus.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
