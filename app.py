@@ -3,6 +3,10 @@ import spacy
 import os
 import time
 import joblib
+from dotenv import load_dotenv
+
+# Load environment variables from .env
+load_dotenv()
 
 # Import custom models
 from models.spacy.spacy_ner import SpacyNER
@@ -10,6 +14,21 @@ from models.crf.crf_model import CRFModel
 from models.crf.features import extract_features
 
 app = Flask(__name__)
+
+@app.context_processor
+def inject_config():
+    return {
+        'APP_NAME': os.getenv('APP_NAME', 'Entify'),
+        'APP_MODE': os.getenv('APP_MODE', 'PROD').upper(),
+        'APP_GITHUB_REPO_URL': os.getenv('APP_GITHUB_REPO_URL', 'https://github.com/softdevhassan/entify'),
+        'CONTACT_EMAIL': os.getenv('CONTACT_EMAIL', 'softdevhassan.biz@gmail.com'),
+        'UOS_URL': os.getenv('UOS_URL', 'https://su.edu.pk'),
+        'ILM_URL': os.getenv('ILM_URL', 'https://ilm.edu.pk/campuses/index.php?campus=ILM-College-Sargodha'),
+        'PROJECT_VERSION': os.getenv('PROJECT_VERSION', 'v2.8.0'),
+        'TEAM_MEMBERS': os.getenv('TEAM_MEMBERS', '').split(','),
+        'TEAM_HANDLES': os.getenv('TEAM_HANDLES', '').split(','),
+        'DEPLOY_DOMAIN': os.getenv('DEPLOY_DOMAIN', 'entify.orbin.dev'),
+    }
 
 # --- Global Model Variables (Initialized Lazily) ---
 _spacy_model = None
@@ -100,38 +119,48 @@ def docs_dev():
     return render_template("docs_dev.html")
 
 
+@app.route("/sitemap")
+def sitemap_page():
+    return render_template("sitemap.html")
+
+
 # --- SEO Routes ---
 
 
 @app.route("/robots.txt")
 def robots():
-    content = "User-agent: *\nDisallow: /api/\n"
+    base_url = f"https://{os.getenv('DEPLOY_DOMAIN', 'entify.orbin.dev')}"
+    content = f"User-agent: *\nAllow: /\nDisallow: /api/\nSitemap: {base_url}/sitemap.xml\n"
     return content, 200, {"Content-Type": "text/plain"}
 
 
 @app.route("/sitemap.xml")
 def sitemap():
-    # A basic static sitemap
     pages = [
-        "/",
-        "/tool",
-        "/about",
-        "/timeline",
-        "/contact",
-        "/docs/user",
-        "/docs/dev",
-        "/privacy-policy",
-        "/terms-of-use",
+        ("/", "1.0", "daily"),
+        ("/tool", "0.9", "weekly"),
+        ("/about", "0.8", "monthly"),
+        ("/timeline", "0.8", "monthly"),
+        ("/contact", "0.7", "monthly"),
+        ("/docs/user", "0.7", "monthly"),
+        ("/docs/dev", "0.7", "monthly"),
+        ("/privacy-policy", "0.5", "monthly"),
+        ("/terms-of-use", "0.5", "monthly"),
+        ("/sitemap", "0.6", "monthly"),
     ]
-    base_url = "https://ner.orbin.dev"
-    urlset = []
-    for page in pages:
-        urlset.append(f"  <url>\n    <loc>{base_url}{page}</loc>\n  </url>")
-
-    xml = f"""<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-{chr(10).join(urlset)}
-</urlset>"""
+    base_url = f"https://{os.getenv('DEPLOY_DOMAIN', 'entify.orbin.dev')}"
+    today = time.strftime("%Y-%m-%d")
+    
+    xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
+    xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    for page, priority, freq in pages:
+        xml += f"  <url>\n"
+        xml += f"    <loc>{base_url}{page}</loc>\n"
+        xml += f"    <lastmod>{today}</lastmod>\n"
+        xml += f"    <changefreq>{freq}</changefreq>\n"
+        xml += f"    <priority>{priority}</priority>\n"
+        xml += f"  </url>\n"
+    xml += "</urlset>"
     return xml, 200, {"Content-Type": "application/xml"}
 
 

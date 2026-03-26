@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}Sitemap | Entify Navigation Directory{% endblock %}
+{% block description %}Quickly navigate through all sections of the Entify Comparative NER Engine Lab, from research documentation to the live analysis tool.{% endblock %}
+
+{% block extra_head %}
+<!-- Page Specific Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Sitemap",
+  "description": "Visual directory of all pages on the Entify research platform."
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+    
+    <!-- Page Header -->
+    <div class="mb-16 text-center" data-aos="fade-down">
+        <h1 class="text-4xl md:text-6xl font-display font-black text-slate-900 uppercase italic mb-6">
+            Site <span class="text-brand-600">Directory</span>
+        </h1>
+        <p class="text-lg text-slate-500 font-bold italic leading-relaxed max-w-2xl mx-auto">
+            A complete navigational map of our research laboratory, technical documentation, and institutional archives.
+        </p>
+    </div>
+
+    <!-- Sitemap Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+        
+        <!-- Pillar: Core Lab -->
+        <div class="bg-white border border-black/5 p-8 rounded-3xl ring-1 ring-black/5 shadow-sm hover:ring-4 hover:ring-brand-500/5 transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+            <div class="w-12 h-12 rounded-2xl bg-brand-50 flex items-center justify-center text-brand-600 mb-6 text-xl">
+                <i class="ri-flask-line"></i>
+            </div>
+            <h2 class="text-xl font-display font-black text-slate-900 uppercase italic mb-6 tracking-tight">Core Engine</h2>
+            <ul class="space-y-4">
+                <li>
+                    <a href="{{ url_for('home') }}" class="group flex items-center justify-between py-2 text-sm font-black text-slate-600 hover:text-brand-600 transition-all uppercase">
+                        <span>Analysis Hub</span>
+                        <i class="ri-arrow-right-s-line transform group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('tool') }}" class="group flex items-center justify-between py-2 text-sm font-black text-slate-600 hover:text-brand-600 transition-all uppercase italic">
+                        <span>Comparison Lab</span>
+                        <i class="ri-arrow-right-s-line transform group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('timeline') }}" class="group flex items-center justify-between py-2 text-sm font-black text-slate-600 hover:text-brand-600 transition-all uppercase">
+                        <span>Dev Timeline</span>
+                        <i class="ri-arrow-right-s-line transform group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Pillar: Documentation -->
+        <div class="bg-white border border-black/5 p-8 rounded-3xl ring-1 ring-black/5 shadow-sm hover:ring-4 hover:ring-brand-500/5 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600 mb-6 text-xl">
+                <i class="ri-book-open-line"></i>
+            </div>
+            <h2 class="text-xl font-display font-black text-slate-900 uppercase italic mb-6 tracking-tight">Archive</h2>
+            <ul class="space-y-4">
+                <li>
+                    <a href="{{ url_for('docs_user') }}" class="group flex items-center justify-between py-2 text-sm font-black text-slate-600 hover:text-brand-600 transition-all uppercase">
+                        <span>User Guide</span>
+                        <i class="ri-arrow-right-s-line transform group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('docs_dev') }}" class="group flex items-center justify-between py-2 text-sm font-black text-slate-600 hover:text-brand-600 transition-all uppercase">
+                        <span>Dev Manual</span>
+                        <i class="ri-arrow-right-s-line transform group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Pillar: Company & Team -->
+        <div class="bg-white border border-black/5 p-8 rounded-3xl ring-1 ring-black/5 shadow-sm hover:ring-4 hover:ring-brand-500/5 transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
+            <div class="w-12 h-12 rounded-2xl bg-slate-900 flex items-center justify-center text-white mb-6 text-xl">
+                <i class="ri-team-line"></i>
+            </div>
+            <h2 class="text-xl font-display font-black text-slate-900 uppercase italic mb-6 tracking-tight">Connect</h2>
+            <ul class="space-y-4">
+                <li>
+                    <a href="{{ url_for('about') }}" class="group flex items-center justify-between py-2 text-sm font-black text-slate-600 hover:text-brand-600 transition-all uppercase">
+                        <span>About Team</span>
+                        <i class="ri-arrow-right-s-line transform group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('contact') }}" class="group flex items-center justify-between py-2 text-sm font-black text-slate-600 hover:text-brand-600 transition-all uppercase italic">
+                        <span>Contact Center</span>
+                        <i class="ri-arrow-right-s-line transform group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Pillar: Legal -->
+        <div class="bg-slate-50 border border-black/5 p-8 rounded-3xl ring-1 ring-black/5 shadow-sm hover:ring-4 hover:ring-brand-500/5 transition-all duration-300" data-aos="fade-up" data-aos-delay="400">
+            <div class="w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-slate-400 mb-6 text-xl">
+                <i class="ri-shield-line"></i>
+            </div>
+            <h2 class="text-xl font-display font-black text-slate-900 uppercase italic mb-6 tracking-tight">Legal</h2>
+            <ul class="space-y-4">
+                <li>
+                    <a href="{{ url_for('privacy') }}" class="group flex items-center justify-between py-2 text-sm font-black text-slate-600 hover:text-brand-600 transition-all uppercase">
+                        <span>Privacy Policy</span>
+                        <i class="ri-arrow-right-s-line transform group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('terms') }}" class="group flex items-center justify-between py-2 text-sm font-black text-slate-600 hover:text-brand-600 transition-all uppercase">
+                        <span>Terms of Use</span>
+                        <i class="ri-arrow-right-s-line transform group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

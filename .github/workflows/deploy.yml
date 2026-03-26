@@ -38,7 +38,7 @@ jobs:
           rsync -avz --delete -vv \
             -e "ssh -i ~/deploy_key -o StrictHostKeyChecking=no -o ConnectTimeout=10" \
             --exclude='.env' --exclude='ner' --exclude='.git' --exclude='.github' --exclude='__pycache__' --exclude='*.pyc' \
-            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/html/ner.orbin.dev/
+            ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/html/entify.orbin.dev/
 
           rm ~/deploy_key
 
@@ -50,7 +50,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             set -e
-            cd /var/www/html/ner.orbin.dev
+            cd /var/www/html/entify.orbin.dev
 
             # Stop MySQL before deploying Flask (free up memory)
             echo "Stopping MySQL..."

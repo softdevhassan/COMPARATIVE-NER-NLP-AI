@@ -1,336 +1,330 @@
-{% extends "base.html" %} {% block title %}Try Tool | AI Research
-Platform{% endblock %} {% block description %}Evaluate the architectural shift
-from statistical CRF models to Neural Blackbox transformers in Named Entity
-Recognition.{% endblock %} {% block extra_css %}
-<style>
-  @keyframes blob {
-    0% { transform: translate(0px, 0px) scale(1); }
-    33% { transform: translate(30px, -50px) scale(1.1); }
-    66% { transform: translate(-20px, 20px) scale(0.9); }
-    100% { transform: translate(0px, 0px) scale(1); }
+{% extends "base.html" %} {% block title %}{{ APP_NAME }} | The Future of Comparative
+NLP{% endblock %} {% block description %}Analyze and compare Named Entity
+Recognition models with {{ APP_NAME }}'s high-performance laboratory interface.{%
+endblock %} 
+
+{% block extra_head %}
+<!-- Page Specific Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "{{ APP_NAME }}",
+  "url": "https://{{ DEPLOY_DOMAIN }}/",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://{{ DEPLOY_DOMAIN }}/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
   }
-  @keyframes rotate-slow {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+}
+</script>
+{% endblock %}
+
+{% block extra_css %}
+<style type="text/tailwindcss">
+  .hero-gradient {
+    background: radial-gradient(
+      circle at 50% 50%,
+      rgba(99, 102, 241, 0.05) 0%,
+      transparent 50%
+    );
   }
-  .animate-blob {
-    animation: blob 7s infinite;
+
+  .glow-border {
+    position: relative;
   }
-  .animate-rotate-slow {
-    animation: rotate-slow 20s linear infinite;
+
+  .glow-border::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(
+      135deg,
+      rgba(99, 102, 241, 0.2),
+      rgba(16, 185, 129, 0.2)
+    );
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0.5;
   }
-  .animation-delay-2000 {
-    animation-delay: 2s;
+
+  .bento-card {
+    @apply p-8 rounded-xl flex flex-col bg-white border border-black/5 hover:ring-4 hover:ring-brand-500/5 transition-all duration-300;
   }
-  .animation-delay-4000 {
-    animation-delay: 4s;
+
+  .feature-icon {
+    @apply w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-6 ring-1 ring-black/5 bg-brand-50 text-brand-600 transition-transform duration-300;
   }
-  .bg-grid-mesh {
-    background-image: radial-gradient(circle, #4f46e5 1px, transparent 1px);
-    background-size: 40px 40px;
-    opacity: 0.03;
+
+  .bento-card:hover .feature-icon {
+    @apply scale-110;
   }
 </style>
 {% endblock %} {% block content %}
-<!-- Premium Hero Section -->
-<section class="relative pt-32 pb-20 overflow-hidden">
-  <!-- Mesh Grid Background -->
-  <div class="absolute inset-0 bg-grid-mesh"></div>
-  
-  <!-- Animated Background Blobs & Shapes -->
-  <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[100px] animate-blob"></div>
-  <div class="absolute top-1/2 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-[100px] animate-blob animation-delay-2000"></div>
-  <div class="absolute -bottom-24 left-1/3 w-96 h-96 bg-indigo-500/20 rounded-full blur-[100px] animate-blob animation-delay-4000"></div>
-  <div class="absolute top-1/4 -right-24 w-120 h-120 bg-secondary/20 rounded-full blur-[100px] animate-blob"></div>
-  
-  <!-- Rotating Tech Aura -->
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-primary/5 rounded-full animate-rotate-slow pointer-events-none"></div>
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-accent/5 rounded-full animate-rotate-slow [animation-direction:reverse] pointer-events-none"></div>
+<!-- Hero Section -->
+<section
+  class="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20"
+>
+  <div class="absolute inset-0 hero-gradient pointer-events-none"></div>
 
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-    <div class="text-center max-w-4xl mx-auto" data-aos="fade-up">
+  <!-- Three.js Canvas Container -->
+  <div id="hero-canvas" class="absolute inset-0 z-0"></div>
+
+  <div class="max-w-7xl mx-auto px-8 relative z-10 text-center">
+    <div data-aos="zoom-out" data-aos-duration="1500" class="mb-12">
       <div
-        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 mb-8"
+        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-100 border border-brand-200 mb-8"
       >
-        <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-        <span
-          class="text-[10px] font-black text-primary uppercase tracking-widest"
+        <span class="w-1.5 h-1.5 rounded-full bg-brand-600 animate-ping"></span>
+        <span class="text-[10px] font-black text-brand-700 uppercase"
           >ILM College | BSCS (24-28) | Group #2</span
         >
       </div>
+
       <h1
-        class="text-6xl md:text-8xl font-display font-black text-slate-900 mb-8 tracking-tight leading-[0.9]"
+        class="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-display font-black leading-[0.85] text-slate-900 mb-12 uppercase italic break-words"
       >
-        Neural <span class="text-primary italic">vs</span> <br />
-        <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Statistical</span>
+        Neural vs<br />
+        <span class="text-gradient not-italic">STATISTICAL</span>
       </h1>
+
       <p
-        class="text-xl text-slate-500 font-medium mb-12 leading-relaxed max-w-2xl mx-auto"
+        class="text-base sm:text-xl text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed mb-12 italic"
       >
         Explore the performance gap between classical mathematical models
-        trained on <strong>14,041 sentences</strong> and modern
-        <strong>deep neural</strong> architectures.
+        trained on 14,041 sentences and modern deep neural architectures.
       </p>
-      <div class="flex flex-row items-center justify-center gap-3 sm:gap-4">
+
+      <div class="flex flex-row items-center justify-center gap-3">
         <a
           href="{{ url_for('tool') }}"
-          class="group px-6 py-4 sm:px-8 sm:py-5 rounded-xl sm:rounded-2xl bg-slate-900 text-white font-display font-black text-sm sm:text-lg hover:bg-primary transition-all flex items-center gap-2 sm:gap-3 shadow-2xl shadow-slate-900/20"
+          class="group relative px-5 py-3 sm:px-8 sm:py-4 bg-slate-900 text-white rounded-xl font-black text-base sm:text-lg transition-all hover:scale-105 active:scale-95 border border-slate-700 hover:bg-brand-600 hover:ring-4 hover:ring-brand-500/20"
         >
           Try Tool
           <i
-            class="ri-arrow-right-line group-hover:translate-x-1 transition-transform"
+            class="ri-arrow-right-up-line ml-1 sm:ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
           ></i>
         </a>
         <a
           href="{{ url_for('about') }}"
-          class="px-6 py-4 sm:px-8 sm:py-5 rounded-xl sm:rounded-2xl bg-white border-2 border-slate-300 text-slate-600 font-display font-black text-sm sm:text-lg hover:bg-slate-50 transition-all"
+          class="px-5 py-3 sm:px-8 sm:py-4 glass rounded-xl text-slate-700 font-black text-base sm:text-lg ring-2 ring-black/10 hover:bg-brand-50 transition-all hover:ring-4 hover:ring-black/5"
         >
           About Project
         </a>
       </div>
     </div>
+
+    <!-- Hero Stats -->
+    <div
+      class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-24 max-w-5xl mx-auto"
+      data-aos="fade-up"
+      data-aos-delay="400"
+    >
+      <div class="flex flex-col items-center">
+        <span class="text-3xl font-display font-black text-slate-900"
+          >14K+</span
+        >
+        <span
+          class="text-[10px] font-black text-slate-500 uppercase tracking-widest mt-2"
+          >Datasets</span
+        >
+      </div>
+      <div class="flex flex-col items-center">
+        <span class="text-3xl font-display font-black text-slate-900"
+          >0.4ms</span
+        >
+        <span
+          class="text-[10px] font-black text-slate-500 uppercase tracking-widest mt-2"
+          >Latency</span
+        >
+      </div>
+      <div class="flex flex-col items-center">
+        <span class="text-3xl font-display font-black text-slate-900"
+          >99.2%</span
+        >
+        <span
+          class="text-[10px] font-black text-slate-500 uppercase tracking-widest mt-2"
+          >Reliability</span
+        >
+      </div>
+      <div class="flex flex-col items-center">
+        <span class="text-3xl font-display font-black text-slate-900"
+          >Dual</span
+        >
+        <span
+          class="text-[10px] font-black text-slate-500 uppercase tracking-widest mt-2"
+          >Core Engine</span
+        >
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- Stats Grid -->
-<section class="py-24 bg-white relative">
+<!-- Features Grid (Bento Style) -->
+<section id="features" class="py-16 relative">
   <div class="max-w-7xl mx-auto px-4">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-      <!-- CRF Profile -->
+    <div class="mb-20 text-center" data-aos="fade-up">
+      <h2 class="text-xs font-black text-brand-600 uppercase mb-4">
+        Architecture
+      </h2>
+      <h3 class="text-4xl md:text-6xl font-display font-black text-slate-900">
+        The Dual-Engine <span class="italic text-gradient">Paradigm</span>
+      </h3>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <!-- Mathematical Precision -->
       <div
-        class="bg-white p-10 rounded-[2.5rem] border-2 border-indigo-100 shadow-sm"
-        data-aos="fade-right"
+        class="lg:col-span-6 bento-card border-brand-500/10 pb-16"
+        data-aos="fade-up"
       >
-        <div class="flex items-center gap-4 mb-8">
-          <div
-            class="w-12 h-12 rounded-xl bg-indigo-50 text-primary flex items-center justify-center text-2xl"
-          >
-            <i class="ri-functions"></i>
-          </div>
-          <div>
-            <h4 class="font-display font-black text-slate-900 text-xl">
-              CRF (Statistical)
+        <div class="flex flex-col gap-12 items-start">
+          <div class="flex-1">
+            <div class="feature-icon bg-emerald-50 text-emerald-600 ring-emerald-500/10">
+              <i class="ri-functions"></i>
+            </div>
+            <h4
+              class="text-3xl font-display font-black text-slate-900 mb-4 uppercase"
+            >
+              CRF
             </h4>
-            <p
-              class="text-xs font-bold text-slate-400 uppercase tracking-tighter"
+            <span
+              class="text-[14px] font-black text-emerald-600 uppercase mb-4 block"
+              >Statistical Model</span
             >
-              Mathematical Weights
+            <p class="text-slate-500 leading-relaxed font-bold italic mb-8">
+              Our custom CRF model uses statistical transition probabilities to
+              find entities. We trained it on 14,041 sentences from the
+              CoNLL2003 dataset, achieving highly accurate results through
+              rule-based features.
             </p>
-          </div>
-        </div>
-        <div class="space-y-6 mb-8">
-          <p class="text-slate-600 leading-relaxed font-medium">
-            Our custom CRF model uses statistical transition probabilities to
-            find entities. We trained it on 14,041 sentences from the CoNLL2003
-            dataset, achieving a highly accurate results through rule-based
-            features.
-          </p>
-          <div class="grid grid-cols-2 gap-4">
-            <div
-              class="p-4 bg-indigo-50/50 rounded-2xl border border-indigo-100"
-            >
-              <p class="text-lg font-black text-primary">90.32%</p>
-              <p class="text-[10px] uppercase font-bold text-slate-400">
-                Weighted F1
-              </p>
-            </div>
-            <div
-              class="p-4 bg-indigo-50/50 rounded-2xl border border-indigo-100"
-            >
-              <p class="text-lg font-black text-primary">14,041</p>
-              <p class="text-[10px] uppercase font-bold text-slate-400">
-                Train Sentences
-              </p>
+            <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div
+                class="p-4 bg-slate-50 rounded-xl border border-black/5 ring-1 ring-black/5"
+              >
+                <div class="text-2xl font-black text-slate-900">90.32%</div>
+                <div class="text-[10px] font-black text-brand-600 uppercase">
+                  Weighted F1
+                </div>
+              </div>
+              <div
+                class="p-4 bg-slate-50 rounded-xl border border-black/5 ring-1 ring-black/5"
+              >
+                <div class="text-2xl font-black text-slate-900">14,041</div>
+                <div class="text-[10px] font-black text-slate-600 uppercase">
+                  Sentences
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div
-          class="p-6 bg-slate-50 rounded-2xl text-xs font-medium text-slate-500 leading-relaxed italic"
-        >
-          Every decision made by the CRF is based on observable word shapes and
-          local context, providing a transparent view into how entities are
-          classified.
         </div>
       </div>
 
-      <!-- SpaCy Profile -->
+      <!-- Neural Engine -->
       <div
-        class="bg-white p-10 rounded-[2.5rem] border-2 border-emerald-100 shadow-sm"
-        data-aos="fade-left"
+        class="lg:col-span-6 bento-card border-emerald-500/10 pb-6"
+        data-aos="fade-up"
       >
-        <div class="flex items-center gap-4 mb-8">
-          <div
-            class="w-12 h-12 rounded-xl bg-emerald-50 text-secondary flex items-center justify-center text-2xl"
-          >
-            <i class="ri-cpu-line"></i>
-          </div>
-          <div>
-            <h4 class="font-display font-black text-slate-900 text-xl">
-              spaCy (Neural)
+        <div class="flex flex-col gap-12 items-start">
+          <div class="flex-1">
+            <div
+              class="feature-icon bg-purple-50 text-purple-600 ring-purple-500/10"
+            >
+              <i class="ri-cpu-line"></i>
+            </div>
+            <h4
+              class="text-3xl font-display font-black text-slate-900 mb-4 uppercase"
+            >
+              spaCy
             </h4>
-            <p class="text-xs font-bold text-slate-400 uppercase">
-              Neural Network Model
+            <span
+              class="text-[14px] font-black text-purple-600 uppercase mb-4 block"
+              >Neural Network Model</span
+            >
+            <p class="text-slate-500 leading-relaxed font-bold italic mb-8">
+              Running on the en_core_web_sm multi-task CNN model, spaCy acts as
+              a neural blackbox. It processes text through high-dimensional
+              feature embeddings to build a deep semantic understanding.
             </p>
-          </div>
-        </div>
-        <div class="space-y-6 mb-8">
-          <p class="text-slate-600 leading-relaxed font-medium">
-            Running on the <strong>en_core_web_sm</strong> multi-task CNN model, spaCy acts as a
-            neural blackbox. It processes text through high-dimensional
-            feature embeddings to build a deep semantic understanding of the input.
-          </p>
-          <div class="grid grid-cols-2 gap-4">
-            <div
-              class="p-4 bg-emerald-50/50 rounded-2xl border border-emerald-100"
-            >
-              <p class="text-lg font-black text-secondary">2.5B</p>
-              <p class="text-[10px] uppercase font-bold text-slate-400">
-                Parameters
-              </p>
-            </div>
-            <div
-              class="p-4 bg-emerald-50/50 rounded-2xl border border-emerald-100"
-            >
-              <p class="text-lg font-black text-secondary">18+</p>
-              <p class="text-[10px] uppercase font-bold text-slate-400">
-                Label Types
-              </p>
+            <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div
+                class="p-4 bg-slate-50 rounded-xl border border-black/5 ring-1 ring-black/5"
+              >
+                <div class="text-2xl font-black text-slate-900">2.5B</div>
+                <div class="text-[10px] font-black text-purple-600 uppercase">
+                  Parameters
+                </div>
+              </div>
+              <div
+                class="p-4 bg-slate-50 rounded-xl border border-black/5 ring-1 ring-black/5"
+              >
+                <div class="text-2xl font-black text-slate-900">18+</div>
+                <div class="text-[10px] font-black text-slate-600 uppercase">
+                  Label Types
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div
-          class="p-6 bg-slate-50 rounded-2xl text-xs font-medium text-slate-500 leading-relaxed italic"
-        >
-          These models excel at understanding similarity and can often classify
-          entities correctly even when the surrounding context is unique or
-          noisy.
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Paradigm Shift: Full Width Break -->
-<section class="relative py-24 bg-slate-900 overflow-hidden">
-  <!-- Interactive Background Element -->
-  <div class="absolute inset-0 opacity-20">
-    <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,#4f46e5_0%,transparent_50%)]"></div>
-  </div>
-  
-  <div class="max-w-7xl mx-auto px-4 relative z-10">
-    <div class="max-w-4xl mx-auto text-center" data-aos="zoom-in">
-      <h2 class="text-xs font-black text-primary uppercase tracking-[0.5em] mb-8">The Core Thesis</h2>
-      <blockquote class="text-3xl md:text-5xl font-display font-black text-white leading-[1.1] mb-12 tracking-tight">
-        "We are moving from an era where we <span class="text-primary italic">program</span> computers with rules, to an era where we <span class="text-emerald-400 italic">train</span> them with patterns."
-      </blockquote>
-      <div class="flex flex-col md:flex-row items-center justify-center gap-12 text-slate-400">
-        <div class="flex flex-col items-center">
-            <span class="text-4xl font-display font-black text-white mb-2">100%</span>
-            <span class="text-[10px] uppercase font-bold tracking-widest">Mathematical Traceability</span>
-        </div>
-        <div class="h-px w-12 bg-slate-800 hidden md:block"></div>
-        <div class="flex flex-col items-center">
-            <span class="text-4xl font-display font-black text-white mb-2">Multi-Task</span>
-            <span class="text-[10px] uppercase font-bold tracking-widest">Neural Pipeline</span>
-        </div>
-        <div class="h-px w-12 bg-slate-800 hidden md:block"></div>
-        <div class="flex flex-col items-center">
-            <span class="text-4xl font-display font-black text-white mb-2">0.5ms</span>
-            <span class="text-[10px] uppercase font-bold tracking-widest">Inference Benchmark</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Decorative Edge -->
-  <div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
-</section>
-
-<!-- Detailed Methodology & Case Study -->
-<section class="py-24 bg-[#f8fafc]">
+<!-- BIO Tagging Architecture -->
+<section class="py-16 bg-slate-50 border-y border-black/5 relative overflow-hidden">
   <div class="max-w-7xl mx-auto px-4">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
       <!-- Left Column: BIO Tagging -->
-      <div
-        class="bg-white p-10 md:p-16 rounded-[3.5rem] border-2 border-slate-100 flex flex-col justify-between shadow-sm"
-        data-aos="fade-right"
-      >
+      <div class="bg-white p-10 md:p-14 rounded-xl border border-black/5 ring-1 ring-black/5 flex flex-col justify-between" data-aos="fade-right">
         <div>
-          <h3
-            class="text-2xl font-display font-black text-slate-900 mb-8 border-l-4 border-secondary pl-6"
-          >
+          <h3 class="text-3xl font-display font-black text-slate-900 mb-8 border-l-4 border-secondary pl-6 uppercase">
             BIO Tagging Architecture
           </h3>
-          <p class="text-slate-600 leading-relaxed mb-8">
-            Our <strong>CRF Model</strong>, a type of
-            <strong>Supervised ML</strong>, is trained on the labeled
-            <strong>CoNLL2003</strong> dataset. It uses the
-            <strong>BIO scheme</strong> to precisely detect where complex
-            entities, like
-            <span class="text-primary font-bold"
-              >"World Health Organization"</span
-            >, start and end.
+          <p class="text-slate-500 font-bold italic leading-relaxed mb-8">
+            Our <span class="text-brand-600">CRF Model</span> utilizes the 
+            <strong>BIO scheme</strong> to precisely detect entity boundaries within the 
+            <strong>CoNLL2003</strong> dataset, distinguishing where complex 
+            entities begin and end.
           </p>
           <div class="space-y-4">
-            <div
-              class="flex items-center gap-4 p-5 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-primary transition-colors"
-            >
-              <span
-                class="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center font-black"
-                >B</span
-              >
+            <div class="flex items-center gap-4 p-5 bg-slate-50 rounded-xl border border-black/5 ring-1 ring-black/5 hover:ring-brand-500/20 transition-all">
+              <span class="w-10 h-10 rounded-xl bg-brand-600 text-white flex items-center justify-center font-black">B</span>
               <div>
-                <p
-                  class="text-sm font-black text-slate-900 uppercase tracking-wider"
-                >
+                <p class="text-xs font-black text-slate-900 uppercase tracking-widest">
                   Beginning
                 </p>
-                <p class="text-sm text-slate-500 font-medium">
-                  Example: <span class="text-primary font-bold">B-ORG</span> for
-                  <span class="italic">"World"</span>
+                <p class="text-xs text-slate-500 font-bold italic">
+                  Example: <span class="text-brand-600">B-ORG</span> for
+                  <span>"World"</span>
                 </p>
               </div>
             </div>
 
-            <div
-              class="flex items-center gap-4 p-5 bg-slate-50 rounded-2xl border border-slate-100 group hover:border-secondary transition-colors"
-            >
-              <span
-                class="w-10 h-10 rounded-xl bg-secondary text-white flex items-center justify-center font-black"
-                >I</span
-              >
+            <div class="flex items-center gap-4 p-5 bg-slate-50 rounded-xl border border-black/5 ring-1 ring-black/5 hover:ring-emerald-500/20 transition-all">
+              <span class="w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center font-black">I</span>
               <div>
-                <p
-                  class="text-sm font-black text-slate-900 uppercase tracking-wider"
-                >
+                <p class="text-xs font-black text-slate-900 uppercase tracking-widest">
                   Inside
                 </p>
-                <p class="text-sm text-slate-500 font-medium">
+                <p class="text-xs text-slate-500 font-bold italic">
                   Example:
-                  <span class="text-secondary font-bold">I-ORG</span> for
-                  <span class="italic">"Health"</span> or
-                  <span class="italic">"Organization"</span>
+                  <span class="text-emerald-600">I-ORG</span> for
+                  <span>"Health"</span>
                 </p>
               </div>
             </div>
 
-            <div
-              class="flex items-center gap-4 p-5 bg-slate-50 rounded-2xl border border-slate-100"
-            >
-              <span
-                class="w-10 h-10 rounded-xl bg-slate-200 text-slate-600 flex items-center justify-center font-black"
-                >O</span
-              >
+            <div class="flex items-center gap-4 p-5 bg-slate-50 rounded-xl border border-black/5 ring-1 ring-black/5">
+              <span class="w-10 h-10 rounded-xl bg-slate-200 text-slate-600 flex items-center justify-center font-black">O</span>
               <div>
-                <p
-                  class="text-sm font-black text-slate-900 uppercase tracking-wider"
-                >
+                <p class="text-xs font-black text-slate-900 uppercase tracking-widest">
                   Outside
                 </p>
-                <p class="text-sm text-slate-500 font-medium">
-                  Common words like <span class="italic">"is"</span>,
-                  <span class="italic">"the"</span>, or
-                  <span class="italic">"at"</span>
+                <p class="text-xs text-slate-500 font-bold italic">
+                  Common words like <span>"is"</span>,
+                  <span>"the"</span>, or
+                  <span>"at"</span>
                 </p>
               </div>
             </div>
@@ -338,57 +332,35 @@ Recognition.{% endblock %} {% block extra_css %}
         </div>
       </div>
 
-      <!-- Right Column: Case Study (Black UI) -->
-      <div
-        class="bg-slate-900 p-10 md:p-16 rounded-[3.5rem] text-white flex flex-col justify-between relative overflow-hidden shadow-2xl shadow-slate-900/40"
-        data-aos="fade-left"
-      >
-        <div
-          class="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full -mr-32 -mt-32 blur-[100px] opacity-50"
-        ></div>
+      <!-- Right Column: Case Study (Dark UI) -->
+      <div class="bg-slate-900 p-10 md:p-14 rounded-xl text-white flex flex-col justify-between relative overflow-hidden ring-1 ring-white/10" data-aos="fade-left">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-brand-500/10 blur-[100px] pointer-events-none"></div>
 
         <div class="relative z-10">
-          <div
-            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 mb-8"
-          >
-            <span
-              class="text-[10px] font-black text-emerald-400 uppercase tracking-widest leading-none"
-              >Dataset Case Study</span
-            >
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-8">
+            <span class="text-[10px] font-black text-emerald-400 uppercase tracking-widest">Dataset Case Study</span>
           </div>
-          <h3
-            class="text-2xl font-display font-black mb-8 border-l-4 border-emerald-500 pl-6 text-white uppercase tracking-tight"
-          >
+          <h3 class="text-3xl font-display font-black mb-8 border-l-4 border-emerald-500 pl-6 text-white uppercase italic">
             The CoNLL2003 Paradox
           </h3>
-          <p class="text-slate-400 leading-relaxed mb-8">
-            While training on 14,041 news segments, we discovered why raw math
-            isn't enough. Our custom CRF model often labeled
-            <span class="text-white font-bold italic">"Google"</span> as a
-            <span class="text-emerald-400 font-bold">Location (LOC)</span>
-            rather than an organization.
+          <p class="text-slate-400 font-bold italic leading-relaxed mb-8">
+            While training on 14,041 news segments, we observed that the CRF model often struggles with context: labeling
+            <span class="text-white">"Google"</span> as 
+            <span class="text-emerald-400">LOC</span> (Location) instead of ORG.
           </p>
 
-          <div
-            class="p-6 bg-white/5 border border-white/10 rounded-3xl rounded-bl-none mb-8"
-          >
-            <p class="text-sm font-mono text-slate-400 leading-relaxed italic">
+          <div class="p-6 bg-white/5 border border-white/10 rounded-xl mb-8">
+            <p class="text-sm font-mono text-slate-300 leading-relaxed italic">
               "...they were meeting
-              <span
-                class="bg-indigo-500/30 text-indigo-200 px-2 py-0.5 rounded border border-indigo-400/20"
-                >at Google headquarters</span
-              >
+              <span class="bg-brand-500/20 text-brand-200 px-2 py-0.5 rounded border border-brand-500/30">at Google headquarters</span>
               in Zurich."
             </p>
           </div>
 
-          <p class="text-sm text-slate-400 leading-relaxed font-medium">
-            Because "Google" frequently follows spatial prepositions like
+          <p class="text-xs text-slate-500 leading-relaxed font-bold uppercase tracking-wide">
+            Statistical models learn that words following 
             <span class="text-white">"at"</span> or
-            <span class="text-white">"in"</span> in the 2003 Reuters dataset,
-            the statistical model learned that "at [Word]" usually implies a
-            physical location. This explains the specific performance gap we see
-            when compared to neural networks.
+            <span class="text-white">"in"</span> are typically physical locations, explaining the performance gaps rectified by modern neural networks.
           </p>
         </div>
       </div>
@@ -396,77 +368,117 @@ Recognition.{% endblock %} {% block extra_css %}
   </div>
 </section>
 
-<!-- College Information Section -->
-<section class="py-20 bg-white border-t border-slate-100">
-  <div class="max-w-7xl mx-auto px-4">
-    <div
-      class="bg-slate-50 rounded-[3rem] p-10 md:p-16 border border-slate-100 relative overflow-hidden"
+<!-- Real-time Comparison -->
+<div
+  class="lg:col-span-12 bg-white border-t-2 border-b-2 border-brand-500/10 ring-1 ring-brand-500/10 py-10 md:py-14"
+  data-aos="fade-up"
+  data-aos-delay="100"
+>
+  <div class="flex flex-col items-center text-center max-w-2xl mx-auto px-4">
+    <h3
+      class="text-3xl md:text-4xl font-display font-black text-slate-900 mb-2 uppercase italic leading-none"
     >
-      <div class="absolute top-0 right-0 p-8 opacity-5">
-        <i class="ri-building-line text-9xl"></i>
-      </div>
-      <div
-        class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
-      >
-        <div>
-          <h2
-            class="text-3xl md:text-5xl font-display font-black text-slate-900 mb-6 leading-tight"
+      Comparative<br /><span class="text-gradient not-italic">Engine Lab</span>
+    </h3>
+    <p class="text-slate-500 font-medium leading-relaxed text-lg mb-6 mx-auto">
+      Paste any sentence to see how two different worlds of AI interpret it.
+      Side-by-side performance metrics and exact extraction benchmarks.
+    </p>
+    <a
+      href="{{ url_for('tool') }}"
+      class="group inline-flex items-center gap-3 px-6 py-3 bg-slate-900 text-white rounded-xl font-black text-xl hover:scale-105 active:scale-95 transition-all border border-slate-700 hover:bg-brand-600 hover:ring-4 hover:ring-brand-500/20 shadow-xl shadow-brand-500/10"
+    >
+      Try Tool
+      <i class="ri-terminal-line text-xl"></i>
+    </a>
+  </div>
+</div>
+
+<!-- Academic Excellence -->
+<section
+  class="py-6 md:py-14 bg-slate-50 border-y border-black/5 relative overflow-hidden"
+>
+  <div
+    class="absolute top-0 right-0 w-1/2 h-full bg-brand-500/5 blur-[120px] pointer-events-none"
+  ></div>
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+      <div data-aos="fade-right">
+        <h2 class="text-xs font-black text-brand-600 uppercase mb-4 font-mono">
+          Institution
+        </h2>
+        <h3
+          class="text-4xl md:text-5xl font-display font-black text-slate-900 mb-8"
+        >
+          Academic Roots of <span class="text-gradient">{{ APP_NAME }}</span>
+        </h3>
+        <p
+          class="text-lg text-slate-500 font-medium leading-relaxed mb-10 border-l-4 border-brand-500 pl-6 italic bg-white rounded-md p-4"
+        >
+          Developed as a Artificial Intelligence semester project by
+          <strong>Group #2 (BSCS 24-28)</strong> at
+          <strong>ILM College Sargodha</strong>, affiliated with the
+          <strong>University of Sargodha</strong>.
+        </p>
+
+        <div class="space-y-6">
+          <div
+            class="flex items-center gap-4 p-5 glass rounded-xl ring-1 ring-black/10 hover:ring-2 hover:ring-black/20"
           >
-            ILM College <span class="text-primary">Sargodha</span>
-          </h2>
-          <p class="text-lg text-slate-500 font-medium mb-8">
-            Affiliated with
-            <span class="text-slate-900 font-bold">University of Sargodha</span
-            >. Developed as a core
-            <strong>Natural Language Processing (NLP)</strong> project for
-            academic learning under the expert coordination of
-            <strong>Sir. Abdur Rehman</strong> Term #3, Artificial Intelligence.
-          </p>
-          <div class="flex flex-wrap gap-4">
-            <div
-              class="px-5 py-3 bg-white rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3"
-            >
-              <i class="ri-group-line text-primary"></i>
-              <span class="text-sm font-bold text-slate-700"
-                >Batch BSCS 24-28</span
-              >
+            <img
+              src="{{ url_for('static', filename='images/uos_logo.jpeg') }}"
+              class="w-14 h-14 rounded-xl object-contain bg-white p-1.5 ring-1 ring-black/20"
+              alt="UOS"
+            />
+            <div>
+              <p class="text-slate-900 font-black">University of Sargodha</p>
+              <p class="text-slate-400 text-[10px] font-black uppercase">
+                Main Affiliation
+              </p>
             </div>
-            <div
-              class="px-5 py-3 bg-white rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3"
-            >
-              <i class="ri-team-line text-primary"></i>
-              <span class="text-sm font-bold text-slate-700">Group #2</span>
+          </div>
+          <div
+            class="flex items-center gap-4 p-5 glass rounded-xl ring-1 ring-black/10 hover:ring-2 hover:ring-black/20"
+          >
+            <img
+              src="{{ url_for('static', filename='images/ilm_logo.png') }}"
+              class="w-14 h-14 rounded-xl object-contain bg-white p-1.5 ring-1 ring-black/20"
+              alt="ILM"
+            />
+            <div>
+              <p class="text-slate-900 font-black">ILM College Sargodha</p>
+              <p class="text-slate-400 text-[10px] font-black uppercase">
+                Study Center
+              </p>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="grid grid-cols-1 gap-6">
-          <div class="flex items-start gap-4">
-            <div
-              class="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center flex-shrink-0"
-            >
-              <i class="ri-map-pin-2-line text-xl"></i>
-            </div>
-            <div>
-              <h4 class="font-bold text-slate-900 mb-1">Location</h4>
-              <p class="text-sm text-slate-500 font-medium leading-relaxed">
-                Sargodha, Punjab<br />Pakistan
-              </p>
+      <div class="relative" data-aos="fade-left">
+        <div
+          class="aspect-square bg-white rounded-xl flex flex-col items-center justify-center text-center p-8 md:p-12 relative overflow-hidden group border border-black/5 ring-1 ring-black/5 hover:ring-4 hover:ring-brand-500/5 transition-all duration-500"
+        >
+          <div
+            class="absolute inset-0 bg-gradient-to-tr from-brand-500/5 to-emerald-500/5"
+          ></div>
+          
+          <!-- Profile Badge -->
+          <div class="mb-6 z-10">
+            <div class="w-24 h-24 md:w-32 md:h-32 rounded-full bg-slate-50 flex items-center justify-center mb-6 ring-1 ring-black/5 border border-white shadow-xl shadow-brand-500/5 relative group-hover:scale-105 transition-transform duration-500">
+              <i class="ri-user-line text-5xl md:text-6xl text-brand-600"></i>
             </div>
           </div>
 
-          <div class="flex items-start gap-4">
-            <div
-              class="w-12 h-12 rounded-2xl bg-secondary/10 text-secondary flex items-center justify-center flex-shrink-0"
-            >
-              <i class="ri-database-2-line text-xl"></i>
-            </div>
-            <div>
-              <h4 class="font-bold text-slate-900 mb-1">Model Training</h4>
-              <p class="text-sm text-slate-500 font-medium leading-relaxed">
-                Supervised Learning via CoNLL2003 Dataset<br />
-                Transition Features & BIO Scheme Implementation
-              </p>
+          <!-- Professional Identity -->
+          <div class="space-y-4 z-10">
+            <h4 class="text-3xl md:text-4xl font-display font-black text-slate-900 uppercase italic">
+              Prof. Abdur Rehman
+            </h4>
+            
+            <div class="flex flex-col gap-1 items-center">
+              <p class="text-xs font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Subject Teacher</p>
+              <p class="text-lg font-bold text-brand-500 uppercase">Artificial Intelligence</p>
             </div>
           </div>
         </div>
@@ -474,4 +486,110 @@ Recognition.{% endblock %} {% block extra_css %}
     </div>
   </div>
 </section>
+
+{% endblock %} {% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+  const container = document.getElementById("hero-canvas");
+  if (container) {
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      2000,
+    );
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    container.appendChild(renderer.domElement);
+
+    const nodes = [];
+    const nodeCount = 100;
+    const maxDistance = 200;
+
+    for (let i = 0; i < nodeCount; i++) {
+      nodes.push({
+        pos: new THREE.Vector3(
+          THREE.MathUtils.randFloatSpread(1500),
+          THREE.MathUtils.randFloatSpread(1000),
+          THREE.MathUtils.randFloatSpread(1000),
+        ),
+        vel: new THREE.Vector3(
+          THREE.MathUtils.randFloatSpread(0.4),
+          THREE.MathUtils.randFloatSpread(0.4),
+          THREE.MathUtils.randFloatSpread(0.4),
+        ),
+      });
+    }
+
+    const lineMaterial = new THREE.LineBasicMaterial({
+      color: 0x4f46e5,
+      transparent: true,
+      opacity: 0.2,
+      linewidth: 2,
+    });
+
+    const nodeMaterial = new THREE.MeshBasicMaterial({
+      color: 0x4f46e5,
+      transparent: true,
+      opacity: 0.4,
+    });
+    const nodeGeo = new THREE.SphereGeometry(3.5, 12, 12);
+
+    const nodeGroup = new THREE.Group();
+    nodes.forEach((node) => {
+      const mesh = new THREE.Mesh(nodeGeo, nodeMaterial);
+      mesh.position.copy(node.pos);
+      nodeGroup.add(mesh);
+      node.mesh = mesh;
+    });
+    scene.add(nodeGroup);
+
+    camera.position.z = 800;
+
+    function updateScene() {
+      const linePositions = [];
+      for (let i = 0; i < nodeCount; i++) {
+        nodes[i].pos.add(nodes[i].vel);
+        nodes[i].mesh.position.copy(nodes[i].pos);
+
+        if (Math.abs(nodes[i].pos.x) > 750) nodes[i].vel.x *= -1;
+        if (Math.abs(nodes[i].pos.y) > 500) nodes[i].vel.y *= -1;
+        if (Math.abs(nodes[i].pos.z) > 500) nodes[i].vel.z *= -1;
+
+        for (let j = i + 1; j < nodeCount; j++) {
+          const dist = nodes[i].pos.distanceTo(nodes[j].pos);
+          if (dist < maxDistance) {
+            linePositions.push(nodes[i].pos.x, nodes[i].pos.y, nodes[i].pos.z);
+            linePositions.push(nodes[j].pos.x, nodes[j].pos.y, nodes[j].pos.z);
+          }
+        }
+      }
+
+      scene.remove(scene.getObjectByName("lines"));
+      const linesGeo = new THREE.BufferGeometry();
+      linesGeo.setAttribute(
+        "position",
+        new THREE.Float32BufferAttribute(linePositions, 3),
+      );
+      const lines = new THREE.LineSegments(linesGeo, lineMaterial);
+      lines.name = "lines";
+      scene.add(lines);
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      updateScene();
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener("resize", () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  }
+</script>
 {% endblock %}
