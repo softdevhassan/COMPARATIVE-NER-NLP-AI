@@ -1,4 +1,6 @@
-{% block description %}Discover the academic journey and technical evolution behind the Entify NER platform.{% endblock %}
+{% extends "base.html" %}
+
+{% block title %}About | The Story of Entify{% endblock %}
 
 {% block extra_head %}
 <script type="application/ld+json">
@@ -20,11 +22,11 @@
     
     <!-- Hero Section -->
     <div class="mb-16 text-center" data-aos="fade-up">
-        <h1 class="text-4xl md:text-6xl font-display font-black text-slate-900 mb-6 uppercase italic leading-tight">
+        <h1 class="text-4xl md:text-6xl font-display font-black text-slate-900 mb-6 uppercase leading-tight">
             The Story of <span class="text-brand-600">Entify</span>
         </h1>
         <div class="bg-brand-50 border border-brand-100 p-8 rounded-2xl">
-            <p class="text-brand-900 italic font-bold text-lg md:text-xl leading-relaxed">
+            <p class="text-brand-900 font-bold text-lg md:text-xl leading-relaxed">
                 "This project wasn't built to solve a specific commercial problem. Instead, it was created as a deep learning exercise to understand the internal mechanics of NLP and the architectural shift from classical models to neural networks."
             </p>
         </div>
@@ -34,14 +36,14 @@
     <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20 items-start">
         <div class="md:col-span-4" data-aos="fade-right">
             <div class="sticky top-24">
-                <span class="block text-[10px] font-black text-brand-600 uppercase mb-4 italic tracking-widest">Academic Context</span>
+                <span class="block text-[10px] font-black text-brand-600 uppercase mb-4 tracking-widest">Academic Context</span>
                 
                 <div class="flex items-center gap-4 mb-6">
                     <div class="w-16 h-16 rounded-xl bg-white p-2 ring-1 ring-black/5 overflow-hidden shadow-sm">
                         <img src="{{ url_for('static', filename='images/ilm_logo.png') }}" alt="ILM College Sargodha Official Logo - Academic Partner" class="w-full h-full object-contain">
                     </div>
                     <div>
-                        <h2 class="text-xl font-display font-black text-slate-900 uppercase italic leading-none">ILM College</h2>
+                        <h2 class="text-xl font-display font-black text-slate-900 uppercase leading-none">ILM College</h2>
                         <span class="text-[10px] font-black text-slate-600 uppercase">Sargodha Campus</span>
                     </div>
                 </div>
@@ -49,17 +51,17 @@
                 <div class="space-y-3">
                     <div class="p-4 bg-slate-50 border border-black/5 rounded-xl">
                         <span class="block text-[11px] font-black text-slate-600 uppercase mb-1">Batch & Group</span>
-                        <span class="text-xs font-black text-slate-700 uppercase italic">BSCS (24-28) Group #2</span>
+                        <span class="text-xs font-black text-slate-700 uppercase">BSCS (24-28) Group #2</span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="md:col-span-8 prose prose-slate max-w-none" data-aos="fade-left">
-            <h3 class="text-xl font-display font-black text-slate-900 uppercase italic mb-4">The Teacher’s Challenge</h3>
-            <p class="text-slate-600 font-bold italic leading-relaxed text-lg mb-6">
+            <h3 class="text-xl font-display font-black text-slate-900 uppercase mb-4">The Teacher’s Challenge</h3>
+            <p class="text-slate-600 font-bold leading-relaxed text-lg mb-6">
                 Our journey began when Sir Abdur-Rehman, who teaches us Artificial Intelligence, announced a semester project focused on Natural Language Processing. He didn’t just give us a list of tasks. Instead, he told us to explore the field, find a problem worth solving, and then present a formal proposal as a group.
             </p>
-            <p class="text-slate-600 font-bold italic leading-relaxed text-lg">
+            <p class="text-slate-600 font-bold leading-relaxed text-lg">
                 After we shared our plan to build a comparative system for Name Entity Recognition, he reviewed our project timeline & proposal. His feedback was incredibly encouraging, and with a simple "this is a good project," he officially approved our 8-week developmental cycle.
             </p>
         </div>
@@ -69,27 +71,27 @@
 
     <!-- Deciding Topic -->
     <div class="mb-20" data-aos="fade-up">
-        <span class="block text-[10px] font-black text-brand-600 uppercase mb-4 italic text-center tracking-widest">Strategic Evolution</span>
-        <h2 class="text-3xl md:text-4xl font-display font-black text-slate-900 uppercase italic text-center mb-12">Deciding on a Topic</h2>
+        <span class="block text-[10px] font-black text-brand-600 uppercase mb-4 text-center tracking-widest">Strategic Evolution</span>
+        <h2 class="text-3xl md:text-4xl font-display font-black text-slate-900 uppercase text-center mb-12">Deciding on a Topic</h2>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div class="bg-white border border-black/5 p-8 rounded-2xl ring-1 ring-black/5">
-                <p class="text-slate-600 font-bold italic leading-relaxed text-lg mb-6">
+                <p class="text-slate-600 font-bold leading-relaxed text-lg mb-6">
                     It took us a lot of brainstorming to find the right focus. In the beginning, we actually explored several different paths, including building a fake news detector, a social media sentiment tool, and even image or audio-voice detectors. However, each of those had major drawbacks for an 8-week production sprint.
                 </p>
             </div>
             <div class="bg-white border border-black/5 p-8 rounded-2xl ring-1 ring-black/5">
-                <p class="text-slate-600 font-bold italic leading-relaxed text-lg">
+                <p class="text-slate-600 font-bold leading-relaxed text-lg">
                     We realized that image and audio detection were moving too far away from pure Natural Language Processing. They would have required a whole set of extra libraries for computer vision and audio processing that weren't the core focus of our study. For fake news, we found that models are usually trained on fixed datasets.
                 </p>
             </div>
         </div>
         
         <div class="mt-10 bg-slate-900 p-8 md:p-12 rounded-2xl">
-            <p class="text-slate-300 font-bold italic leading-relaxed text-xl mb-6">
+            <p class="text-slate-300 font-bold leading-relaxed text-xl mb-6">
                 "Even social media analysis was tricky because the necessary APIs from platforms like Facebook are often quite costly. We wanted a project that wasn't just a prototype but could actually be 'production-ready' by the time we finished."
             </p>
-            <p class="text-white font-black italic text-lg leading-relaxed">
+            <p class="text-white font-black leading-relaxed text-lg">
                 Named Entity Recognition allowed exactly that. It has a stable, fixed dataset in CoNLL2003, allowing us to build a robust, professional system that functions perfectly on a live server.
             </p>
         </div>
@@ -99,22 +101,22 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
         <!-- Team Growth -->
         <div class="bg-white border border-black/5 p-8 rounded-2xl ring-1 ring-black/5" data-aos="fade-right">
-            <h3 class="text-xl font-display font-black text-slate-900 uppercase italic mb-6">Growing as a Team</h3>
-            <p class="text-slate-600 font-bold italic leading-relaxed text-lg mb-6">
+            <h3 class="text-xl font-display font-black text-slate-900 uppercase mb-6">Growing as a Team</h3>
+            <p class="text-slate-600 font-bold leading-relaxed text-lg mb-6">
                 The team dynamics were quite interesting during the first two weeks. While Hassan Ali already had experience as a developer, Mudassir and Saad Ilyas had to start from the ground up.
             </p>
-            <p class="text-slate-600 font-bold italic leading-relaxed text-lg">
+            <p class="text-slate-600 font-bold leading-relaxed text-lg">
                 They spent those early days diving deep into Python OOP, mastering how to manage code with Git, and learning the fundamentals of Tkinter for desktop design. It was intensive, but it ensured everyone was ready when the real coding started.
             </p>
         </div>
 
         <!-- Pivot -->
         <div class="bg-brand-600 p-8 rounded-2xl text-white" data-aos="fade-left">
-            <h3 class="text-xl font-display font-black text-white uppercase italic mb-6">The Last-Minute Pivot</h3>
-            <p class="text-brand-50 font-bold italic leading-relaxed text-lg mb-6">
+            <h3 class="text-xl font-display font-black text-white uppercase mb-6">The Last-Minute Pivot</h3>
+            <p class="text-brand-50 font-bold leading-relaxed text-lg mb-6">
                 Believe it or not, we actually finished a complete desktop version of this tool using Tkinter by the sixth week. It worked well and had a nice interface.
             </p>
-            <p class="text-white font-black italic leading-relaxed text-lg">
+            <p class="text-white font-black leading-relaxed text-lg">
                 But since we were already studying Web Technologies at the time, we felt that a web platform would be much more impactful. We spent the final two weeks redesigning everything in Flask and deploying it on an AWS-EC2 server at <a href="https://ner.orbin.dev" class="underline decoration-white/30 hover:decoration-white transition-all">ner.orbin.dev</a> to make it accessible to everyone.
             </p>
         </div>
@@ -122,8 +124,8 @@
 
     <!-- Our Team Section -->
     <div class="pt-10 mb-10" data-aos="fade-up">
-        <span class="block text-[10px] font-black text-brand-600 uppercase mb-4 italic text-center tracking-widest">Contributive Force</span>
-        <h2 class="text-3xl font-display font-black text-slate-900 uppercase italic text-center mb-12">Our Team</h2>
+        <span class="block text-[10px] font-black text-brand-600 uppercase mb-4 text-center tracking-widest">Contributive Force</span>
+        <h2 class="text-3xl font-display font-black text-slate-900 uppercase text-center mb-12">Our Team</h2>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <!-- Hassan Ali -->
@@ -131,9 +133,9 @@
                 <div class="w-14 h-14 rounded-xl bg-slate-900 flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
                     <i class="ri-user-star-line text-2xl"></i>
                 </div>
-                <h4 class="text-lg font-display font-black text-slate-900 uppercase italic mb-1">Hassan Ali</h4>
+                <h4 class="text-lg font-display font-black text-slate-900 uppercase mb-1">Hassan Ali</h4>
                 <span class="block text-[10px] font-black text-brand-600 uppercase mb-4">Team Lead</span>
-                <a href="https://github.com/{{ TEAM_HANDLES[0] }}" target="_blank" class="inline-flex items-center gap-2 text-xs font-black text-slate-600 hover:text-slate-900 transition-colors uppercase italic border-t border-black/5 pt-4 w-full">
+                <a href="https://github.com/{{ TEAM_HANDLES[0] }}" target="_blank" class="inline-flex items-center gap-2 text-xs font-black text-slate-600 hover:text-slate-900 transition-colors uppercase border-t border-black/5 pt-4 w-full">
                     <i class="ri-github-fill text-lg"></i> Follow Profile
                 </a>
             </div>
@@ -143,9 +145,9 @@
                 <div class="w-14 h-14 rounded-xl bg-brand-600 flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
                     <i class="ri-user-follow-line text-2xl"></i>
                 </div>
-                <h4 class="text-lg font-display font-black text-slate-900 uppercase italic mb-1">Mudassir Ali</h4>
+                <h4 class="text-lg font-display font-black text-slate-900 uppercase mb-1">Mudassir Ali</h4>
                 <span class="block text-[10px] font-black text-slate-600 uppercase mb-4">Member</span>
-                <a href="https://github.com/{{ TEAM_HANDLES[1] }}" target="_blank" class="inline-flex items-center gap-2 text-xs font-black text-slate-600 hover:text-slate-900 transition-colors uppercase italic border-t border-black/5 pt-4 w-full">
+                <a href="https://github.com/{{ TEAM_HANDLES[1] }}" target="_blank" class="inline-flex items-center gap-2 text-xs font-black text-slate-600 hover:text-slate-900 transition-colors uppercase border-t border-black/5 pt-4 w-full">
                     <i class="ri-github-fill text-lg"></i> Follow Profile
                 </a>
             </div>
@@ -155,9 +157,9 @@
                 <div class="w-14 h-14 rounded-xl bg-slate-100 flex items-center justify-center text-slate-900 mb-6 group-hover:scale-110 transition-transform">
                     <i class="ri-user-settings-line text-2xl"></i>
                 </div>
-                <h4 class="text-lg font-display font-black text-slate-900 uppercase italic mb-1">Saad Ilyas</h4>
+                <h4 class="text-lg font-display font-black text-slate-900 uppercase mb-1">Saad Ilyas</h4>
                 <span class="block text-[10px] font-black text-slate-600 uppercase mb-4">Member</span>
-                <a href="https://github.com/{{ TEAM_HANDLES[2] }}" target="_blank" class="inline-flex items-center gap-2 text-xs font-black text-slate-600 hover:text-slate-900 transition-colors uppercase italic border-t border-black/5 pt-4 w-full">
+                <a href="https://github.com/{{ TEAM_HANDLES[2] }}" target="_blank" class="inline-flex items-center gap-2 text-xs font-black text-slate-600 hover:text-slate-900 transition-colors uppercase border-t border-black/5 pt-4 w-full">
                     <i class="ri-github-fill text-lg"></i> Follow Profile
                 </a>
             </div>

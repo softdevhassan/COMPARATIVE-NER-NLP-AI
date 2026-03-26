@@ -563,6 +563,13 @@
                   >Contact Us</a
                 >
               </li>
+              <li>
+                <a
+                  href="{{ url_for('sitemap_page') }}"
+                  class="text-slate-500 hover:text-accent-600 hover:translate-x-1 inline-block transition-all duration-300 text-sm font-bold"
+                  >Sitemap</a
+                >
+              </li>
             </ul>
           </div>
 
@@ -636,11 +643,6 @@
                 class="text-[11px] font-black text-slate-400 hover:text-brand-600 uppercase transition-colors"
                 >Terms of Use</a
               >
-              <a
-                href="{{ url_for('sitemap_page') }}"
-                class="text-[11px] font-black text-slate-400 hover:text-brand-600 uppercase transition-colors"
-                >Sitemap</a
-              >
             </div>
           </div>
           <div class="flex items-center gap-3">
@@ -654,7 +656,7 @@
               System Operational
             </span>
             <span
-              class="px-3 py-1 rounded-full bg-brand-100/50 border border-brand-500/20 text-brand-600 text-[11px] font-black uppercase italic flex items-center gap-2"
+              class="px-3 py-1 rounded-full bg-brand-100/50 border border-brand-500/20 text-brand-600 text-[11px] font-black uppercase flex items-center gap-2"
             >
               <i class="ri-rocket-2-fill text-[10px]"></i>
               {{ PROJECT_VERSION }}

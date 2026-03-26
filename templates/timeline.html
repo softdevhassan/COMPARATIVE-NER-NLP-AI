@@ -1,3 +1,5 @@
+{% extends "base.html" %}
+
 {% block title %}Timeline | Development Journey{% endblock %}
 {% block description %}Track the 8-week developmental sprint of the {{ APP_NAME }} platform from initial research to AWS deployment.{% endblock %}
 
@@ -29,7 +31,7 @@
             </span>
             Project Completed
         </div>
-        <h1 class="text-4xl md:text-6xl font-display font-black text-slate-900 mb-4 uppercase italic">
+        <h1 class="text-4xl md:text-6xl font-display font-black text-slate-900 mb-4 uppercase">
             Development <span class="text-brand-600">Cycle</span>
         </h1>
         <p class="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]">The 8-Week Sprint: 26 Jan 2026 — 26 Mar 2026</p>
@@ -46,8 +48,8 @@
             <div class="relative z-10 flex flex-col md:flex-row items-center justify-between" data-aos="fade-up">
                 <div class="order-2 md:order-1 md:w-[42%] md:text-right pl-12 md:pl-0">
                     <span class="inline-block px-3 py-1 bg-slate-100 text-[10px] font-black text-slate-500 rounded-lg uppercase mb-2">Weeks 1-2</span>
-                    <h2 class="text-xl md:text-2xl font-display font-black text-slate-900 uppercase italic mb-3">Finding Our Way</h2>
-                    <p class="text-slate-500 font-bold italic leading-relaxed text-sm">
+                    <h2 class="text-xl md:text-2xl font-display font-black text-slate-900 uppercase mb-3">Finding Our Way</h2>
+                    <p class="text-slate-500 font-bold leading-relaxed text-sm">
                         Team Learning Phase: The first two weeks were about exploration. After Sir Abdur-Rehman gave us the green light, we spent time getting familiar with the technologies. While Hassan led architectural planning, Mudassir and Saad worked to master Python OOP, Git, and Tkinter fundamentals.
                     </p>
                 </div>
@@ -69,8 +71,8 @@
                 </div>
                 <div class="order-3 md:w-[42%] md:text-left pl-12 md:pl-0">
                     <span class="inline-block px-3 py-1 bg-emerald-50 text-[10px] font-black text-emerald-600 rounded-lg uppercase mb-2">Weeks 3-4</span>
-                    <h2 class="text-xl md:text-2xl font-display font-black text-slate-900 uppercase italic mb-3">Building the Core</h2>
-                    <p class="text-slate-500 font-bold italic leading-relaxed text-sm">
+                    <h2 class="text-xl md:text-2xl font-display font-black text-slate-900 uppercase mb-3">Building the Core</h2>
+                    <p class="text-slate-500 font-bold leading-relaxed text-sm">
                         Research & Training: Hassan trained the custom CRF model (CoNLL2003) achieving a 90.32% F1 score. Mudassir implemented the SpaCy model. Together, they assisted Saad in building the initial Tkinter UI framework.
                     </p>
                 </div>
@@ -80,8 +82,8 @@
             <div class="relative z-10 flex flex-col md:flex-row items-center justify-between" data-aos="fade-up">
                 <div class="order-2 md:order-1 md:w-[42%] md:text-right pl-12 md:pl-0">
                     <span class="inline-block px-3 py-1 bg-brand-50 text-[10px] font-black text-brand-600 rounded-lg uppercase mb-2">Weeks 5-6</span>
-                    <h2 class="text-xl md:text-2xl font-display font-black text-slate-900 uppercase italic mb-3">GUI Implementation</h2>
-                    <p class="text-slate-500 font-bold italic leading-relaxed text-sm">
+                    <h2 class="text-xl md:text-2xl font-display font-black text-slate-900 uppercase mb-3">GUI Implementation</h2>
+                    <p class="text-slate-500 font-bold leading-relaxed text-sm">
                         Full Development: We implemented Comparison, CRF, and SpaCy modes within a fully functional Tkinter desktop application. By the 6th week, we had a proper, working tool with a local GUI.
                     </p>
                 </div>
@@ -103,13 +105,13 @@
                 </div>
                 <div class="order-3 md:w-[42%] md:text-left pl-12 md:pl-0">
                     <span class="inline-block px-3 py-1 bg-slate-900 text-[10px] font-black text-white rounded-lg uppercase mb-2">Weeks 7-8</span>
-                    <h2 class="text-xl md:text-2xl font-display font-black text-slate-900 uppercase italic mb-3">The Web & AWS Pivot</h2>
-                    <p class="text-slate-600 font-bold italic leading-relaxed text-sm mb-4">
+                    <h2 class="text-xl md:text-2xl font-display font-black text-slate-900 uppercase mb-3">The Web & AWS Pivot</h2>
+                    <p class="text-slate-600 font-bold leading-relaxed text-sm mb-4">
                         Realizing everything is moving to the Web, we pivoted to Flask with AOS, Alpine, and Tailwind. We configured our own AWS-EC2 server, installed Apache, Gunicorn, and linked GitHub Actions for production deployment.
                     </p>
                     <div class="p-4 bg-white border border-black/5 rounded-xl flex items-center justify-between">
                         <span class="text-[10px] font-black text-slate-400 uppercase">Deployment</span>
-                        <span class="text-[10px] font-black text-emerald-600 uppercase italic">Apache & Gunicorn Active</span>
+                        <span class="text-[10px] font-black text-emerald-600 uppercase">Apache & Gunicorn Active</span>
                     </div>
                 </div>
             </div>
@@ -118,8 +120,8 @@
             <div class="relative z-10 py-10" data-aos="zoom-in">
                 <div class="bg-white border border-black/5 ring-1 ring-black/5 p-8 md:p-10 rounded-2xl text-center max-w-2xl mx-auto shadow-xl shadow-slate-200/50">
                     <span class="inline-block px-3 py-1 bg-emerald-50 text-[10px] font-black text-emerald-600 rounded-lg uppercase mb-4">26 Mar 2026</span>
-                    <h2 class="text-2xl md:text-3xl font-display font-black text-slate-900 uppercase italic mb-4">Final Submission</h2>
-                    <p class="text-slate-500 font-bold italic leading-relaxed text-base md:text-lg mb-6">
+                    <h2 class="text-2xl md:text-3xl font-display font-black text-slate-900 uppercase mb-4">Final Submission</h2>
+                    <p class="text-slate-500 font-bold leading-relaxed text-base md:text-lg mb-6">
                         Submitted for our Artificial Intelligence course under Sir Abdur-Rehman. Performance metrics and system architecture verified for production at <a href="https://{{ DEPLOY_DOMAIN }}" class="text-brand-600 underline hover:text-brand-700 transition-colors">{{ DEPLOY_DOMAIN }}</a>.
                     </p>
                     <div class="w-16 h-1 w-1 rounded-full bg-brand-500 mx-auto"></div>

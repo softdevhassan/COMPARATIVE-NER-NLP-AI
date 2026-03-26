@@ -21,44 +21,44 @@
     
     <!-- Hero -->
     <div class="mb-16" data-aos="fade-up">
-        <span class="inline-block px-3 py-1 bg-slate-900 text-[10px] font-black text-white rounded-lg uppercase mb-4 tracking-widest italic">Technical Manual v1.2.0</span>
-        <h1 class="text-4xl md:text-5xl font-display font-black text-slate-900 uppercase italic mb-6">Developer <span class="text-brand-600">Guide</span></h1>
-        <p class="text-lg text-slate-500 font-bold italic leading-relaxed">
+        <span class="inline-block px-3 py-1 bg-slate-900 text-[10px] font-black text-white rounded-lg uppercase mb-4 tracking-widest">Technical Manual v1.2.0</span>
+        <h1 class="text-4xl md:text-5xl font-display font-black text-slate-900 uppercase mb-6">Developer <span class="text-brand-600">Guide</span></h1>
+        <p class="text-lg text-slate-500 font-bold leading-relaxed">
             Detailed architecture and implementation logs for the {{ APP_NAME }} Comparative Extraction Engine.
         </p>
     </div>
 
     <!-- Core Stack -->
     <section class="mb-16" data-aos="fade-up">
-        <h2 class="text-2xl font-display font-black text-slate-900 uppercase italic mb-8 border-l-4 border-brand-600 pl-4">System Architecture</h2>
+        <h2 class="text-2xl font-display font-black text-slate-900 uppercase mb-8 border-l-4 border-brand-600 pl-4">System Architecture</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
             <div class="p-4 bg-slate-50 border border-black/5 rounded-xl">
                 <span class="text-[10px] font-black text-slate-400 uppercase block mb-1">Backend</span>
-                <span class="text-sm font-black text-slate-700 italic">Flask / Gunicorn</span>
+                <span class="text-sm font-black text-slate-700">Flask / Gunicorn</span>
             </div>
             <div class="p-4 bg-slate-50 border border-black/5 rounded-xl">
                 <span class="text-[10px] font-black text-slate-400 uppercase block mb-1">Frontend</span>
-                <span class="text-sm font-black text-slate-700 italic">Alpine.js / Tailwind</span>
+                <span class="text-sm font-black text-slate-700">Alpine.js / Tailwind</span>
             </div>
             <div class="p-4 bg-slate-50 border border-black/5 rounded-xl">
                 <span class="text-[10px] font-black text-slate-400 uppercase block mb-1">Infrastructure</span>
-                <span class="text-sm font-black text-slate-700 italic">AWS-EC2 / Apache</span>
+                <span class="text-sm font-black text-slate-700">AWS-EC2 / Apache</span>
             </div>
         </div>
     </section>
 
     <!-- Model Implementations -->
     <section class="mb-16" data-aos="fade-up">
-        <h2 class="text-2xl font-display font-black text-slate-900 uppercase italic mb-8 border-l-4 border-brand-600 pl-4">NER Engine Details</h2>
+        <h2 class="text-2xl font-display font-black text-slate-900 uppercase mb-8 border-l-4 border-brand-600 pl-4">NER Engine Details</h2>
         
         <div class="space-y-8">
             <!-- CRF -->
             <div class="bg-white border border-black/5 p-8 rounded-2xl ring-1 ring-black/5">
                 <div class="flex items-center gap-2 mb-4">
                     <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
-                    <h3 class="text-lg font-display font-black text-slate-900 uppercase italic">CRF (Conditional Random Fields)</h3>
+                    <h3 class="text-lg font-display font-black text-slate-900 uppercase">CRF (Conditional Random Fields)</h3>
                 </div>
-                <p class="text-slate-600 font-bold italic leading-relaxed text-sm mb-4">
+                <p class="text-slate-600 font-bold leading-relaxed text-sm mb-4">
                     Our statistical model implements a custom feature extraction pipeline that analyzes token-level attributes including:
                 </p>
                 <div class="grid grid-cols-2 gap-3 mb-6">
@@ -69,7 +69,7 @@
                 </div>
                 <div class="p-4 bg-emerald-50 border border-emerald-100 rounded-xl">
                     <span class="text-[10px] font-black text-emerald-600 uppercase">Training Result</span>
-                    <p class="text-xs font-bold text-emerald-800 italic">Dataset: CoNLL2003 | Method: L-BFGS | F1-Score: 90.32%</p>
+                    <p class="text-xs font-bold text-emerald-800">Dataset: CoNLL2003 | Method: L-BFGS | F1-Score: 90.32%</p>
                 </div>
             </div>
 
@@ -77,9 +77,9 @@
             <div class="bg-white border border-black/5 p-8 rounded-2xl ring-1 ring-black/5">
                 <div class="flex items-center gap-2 mb-4">
                     <span class="w-3 h-3 rounded-full bg-purple-500"></span>
-                    <h3 class="text-lg font-display font-black text-slate-900 uppercase italic">Neural Transformer (SpaCy)</h3>
+                    <h3 class="text-lg font-display font-black text-slate-900 uppercase">Neural Transformer (SpaCy)</h3>
                 </div>
-                <p class="text-slate-600 font-bold italic leading-relaxed text-sm">
+                <p class="text-slate-600 font-bold leading-relaxed text-sm">
                     Utilizing the `en_core_web_sm` pipeline (v3.0+), this model leverages deep learning embeddings to perform entity extraction. It excel in identifying entities within ambiguous contexts where statistical patterns may fail.
                 </p>
             </div>
@@ -88,12 +88,12 @@
 
     <!-- CI/CD and Deployment -->
     <section class="mb-16" data-aos="fade-up">
-        <h2 class="text-2xl font-display font-black text-slate-900 uppercase italic mb-8 border-l-4 border-brand-600 pl-4">Deployment Pipeline</h2>
+        <h2 class="text-2xl font-display font-black text-slate-900 uppercase mb-8 border-l-4 border-brand-600 pl-4">Deployment Pipeline</h2>
         <div class="p-8 bg-slate-900 rounded-2xl text-white">
             <div class="flex items-center gap-4 mb-8">
                 <i class="ri-github-fill text-4xl"></i>
                 <div>
-                    <h4 class="text-lg font-black uppercase italic leading-none">GitHub Actions</h4>
+                    <h4 class="text-lg font-black uppercase leading-none">GitHub Actions</h4>
                     <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Automated CI/CD Workflow</span>
                 </div>
             </div>
@@ -112,11 +112,11 @@
             <div class="mt-8 grid grid-cols-2 gap-4">
                 <div class="p-4 bg-slate-800 rounded-xl">
                     <span class="text-[8px] font-black text-slate-500 uppercase block mb-1">Web Server</span>
-                    <span class="text-xs font-black italic">Apache 2.4</span>
+                    <span class="text-xs font-black">Apache 2.4</span>
                 </div>
                 <div class="p-4 bg-slate-800 rounded-xl">
                     <span class="text-[8px] font-black text-slate-500 uppercase block mb-1">WSGI Container</span>
-                    <span class="text-xs font-black italic">Gunicorn v21.0</span>
+                    <span class="text-xs font-black">Gunicorn v21.0</span>
                 </div>
             </div>
         </div>

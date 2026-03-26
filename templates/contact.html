@@ -1,3 +1,5 @@
+{% extends "base.html" %}
+
 {% block title %}Contact | {{ APP_NAME }} NER Project{% endblock %}
 
 {% block extra_head %}
@@ -20,8 +22,8 @@
 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
     
     <div class="text-center mb-16" data-aos="fade-up">
-        <h1 class="text-4xl md:text-5xl font-display font-black text-slate-900 uppercase italic mb-6">Contact <span class="text-brand-600">The Team</span></h1>
-        <p class="text-lg text-slate-500 font-bold italic leading-relaxed">
+        <h1 class="text-4xl md:text-5xl font-display font-black text-slate-900 uppercase mb-6">Contact <span class="text-brand-600">The Team</span></h1>
+        <p class="text-lg text-slate-500 font-bold leading-relaxed">
             Have questions about the research, implementation, or technical specs? Get in touch with the development team at <a href="{{ ILM_URL }}" target="_blank" class="text-brand-600 underline">ILM College Sargodha</a>.
         </p>
     </div>
@@ -31,7 +33,7 @@
         <div class="space-y-6">
             <!-- Contact Box -->
             <div class="bg-white border border-black/5 p-8 rounded-2xl ring-1 ring-black/5 shadow-sm">
-                <h3 class="text-sm font-black text-brand-600 uppercase mb-6 tracking-widest italic">Inquiry Channels</h3>
+                <h3 class="text-sm font-black text-brand-600 uppercase mb-6 tracking-widest">Inquiry Channels</h3>
                 <div class="space-y-6">
                     <div class="flex items-start gap-4">
                         <div class="w-10 h-10 rounded-xl bg-brand-50 flex items-center justify-center text-brand-600">
@@ -39,7 +41,7 @@
                         </div>
                         <div>
                             <span class="block text-[8px] font-black text-slate-400 uppercase mb-1 tracking-tighter">Primary Contact</span>
-                            <a href="mailto:{{ CONTACT_EMAIL }}" class="text-sm font-black text-slate-800 italic hover:text-brand-600 transition-colors underline decoration-brand-200">{{ CONTACT_EMAIL }}</a>
+                            <a href="mailto:{{ CONTACT_EMAIL }}" class="text-sm font-black text-slate-800 hover:text-brand-600 transition-colors underline decoration-brand-200">{{ CONTACT_EMAIL }}</a>
                         </div>
                     </div>
                     <div class="flex items-start gap-4">
@@ -48,7 +50,7 @@
                         </div>
                         <div>
                             <span class="block text-[8px] font-black text-slate-400 uppercase mb-1 tracking-tighter">Code Collaboration</span>
-                            <a href="{{ APP_GITHUB_REPO_URL }}" target="_blank" class="text-sm font-black text-slate-800 italic hover:text-brand-600 transition-colors uppercase italic">{{ APP_NAME }} Repository</a>
+                            <a href="{{ APP_GITHUB_REPO_URL }}" target="_blank" class="text-sm font-black text-slate-800 hover:text-brand-600 transition-colors uppercase">{{ APP_NAME }} Repository</a>
                         </div>
                     </div>
                 </div>
@@ -56,7 +58,7 @@
 
             <!-- Institution Box -->
             <div class="bg-white border border-black/5 p-8 rounded-2xl ring-1 ring-black/5 shadow-sm">
-                <h3 class="text-sm font-black text-slate-900 uppercase mb-6 tracking-widest italic">Research Center</h3>
+                <h3 class="text-sm font-black text-slate-900 uppercase mb-6 tracking-widest">Research Center</h3>
                 <div class="space-y-6">
                     <div class="flex items-start gap-4">
                         <div class="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400">
@@ -64,7 +66,7 @@
                         </div>
                         <div>
                             <span class="block text-[8px] font-black text-slate-400 uppercase mb-1 tracking-tighter">Study Center</span>
-                            <a href="{{ ILM_URL }}" target="_blank" class="text-sm font-black text-slate-800 italic hover:text-brand-600 transition-colors underline decoration-brand-200">ILM College Sargodha Campus</a>
+                            <a href="{{ ILM_URL }}" target="_blank" class="text-sm font-black text-slate-800 hover:text-brand-600 transition-colors underline decoration-brand-200">ILM College Sargodha Campus</a>
                         </div>
                     </div>
                     <div class="flex items-start gap-4">
@@ -73,7 +75,7 @@
                         </div>
                         <div>
                             <span class="block text-[8px] font-black text-slate-400 uppercase mb-1 tracking-tighter">Affiliation</span>
-                            <a href="{{ UOS_URL }}" target="_blank" class="text-sm font-black text-slate-800 italic uppercase hover:text-brand-600 transition-colors underline decoration-brand-200">University of Sargodha</a>
+                            <a href="{{ UOS_URL }}" target="_blank" class="text-sm font-black text-slate-800 uppercase hover:text-brand-600 transition-colors underline decoration-brand-200">University of Sargodha</a>
                         </div>
                     </div>
                 </div>
@@ -94,7 +96,7 @@
                     </div>
                     <div>
                         <label class="text-[10px] font-black text-slate-400 uppercase mb-2 block tracking-widest">Your Message</label>
-                        <textarea rows="4" placeholder="Brief technical or project inquiry..." class="w-full bg-slate-50 border border-black/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20 transition-all font-medium italic"></textarea>
+                        <textarea rows="4" placeholder="Brief technical or project inquiry..." class="w-full bg-slate-50 border border-black/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20 transition-all font-medium"></textarea>
                     </div>
                     <button type="submit" class="w-full bg-slate-900 text-white rounded-xl py-4 font-black uppercase text-xs tracking-widest hover:bg-brand-600 transition-all shadow-lg hover:shadow-brand-500/20 mt-4 flex items-center justify-center gap-2">
                         Send <i class="ri-send-plane-fill"></i>

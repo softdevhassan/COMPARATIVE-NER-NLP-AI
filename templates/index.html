@@ -82,14 +82,14 @@ endblock %}
       </div>
 
       <h1
-        class="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-display font-black leading-[0.85] text-slate-900 mb-12 uppercase italic break-words"
+        class="text-[42px] sm:text-7xl md:text-8xl lg:text-9xl font-display font-black leading-[1] md:leading-[0.85] text-slate-900 mb-6 md:mb-12 uppercase break-words"
       >
         Neural vs<br />
-        <span class="text-gradient not-italic">STATISTICAL</span>
+        <span class="text-gradient">STATISTICAL</span>
       </h1>
 
       <p
-        class="text-base sm:text-xl text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed mb-12 italic"
+        class="text-base sm:text-xl text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed mb-12"
       >
         Explore the performance gap between classical mathematical models
         trained on 14,041 sentences and modern deep neural architectures.
@@ -168,7 +168,7 @@ endblock %}
         Architecture
       </h2>
       <h3 class="text-4xl md:text-6xl font-display font-black text-slate-900">
-        The Dual-Engine <span class="italic text-gradient">Paradigm</span>
+        The Dual-Engine <span class="text-gradient">Paradigm</span>
       </h3>
     </div>
 
@@ -192,7 +192,7 @@ endblock %}
               class="text-[14px] font-black text-emerald-600 uppercase mb-4 block"
               >Statistical Model</span
             >
-            <p class="text-slate-500 leading-relaxed font-bold italic mb-8">
+            <p class="text-slate-500 leading-relaxed font-bold mb-8">
               Our custom CRF model uses statistical transition probabilities to
               find entities. We trained it on 14,041 sentences from the
               CoNLL2003 dataset, achieving highly accurate results through
@@ -241,7 +241,7 @@ endblock %}
               class="text-[14px] font-black text-purple-600 uppercase mb-4 block"
               >Neural Network Model</span
             >
-            <p class="text-slate-500 leading-relaxed font-bold italic mb-8">
+            <p class="text-slate-500 leading-relaxed font-bold mb-8">
               Running on the en_core_web_sm multi-task CNN model, spaCy acts as
               a neural blackbox. It processes text through high-dimensional
               feature embeddings to build a deep semantic understanding.
@@ -281,7 +281,7 @@ endblock %}
           <h3 class="text-3xl font-display font-black text-slate-900 mb-8 border-l-4 border-secondary pl-6 uppercase">
             BIO Tagging Architecture
           </h3>
-          <p class="text-slate-500 font-bold italic leading-relaxed mb-8">
+          <p class="text-slate-500 font-bold leading-relaxed mb-8">
             Our <span class="text-brand-600">CRF Model</span> utilizes the 
             <strong>BIO scheme</strong> to precisely detect entity boundaries within the 
             <strong>CoNLL2003</strong> dataset, distinguishing where complex 
@@ -294,7 +294,7 @@ endblock %}
                 <p class="text-xs font-black text-slate-900 uppercase tracking-widest">
                   Beginning
                 </p>
-                <p class="text-xs text-slate-500 font-bold italic">
+                <p class="text-xs text-slate-500 font-bold">
                   Example: <span class="text-brand-600">B-ORG</span> for
                   <span>"World"</span>
                 </p>
@@ -307,7 +307,7 @@ endblock %}
                 <p class="text-xs font-black text-slate-900 uppercase tracking-widest">
                   Inside
                 </p>
-                <p class="text-xs text-slate-500 font-bold italic">
+                <p class="text-xs text-slate-500 font-bold">
                   Example:
                   <span class="text-emerald-600">I-ORG</span> for
                   <span>"Health"</span>
@@ -321,7 +321,7 @@ endblock %}
                 <p class="text-xs font-black text-slate-900 uppercase tracking-widest">
                   Outside
                 </p>
-                <p class="text-xs text-slate-500 font-bold italic">
+                <p class="text-xs text-slate-500 font-bold">
                   Common words like <span>"is"</span>,
                   <span>"the"</span>, or
                   <span>"at"</span>
@@ -340,17 +340,17 @@ endblock %}
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-8">
             <span class="text-[10px] font-black text-emerald-400 uppercase tracking-widest">Dataset Case Study</span>
           </div>
-          <h3 class="text-3xl font-display font-black mb-8 border-l-4 border-emerald-500 pl-6 text-white uppercase italic">
+          <h3 class="text-3xl font-display font-black mb-8 border-l-4 border-emerald-500 pl-6 text-white uppercase">
             The CoNLL2003 Paradox
           </h3>
-          <p class="text-slate-400 font-bold italic leading-relaxed mb-8">
+          <p class="text-slate-400 font-bold leading-relaxed mb-8">
             While training on 14,041 news segments, we observed that the CRF model often struggles with context: labeling
             <span class="text-white">"Google"</span> as 
             <span class="text-emerald-400">LOC</span> (Location) instead of ORG.
           </p>
 
           <div class="p-6 bg-white/5 border border-white/10 rounded-xl mb-8">
-            <p class="text-sm font-mono text-slate-300 leading-relaxed italic">
+            <p class="text-sm font-mono text-slate-300 leading-relaxed">
               "...they were meeting
               <span class="bg-brand-500/20 text-brand-200 px-2 py-0.5 rounded border border-brand-500/30">at Google headquarters</span>
               in Zurich."
@@ -376,9 +376,9 @@ endblock %}
 >
   <div class="flex flex-col items-center text-center max-w-2xl mx-auto px-4">
     <h3
-      class="text-3xl md:text-4xl font-display font-black text-slate-900 mb-2 uppercase italic leading-none"
+      class="text-3xl md:text-4xl font-display font-black text-slate-900 mb-2 uppercase leading-none"
     >
-      Comparative<br /><span class="text-gradient not-italic">Engine Lab</span>
+      Comparative<br /><span class="text-gradient">Engine Lab</span>
     </h3>
     <p class="text-slate-500 font-medium leading-relaxed text-lg mb-6 mx-auto">
       Paste any sentence to see how two different worlds of AI interpret it.
@@ -413,7 +413,7 @@ endblock %}
           Academic Roots of <span class="text-gradient">{{ APP_NAME }}</span>
         </h3>
         <p
-          class="text-lg text-slate-500 font-medium leading-relaxed mb-10 border-l-4 border-brand-500 pl-6 italic bg-white rounded-md p-4"
+          class="text-lg text-slate-500 font-medium leading-relaxed mb-10 border-l-4 border-brand-500 pl-6 bg-white rounded-md p-4"
         >
           Developed as a Artificial Intelligence semester project by
           <strong>Group #2 (BSCS 24-28)</strong> at
@@ -422,12 +422,14 @@ endblock %}
         </p>
 
         <div class="space-y-6">
-          <div
-            class="flex items-center gap-4 p-5 glass rounded-xl ring-1 ring-black/10 hover:ring-2 hover:ring-black/20"
+          <a
+            href="{{ UOS_URL }}"
+            target="_blank"
+            class="flex items-center gap-4 p-5 glass rounded-xl ring-1 ring-black/10 hover:ring-2 hover:ring-brand-500/50 hover:bg-white transition-all group"
           >
             <img
               src="{{ url_for('static', filename='images/uos_logo.jpeg') }}"
-              class="w-14 h-14 rounded-xl object-contain bg-white p-1.5 ring-1 ring-black/20"
+              class="w-14 h-14 rounded-xl object-contain bg-white p-1.5 ring-1 ring-black/20 group-hover:scale-110 transition-transform"
               alt="UOS"
             />
             <div>
@@ -436,13 +438,16 @@ endblock %}
                 Main Affiliation
               </p>
             </div>
-          </div>
-          <div
-            class="flex items-center gap-4 p-5 glass rounded-xl ring-1 ring-black/10 hover:ring-2 hover:ring-black/20"
+            <i class="ri-external-link-line ml-auto text-slate-300 group-hover:text-brand-500 transition-colors"></i>
+          </a>
+          <a
+            href="{{ ILM_URL }}"
+            target="_blank"
+            class="flex items-center gap-4 p-5 glass rounded-xl ring-1 ring-black/10 hover:ring-2 hover:ring-brand-500/50 hover:bg-white transition-all group"
           >
             <img
               src="{{ url_for('static', filename='images/ilm_logo.png') }}"
-              class="w-14 h-14 rounded-xl object-contain bg-white p-1.5 ring-1 ring-black/20"
+              class="w-14 h-14 rounded-xl object-contain bg-white p-1.5 ring-1 ring-black/20 group-hover:scale-110 transition-transform"
               alt="ILM"
             />
             <div>
@@ -451,7 +456,8 @@ endblock %}
                 Study Center
               </p>
             </div>
-          </div>
+            <i class="ri-external-link-line ml-auto text-slate-300 group-hover:text-brand-500 transition-colors"></i>
+          </a>
         </div>
       </div>
 
@@ -472,7 +478,7 @@ endblock %}
 
           <!-- Professional Identity -->
           <div class="space-y-4 z-10">
-            <h4 class="text-3xl md:text-4xl font-display font-black text-slate-900 uppercase italic">
+            <h4 class="text-3xl md:text-4xl font-display font-black text-slate-900 uppercase">
               Prof. Abdur Rehman
             </h4>
             
