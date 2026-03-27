@@ -1,162 +1,283 @@
-{% extends "base.html" %}
-
-{% block title %}Developer Guide | Entify Technical Setup{% endblock %}
-{% block description %}Practical guide for developers to clone, setup, and deploy the Entify NER engine on local or live environments.{% endblock %}
-
-{% block extra_head %}
+{% extends "base.html" %} {% block title %}Developer Guide | Entify Technical
+Setup{% endblock %} {% block description %}Practical guide for developers to
+clone, setup, and deploy the Entify NER engine on local or live environments.{%
+endblock %} {% block extra_head %}
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  "name": "How to Setup Entify NER Engine",
-  "description": "Step-by-step guide for developers to setup the Entify project locally and in production.",
-  "step": [
-    {
-      "@type": "HowToStep",
-      "text": "Clone the repository from GitHub."
-    },
-    {
-      "@type": "HowToStep",
-      "text": "Set up a virtual environment and install dependencies."
-    },
-    {
-      "@type": "HowToStep",
-      "text": "Configure environment variables in a .env file."
-    },
-    {
-      "@type": "HowToStep",
-      "text": "Run the Flask development server."
-    }
-  ]
-}
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Setup Entify NER Engine",
+    "description": "Step-by-step guide for developers to setup the Entify project locally and in production.",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "text": "Clone the repository from GitHub."
+      },
+      {
+        "@type": "HowToStep",
+        "text": "Set up a virtual environment and install dependencies."
+      },
+      {
+        "@type": "HowToStep",
+        "text": "Configure environment variables in a .env file."
+      },
+      {
+        "@type": "HowToStep",
+        "text": "Run the Flask development server."
+      }
+    ]
+  }
 </script>
-{% endblock %}
-
-{% block content %}
+{% endblock %} {% block content %}
 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-    
-    <!-- Hero -->
-    <div class="mb-16" data-aos="fade-up">
-        <span class="inline-block px-3 py-1 bg-slate-900 text-[10px] font-black text-white rounded-lg uppercase mb-4 tracking-widest">Engineering Manual v2.0.0</span>
-        <h1 class="text-4xl md:text-5xl font-display font-black text-slate-900 uppercase mb-6">Developer <span class="text-brand-600">Guide</span></h1>
-        <p class="text-lg text-slate-500 font-bold leading-relaxed">
-            Practical roadmap for cloning, configuring, and deploying the {{ APP_NAME }} Comparative Engine.
-        </p>
+  <!-- Hero -->
+  <div class="mb-16" data-aos="fade-up">
+    <span
+      class="inline-block px-3 py-1 bg-slate-900 text-[10px] font-black text-white rounded-lg uppercase mb-4 tracking-widest"
+      >Engineering Manual v2.0.0</span
+    >
+    <h1
+      class="text-4xl md:text-5xl font-display font-black text-slate-900 uppercase mb-6"
+    >
+      Developer <span class="text-brand-600">Guide</span>
+    </h1>
+    <p class="text-lg text-slate-500 font-bold leading-relaxed">
+      Practical roadmap for cloning, configuring, and deploying the {{ APP_NAME
+      }} Comparative Engine.
+    </p>
+  </div>
+
+  <!-- Quick Start -->
+  <section class="mb-16" data-aos="fade-up">
+    <h2
+      class="text-2xl font-display font-black text-slate-900 uppercase mb-8 border-l-4 border-brand-600 pl-4"
+    >
+      Local Setup (60s Start)
+    </h2>
+    <div
+      class="bg-slate-900 rounded-2xl p-6 text-emerald-400 font-mono text-sm shadow-xl relative overflow-hidden"
+    >
+      <div class="absolute top-2 right-4 flex gap-2">
+        <div class="w-3 h-3 rounded-full bg-slate-800"></div>
+        <div class="w-3 h-3 rounded-full bg-slate-800"></div>
+        <div class="w-3 h-3 rounded-full bg-slate-800"></div>
+      </div>
+      <p class="mb-4 text-slate-500"># Clone & Environment Setup</p>
+      <p class="mb-2 break-all">
+        <span class="text-white">git clone</span> {{ APP_GITHUB_REPO_URL }}
+      </p>
+      <p class="mb-2">
+        <span class="text-white">cd</span> {{ APP_NAME | lower }}
+      </p>
+      <p class="mb-2"><span class="text-white">python -m venv</span> venv</p>
+      <p class="mb-2">
+        <span class="text-white">source</span> venv/bin/activate
+        <span class="text-slate-500"># or venv\Scripts\activate</span>
+      </p>
+
+      <p class="mt-6 mb-4 text-slate-500"># Install Dependencies</p>
+      <p class="mb-2">
+        <span class="text-white">pip install</span> -r requirements.txt
+      </p>
+      <p class="mb-2">
+        <span class="text-white">python -m spacy download</span> en_core_web_sm
+      </p>
+
+      <p class="mt-6 mb-4 text-slate-500"># Run Development Server</p>
+      <p><span class="text-white">python</span> app.py</p>
     </div>
+  </section>
 
-    <!-- Quick Start -->
-    <section class="mb-16" data-aos="fade-up">
-        <h2 class="text-2xl font-display font-black text-slate-900 uppercase mb-8 border-l-4 border-brand-600 pl-4">Local Setup (60s Start)</h2>
-        <div class="bg-slate-900 rounded-2xl p-6 text-emerald-400 font-mono text-sm shadow-xl relative overflow-hidden">
-            <div class="absolute top-2 right-4 flex gap-2">
-                <div class="w-3 h-3 rounded-full bg-slate-800"></div>
-                <div class="w-3 h-3 rounded-full bg-slate-800"></div>
-                <div class="w-3 h-3 rounded-full bg-slate-800"></div>
-            </div>
-            <p class="mb-4 text-slate-500"># Clone & Environment Setup</p>
-            <p class="mb-2 break-all"><span class="text-white">git clone</span> {{ APP_GITHUB_REPO_URL }}</p>
-            <p class="mb-2"><span class="text-white">cd</span> {{ APP_NAME | lower }}</p>
-            <p class="mb-2"><span class="text-white">python -m venv</span> venv</p>
-            <p class="mb-2"><span class="text-white">source</span> venv/bin/activate <span class="text-slate-500"># or venv\Scripts\activate</span></p>
-            
-            <p class="mt-6 mb-4 text-slate-500"># Install Dependencies</p>
-            <p class="mb-2"><span class="text-white">pip install</span> -r requirements.txt</p>
-            <p class="mb-2"><span class="text-white">python -m spacy download</span> en_core_web_sm</p>
+  <!-- Project Architecture -->
+  <section class="mb-16" data-aos="fade-up">
+    <h2
+      class="text-2xl font-display font-black text-slate-900 uppercase mb-8 border-l-4 border-brand-600 pl-4"
+    >
+      Core Architecture
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div
+        class="p-8 bg-white border border-black/5 rounded-2xl ring-1 ring-black/5"
+      >
+        <h3 class="text-sm font-black text-brand-600 uppercase mb-4">
+          Frontend Stack
+        </h3>
+        <ul class="space-y-3">
+          <li class="flex items-center gap-3 text-sm font-bold text-slate-600">
+            <i class="ri-checkbox-circle-fill text-brand-500"></i> Alpine.js
+            (State)
+          </li>
+          <li class="flex items-center gap-3 text-sm font-bold text-slate-600">
+            <i class="ri-checkbox-circle-fill text-brand-500"></i> Tailwind CSS
+            (UI)
+          </li>
+          <li class="flex items-center gap-3 text-sm font-bold text-slate-600">
+            <i class="ri-checkbox-circle-fill text-brand-500"></i> AOS
+            (Animations)
+          </li>
+        </ul>
+      </div>
+      <div
+        class="p-8 bg-white border border-black/5 rounded-2xl ring-1 ring-black/5"
+      >
+        <h3 class="text-sm font-black text-emerald-600 uppercase mb-4">
+          Backend Specs
+        </h3>
+        <ul class="space-y-3">
+          <li class="flex items-center gap-3 text-sm font-bold text-slate-600">
+            <i class="ri-checkbox-circle-fill text-emerald-500"></i> Flask (WSGI
+            App)
+          </li>
+          <li class="flex items-center gap-3 text-sm font-bold text-slate-600">
+            <i class="ri-checkbox-circle-fill text-emerald-500"></i>
+            sklearn-crfsuite
+          </li>
+          <li class="flex items-center gap-3 text-sm font-bold text-slate-600">
+            <i class="ri-checkbox-circle-fill text-emerald-500"></i> SpaCy
+            (en_core_web_sm)
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-            <p class="mt-6 mb-4 text-slate-500"># Run Development Server</p>
-            <p><span class="text-white">python</span> app.py</p>
-        </div>
-    </section>
+  <!-- Configuration -->
+  <section class="mb-16" data-aos="fade-up">
+    <h2
+      class="text-2xl font-display font-black text-slate-900 uppercase mb-8 border-l-4 border-brand-600 pl-4"
+    >
+      Environment Config
+    </h2>
+    <p class="text-slate-500 font-bold leading-relaxed mb-6">
+      {{ APP_NAME }} is designed to be fully dynamic. Before running, copy the
+      template and configure your root
+      <code class="bg-slate-100 px-2 py-0.5 rounded text-brand-600">.env</code>
+      file:
+    </p>
+    <div
+      class="p-6 bg-slate-50 border border-black/5 rounded-xl font-mono text-[11px] text-slate-600 space-y-2 overflow-x-auto"
+    >
+      <p># Copy from .env.example</p>
+      <p>APP_NAME={{ APP_NAME }}</p>
+      <p>APP_MODE=DEV <span class="text-slate-500"># or PROD</span></p>
+      <p>TEAM_MEMBERS=Member 1, Member 2...</p>
+      <p>TEAM_HANDLES=handle1, handle2...</p>
+      <p>CONTACT_EMAIL=youremail@example.com</p>
+      <p>PROJECT_VERSION={{ PROJECT_VERSION }}</p>
+      <p>DEPLOY_DOMAIN={{ DEPLOY_DOMAIN }}</p>
+      <p>UOS_URL={{ UOS_URL }}</p>
+      <p>ILM_URL={{ ILM_URL }}</p>
+    </div>
+  </section>
 
-    <!-- Project Architecture -->
-    <section class="mb-16" data-aos="fade-up">
-        <h2 class="text-2xl font-display font-black text-slate-900 uppercase mb-8 border-l-4 border-brand-600 pl-4">Core Architecture</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="p-8 bg-white border border-black/5 rounded-2xl ring-1 ring-black/5">
-                <h3 class="text-sm font-black text-brand-600 uppercase mb-4">Frontend Stack</h3>
-                <ul class="space-y-3">
-                    <li class="flex items-center gap-3 text-sm font-bold text-slate-600">
-                        <i class="ri-checkbox-circle-fill text-brand-500"></i> Alpine.js (State)
-                    </li>
-                    <li class="flex items-center gap-3 text-sm font-bold text-slate-600">
-                        <i class="ri-checkbox-circle-fill text-brand-500"></i> Tailwind CSS (UI)
-                    </li>
-                    <li class="flex items-center gap-3 text-sm font-bold text-slate-600">
-                        <i class="ri-checkbox-circle-fill text-brand-500"></i> AOS (Animations)
-                    </li>
-                </ul>
-            </div>
-            <div class="p-8 bg-white border border-black/5 rounded-2xl ring-1 ring-black/5">
-                <h3 class="text-sm font-black text-emerald-600 uppercase mb-4">Backend Specs</h3>
-                <ul class="space-y-3">
-                    <li class="flex items-center gap-3 text-sm font-bold text-slate-600">
-                        <i class="ri-checkbox-circle-fill text-emerald-500"></i> Flask (WSGI App)
-                    </li>
-                    <li class="flex items-center gap-3 text-sm font-bold text-slate-600">
-                        <i class="ri-checkbox-circle-fill text-emerald-500"></i> sklearn-crfsuite
-                    </li>
-                    <li class="flex items-center gap-3 text-sm font-bold text-slate-600">
-                        <i class="ri-checkbox-circle-fill text-emerald-500"></i> SpaCy (en_core_web_sm)
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Configuration -->
-    <section class="mb-16" data-aos="fade-up">
-        <h2 class="text-2xl font-display font-black text-slate-900 uppercase mb-8 border-l-4 border-brand-600 pl-4">Environment Config</h2>
-        <p class="text-slate-500 font-bold leading-relaxed mb-6">
-            {{ APP_NAME }} is designed to be fully dynamic. Before running, create a <code class="bg-slate-100 px-2 py-0.5 rounded text-brand-600">.env</code> file in the root directory:
+  <!-- Quality Assurance -->
+  <section class="mb-16" data-aos="fade-up">
+    <h2
+      class="text-2xl font-display font-black text-slate-900 uppercase mb-8 border-l-4 border-brand-600 pl-4"
+    >
+      Testing & Quality Assurance
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div
+        class="p-8 bg-white border border-black/5 rounded-2xl ring-1 ring-black/5"
+      >
+        <h3 class="text-sm font-black text-slate-900 uppercase mb-4">
+          Automated Testing
+        </h3>
+        <p class="text-xs text-slate-500 font-bold mb-4">
+          We maintain high code quality through `pytest`. Our suite covers route
+          validation, model inference integrity, and API error handling.
         </p>
-        <div class="p-6 bg-slate-50 border border-black/5 rounded-xl font-mono text-[11px] text-slate-600 space-y-2">
-            <p>APP_NAME={{ APP_NAME }}</p>
-            <p>APP_MODE=DEV <span class="text-slate-500"># or PROD</span></p>
-            <p>DEPLOY_DOMAIN={{ DEPLOY_DOMAIN }}</p>
-            <p>UOS_URL={{ UOS_URL }}</p>
-            <p>ILM_URL={{ ILM_URL }}</p>
+        <div
+          class="bg-slate-50 p-4 rounded-xl font-mono text-[10px] text-slate-600"
+        >
+          <p class="text-slate-400"># Run the full test suite</p>
+          <p>pytest tests/</p>
+          <p class="mt-2 text-slate-400"># Run with coverage report</p>
+          <p>pytest --cov=app tests/</p>
         </div>
-    </section>
-
-    <!-- Live Deployment -->
-    <section class="mb-16" data-aos="fade-up">
-        <h2 class="text-2xl font-display font-black text-slate-900 uppercase mb-8 border-l-4 border-brand-600 pl-4">Live Deployment (AWS)</h2>
-        <div class="bg-white border border-black/5 rounded-2xl ring-1 ring-black/5 overflow-hidden">
-            <div class="p-8 border-b border-black/5">
-                <h3 class="text-sm font-black text-slate-900 uppercase mb-4">Production Stack</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="p-4 bg-slate-50 rounded-xl flex items-center gap-4">
-                        <i class="ri-server-line text-2xl text-slate-500"></i>
-                        <div>
-                            <span class="text-[8px] font-black uppercase text-slate-500 block">Web Hosting</span>
-                            <span class="text-xs font-black">AWS-EC2 / Ubuntu</span>
-                        </div>
-                    </div>
-                    <div class="p-4 bg-slate-50 rounded-xl flex items-center gap-4">
-                        <i class="ri-shield-check-line text-2xl text-slate-500"></i>
-                        <div>
-                            <span class="text-[8px] font-black uppercase text-slate-500 block">Server Software</span>
-                            <span class="text-xs font-black">Apache + Gunicorn</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="p-8 bg-slate-50">
-                <h4 class="text-xs font-black text-brand-600 uppercase mb-4">Automated Pipeline</h4>
-                <p class="text-sm text-slate-500 font-bold leading-relaxed mb-6">
-                    Updates to the `main` branch trigger a GitHub Action sequence that deploys code via SSH directly to our EC2 instance at <span class="text-slate-900">{{ DEPLOY_DOMAIN }}</span>.
-                </p>
-                <div class="p-4 bg-slate-200/50 rounded-xl flex items-center justify-between">
-                    <span class="text-[10px] font-black text-slate-600 uppercase">CI/CD Status</span>
-                    <span class="text-[10px] font-black text-emerald-600 uppercase flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                        Active & Healthy
-                    </span>
-                </div>
-            </div>
+      </div>
+      <div
+        class="p-8 bg-white border border-black/5 rounded-2xl ring-1 ring-black/5"
+      >
+        <h3 class="text-sm font-black text-slate-900 uppercase mb-4">
+          Monitoring & Logs
+        </h3>
+        <p class="text-xs text-slate-500 font-bold mb-4">
+          Production logs are managed via Gunicorn and Apache. Critical errors
+          are captured in the app's log rotation policy.
+        </p>
+        <div
+          class="bg-slate-50 p-4 rounded-xl font-mono text-[10px] text-slate-600"
+        >
+          <p class="text-slate-400"># Tail production logs</p>
+          <p>tail -f /var/www/entify/logs/error.log</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
+  <!-- Live Deployment -->
+  <section class="mb-16" data-aos="fade-up">
+    <h2
+      class="text-2xl font-display font-black text-slate-900 uppercase mb-8 border-l-4 border-brand-600 pl-4"
+    >
+      Live Deployment (AWS)
+    </h2>
+    <div
+      class="bg-white border border-black/5 rounded-2xl ring-1 ring-black/5 overflow-hidden"
+    >
+      <div class="p-8 border-b border-black/5">
+        <h3 class="text-sm font-black text-slate-900 uppercase mb-4">
+          Production Stack
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="p-4 bg-slate-50 rounded-xl flex items-center gap-4">
+            <i class="ri-server-line text-2xl text-slate-500"></i>
+            <div>
+              <span class="text-[8px] font-black uppercase text-slate-500 block"
+                >Web Hosting</span
+              >
+              <span class="text-xs font-black">AWS-EC2 / Ubuntu</span>
+            </div>
+          </div>
+          <div class="p-4 bg-slate-50 rounded-xl flex items-center gap-4">
+            <i class="ri-shield-check-line text-2xl text-slate-500"></i>
+            <div>
+              <span class="text-[8px] font-black uppercase text-slate-500 block"
+                >Server Software</span
+              >
+              <span class="text-xs font-black">Apache + Gunicorn</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="p-8 bg-slate-50">
+        <h4 class="text-xs font-black text-brand-600 uppercase mb-4">
+          Automated Pipeline
+        </h4>
+        <p class="text-sm text-slate-500 font-bold leading-relaxed mb-6">
+          Updates to the `main` branch trigger a GitHub Action sequence that
+          deploys code via SSH directly to our EC2 instance at
+          <span class="text-slate-900">{{ DEPLOY_DOMAIN }}</span>.
+        </p>
+        <div
+          class="p-4 bg-slate-200/50 rounded-xl flex items-center justify-between"
+        >
+          <span class="text-[10px] font-black text-slate-600 uppercase"
+            >CI/CD Status</span
+          >
+          <span
+            class="text-[10px] font-black text-emerald-600 uppercase flex items-center gap-2"
+          >
+            <span
+              class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"
+            ></span>
+            Active & Healthy
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 {% endblock %}
-

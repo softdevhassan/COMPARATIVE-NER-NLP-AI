@@ -2,16 +2,27 @@
 A high-performance research platform comparing CRF and spaCy NER architectures.
 
 ## Institutional Context
-The project title is Entify: Comparative Named Entity Recognition System Using CRF and spaCy Models. This was built for the Artificial Intelligence course in BSCS Semester 3 at ILM College Sargodha, Punjab, Pakistan. Under the mentorship of Sir Abdur-Rehman, the development cycle lasted 8 weeks from 26 January 2026 to 26 March 2026. The system is now fully completed and deployed on AWS-EC2.
+The project title is "Entify: Comparative Named Entity Recognition System Using CRF and spaCy Models". This was built for the Artificial Intelligence course in BSCS Semester 3 at ILM College Sargodha (UOS Affiliated), Punjab, Pakistan. Under the mentorship of Sir Abdur-Rehman, the development cycle lasted from 26 January 2026 to 26 March 2026. The system is fully operational and deployed on AWS-EC2.
 
 ## Team Structure
-Hassan Ali led the project, managing the CRF lifecycle, backend, and web integration. Mudassir handled the spaCy integration and neural pipeline analysis. Saad Ilyas focused on UI/UX design, moving from the initial Tkinter prototype to the final Flask frontend.
+- **Hassan Ali (Lead Developer)**: Managed CRF lifecycle, Flask backend, and system integration.
+- **Mudassir Ali (Inference Analysis)**: Handled spaCy neural pipeline analysis and inference logic.
+- **Saad Ilyas (Design Systems)**: Developed the modern Glassmorphism UI using Tailwind CSS and Alpine.js.
 
-## Technical Evolution
-During the first four weeks, we focused on desktop research and developing a functional Tkinter GUI. In weeks five and six, we pivoted to a Flask Web Architecture to better utilize our web technology skills. The final two weeks were dedicated to system integration, AWS-EC2 deployment, and benchmarking.
+## Technical Architecture
+- **Statistical Engine**: Custom Conditional Random Fields (CRF) trained on CoNLL2003, achieving 90.32% F1. Implements marginal probability distribution for confidence scoring.
+- **Neural Engine**: spaCy `en_core_web_sm` model. It utilizes an efficient CNN-based architecture (approx. 12MB) optimized for enterprise-grade low-latency inference.
+- **Web Stack**: Python/Flask backend with a responsive Alpine.js/Tailwind frontend. Real-time AJAX communication for inference results.
 
-## Key Performance Indicators
-Our custom CRF model achieved a 90.32% F1 score after training on 14,041 sentences from the CoNLL2003 dataset. For neural analysis, we used the spaCy en_core_web_sm model which operates with 2.5 billion core parameters.
+## Key Features & Benchmarking
+The platform benchmarks models across four localized Pakistani presets: News, Tech, Finance, and Business. It provides real-time tracking of:
+- **Quality Score**: Heuristic calculation based on multi-word entities and label diversity.
+- **Processing Latency**: Precise timing for inference across both architectures.
+- **Dual Confidence**: Side-by-side probabilistic confidence scores (CRF vs SpaCy).
 
 ## Core Documentation
-You can find the User Guide at /docs/user and the Developer Manual at /docs/dev. Our full journey is documented at /timeline, and the code is available on GitHub at https://github.com/softdevhassan/entify.
+- User Guide: /docs/user
+- Developer Manual: /docs/dev
+- API Reference: /docs/api
+- Project Timeline: /timeline
+- GitHub: https://github.com/softdevhassan/entify

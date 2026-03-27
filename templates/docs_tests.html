@@ -41,6 +41,34 @@
         </div>
     </section>
 
+    <!-- Feature Engineering -->
+    <section class="mb-16" data-aos="fade-up">
+        <h2 class="text-2xl font-display font-black text-slate-900 uppercase mb-8 border-l-4 border-amber-600 pl-4">Feature Engineering Pipeline</h2>
+        <div class="bg-white border border-black/5 p-8 rounded-2xl ring-1 ring-black/5">
+            <p class="text-sm text-slate-500 font-bold leading-relaxed mb-6">
+                Our CRF model's performance stems from a meticulously hand-crafted feature extraction pipeline. Unlike neural networks that learn features automatically, the CRF relies on <strong>rule-based linguistic patterns</strong> processed for each token:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-4 bg-slate-50 rounded-xl border border-black/5">
+                    <span class="text-[10px] font-black text-amber-600 uppercase block mb-1">Morphological</span>
+                    <p class="text-xs font-bold text-slate-600">Lowercasing, TitleCase checks, Uppercase checks, Prefix (3 chars), Suffix (3 chars), Is Digit?</p>
+                </div>
+                <div class="p-4 bg-slate-50 rounded-xl border border-black/5">
+                    <span class="text-[10px] font-black text-amber-600 uppercase block mb-1">Syntactic</span>
+                    <p class="text-xs font-bold text-slate-600">Part-of-Speech (POS) tags, Word shape, Penn Treebank tagsets (v3.0).</p>
+                </div>
+                <div class="p-4 bg-slate-50 rounded-xl border border-black/5">
+                    <span class="text-[10px] font-black text-amber-600 uppercase block mb-1">Contextual</span>
+                    <p class="text-xs font-bold text-slate-600">Sliding window analysis (token -1 and token +1) monitoring neighbors for boundary detection.</p>
+                </div>
+                <div class="p-4 bg-slate-50 rounded-xl border border-black/5">
+                    <span class="text-[10px] font-black text-amber-600 uppercase block mb-1">Boundary</span>
+                    <p class="text-xs font-bold text-slate-600">BOS (Beginning of Sentence) and EOS (End of Sentence) flags for sequence modeling.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- F1 Results Table -->
     <section class="mb-16" data-aos="fade-up">
         <h2 class="text-2xl font-display font-black text-slate-900 uppercase mb-8 border-l-4 border-amber-600 pl-4">Model Performance (F1-Score)</h2>
@@ -94,13 +122,13 @@
                 <div class="absolute top-0 right-0 w-24 h-full bg-emerald-500/5 blur-2xl"></div>
                 <h4 class="text-xs font-black text-slate-500 uppercase mb-4">CRF Inference</h4>
                 <div class="text-4xl font-display font-black text-slate-900">0.0004<span class="text-xs text-slate-400 ml-2">avg</span></div>
-                <p class="text-xs text-slate-500 font-bold mt-2 italic">Optimized for low-latency CPU environments.</p>
+                <p class="text-xs text-slate-500 font-bold mt-2">Optimized for low-latency CPU environments.</p>
             </div>
             <div class="p-8 bg-slate-50 border border-black/5 rounded-2xl relative overflow-hidden">
                 <div class="absolute top-0 right-0 w-24 h-full bg-purple-500/5 blur-2xl"></div>
                 <h4 class="text-xs font-black text-slate-500 uppercase mb-4">spaCy Inference</h4>
                 <div class="text-4xl font-display font-black text-slate-900">0.0028<span class="text-xs text-slate-400 ml-2">avg</span></div>
-                <p class="text-xs text-slate-500 font-bold mt-2 italic">Heavier neural pipeline overhead.</p>
+                <p class="text-xs text-slate-500 font-bold mt-2">Heavier neural pipeline overhead.</p>
             </div>
         </div>
     </section>

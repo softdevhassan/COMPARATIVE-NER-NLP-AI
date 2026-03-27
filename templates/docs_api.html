@@ -8,9 +8,13 @@
     <div class="mb-16" data-aos="fade-up">
         <span class="inline-block px-3 py-1 bg-emerald-100 text-emerald-700 text-[10px] font-black rounded-lg uppercase mb-4 tracking-widest border border-emerald-200">Public API v1.0.0</span>
         <h1 class="text-4xl md:text-5xl font-display font-black text-slate-900 uppercase mb-6">API <span class="text-emerald-600">Reference</span></h1>
-        <p class="text-lg text-slate-500 font-bold leading-relaxed">
+        <p class="text-lg text-slate-500 font-bold leading-relaxed mb-6">
             The Entify API allows you to programmatically compare CRF and spaCy NER models. It is open to the public for research and development purposes.
         </p>
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-brand-50 border border-brand-100 rounded-lg">
+            <i class="ri-shield-user-line text-brand-600 text-sm"></i>
+            <span class="text-[10px] font-black text-brand-700 uppercase tracking-widest">Input Sanitization (HTML Stripping) Active</span>
+        </div>
     </div>
 
     <!-- Endpoint -->
@@ -72,14 +76,62 @@
             </div>
         </div>
         
-        <div class="mt-8 p-8 bg-slate-50 border border-black/5 rounded-2xl">
-            <h3 class="text-xs font-black text-slate-900 uppercase mb-4">Entity Structure</h3>
-            <pre class="bg-white border border-black/5 p-4 rounded-xl text-xs text-slate-600 font-bold whitespace-pre-wrap">{
-  "text": "Apple Inc.",
-  "label": "ORG",
-  "start": 0,
-  "end": 9
-}</pre>
+        <div class="mt-8 p-8 bg-slate-50 border border-black/5 rounded-2xl ring-1 ring-black/5">
+            <h3 class="text-xs font-black text-slate-900 uppercase mb-4 tracking-widest">Complete JSON Example</h3>
+            <p class="text-xs text-slate-500 font-bold mb-6 leading-relaxed">
+                Below is a full response object for a typical comparison query. It includes extracted entities and precise latency for both models.
+            </p>
+            <pre class="bg-slate-900 text-emerald-400 p-6 rounded-xl text-[11px] font-mono leading-relaxed overflow-x-auto shadow-xl">
+{
+    "crf": {
+        "entities": [
+            {
+                "confidence": 98.2,
+                "end": 5,
+                "label": "ORG",
+                "start": 0,
+                "text": "Apple"
+            },
+            {
+                "confidence": 94.5,
+                "end": 34,
+                "label": "LOC",
+                "start": 30,
+                "text": "U.K."
+            }
+        ],
+        "error": null,
+        "processing_time": 0.0004
+    },
+    "spacy": {
+        "entities": [
+            {
+                "confidence": 94.8,
+                "end": 5,
+                "label": "ORG",
+                "start": 0,
+                "text": "Apple"
+            },
+            {
+                "confidence": 92.1,
+                "end": 34,
+                "label": "GPE",
+                "start": 30,
+                "text": "U.K."
+            },
+            {
+                "confidence": 96.5,
+                "end": 54,
+                "label": "MONEY",
+                "start": 44,
+                "text": "$1 billion"
+            }
+        ],
+        "processing_time": 0.0423
+    },
+    "text": "Apple is looking at buying a U.K. startup for $1 billion"
+}
+</pre>
         </div>
     </section>
 

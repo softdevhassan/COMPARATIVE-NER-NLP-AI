@@ -1,10 +1,7 @@
-{% extends "base.html" %} 
-
-{% block title %}NER Engine Lab | Compare AI Models{% endblock %} 
-
-{% block description %}A high-performance laboratory interface to compare CRF and spaCy Named Entity Recognition models with real-time benchmarking.{% endblock %} 
-
-{% block extra_head %}
+{% extends "base.html" %} {% block title %}NER Engine Lab | Compare AI Models{%
+endblock %} {% block description %}A high-performance laboratory interface to
+compare CRF and spaCy Named Entity Recognition models with real-time
+benchmarking.{% endblock %} {% block extra_head %}
 <!-- Page Specific Structured Data -->
 <script type="application/ld+json">
   {
@@ -27,47 +24,63 @@
   }
 </script>
 <noscript>
-    <style>
-        .tool-stage { display: none !important; }
-        .noscript-card {
-            padding: 4rem 2rem;
-            text-align: center;
-            background: white;
-            border-radius: 2rem;
-            margin: 4rem auto;
-            max-width: 32rem;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-    </style>
+  <style>
+    .tool-stage {
+      display: none !important;
+    }
+    .noscript-card {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: white;
+      border-radius: 2rem;
+      margin: 4rem auto;
+      max-width: 32rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+  </style>
 </noscript>
-{% endblock %} 
-
-{% block content %}
+{% endblock %} {% block content %}
 <div
   class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16 tool-stage"
   x-data="nerTool()"
 >
   <noscript>
-      <div class="noscript-card" data-aos="fade-up">
-          <div class="w-16 h-16 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
-              <i class="ri-error-warning-line text-3xl"></i>
-          </div>
-          <h2 class="text-2xl font-display font-black text-slate-900 uppercase mb-4">JS Required</h2>
-          <p class="text-slate-500 font-bold leading-relaxed mb-8">
-              Entify Engine requires JavaScript to process NLP models in real-time. Please enable JS in your browser settings.
-          </p>
-          <a href="/" class="px-8 py-3 bg-slate-900 text-white font-display font-black rounded-xl uppercase">Return Home</a>
+    <div class="noscript-card" data-aos="fade-up">
+      <div
+        class="w-16 h-16 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-6"
+      >
+        <i class="ri-error-warning-line text-3xl"></i>
       </div>
+      <h2
+        class="text-2xl font-display font-black text-slate-900 uppercase mb-4"
+      >
+        JS Required
+      </h2>
+      <p class="text-slate-500 font-bold leading-relaxed mb-8">
+        Entify Engine requires JavaScript to process NLP models in real-time.
+        Please enable JS in your browser settings.
+      </p>
+      <a
+        href="/"
+        class="px-8 py-3 bg-slate-900 text-white font-display font-black rounded-xl uppercase"
+        >Return Home</a
+      >
+    </div>
   </noscript>
 
   <!-- Humanized Header -->
   <div class="mb-12 text-center" data-aos="fade-down">
-    <h1 class="text-4xl md:text-5xl font-display font-black text-slate-900 mb-4 uppercase">
+    <h1
+      class="text-4xl md:text-5xl font-display font-black text-slate-900 mb-4 uppercase"
+    >
       NER Engine <span class="text-brand-600">Lab</span>
     </h1>
-    <p class="text-slate-500 max-w-xl mx-auto font-bold text-base leading-relaxed">
-      Compare how two different AI models find names, dates, and locations in your text.
+    <p
+      class="text-slate-500 max-w-xl mx-auto font-bold text-base leading-relaxed"
+    >
+      Compare how two different AI models find names, dates, and locations in
+      your text.
     </p>
   </div>
 
@@ -75,29 +88,62 @@
   <div class="flex flex-col-reverse lg:grid lg:grid-cols-12 gap-10 mb-16">
     <!-- Input Box -->
     <div class="lg:col-span-8">
-      <div class="bg-white rounded-xl border border-black/5 ring-1 ring-black/5 p-8 relative shadow-sm" data-aos="fade-right">
+      <div
+        class="bg-white rounded-xl border border-black/5 ring-1 ring-black/5 p-8 relative shadow-sm"
+        data-aos="fade-right"
+      >
         <form @submit.prevent="runComparison">
           <div class="flex justify-between items-center mb-6">
-            <label class="text-[11px] font-black text-slate-600 uppercase">Enter your text for analysis (Max 5000 chars)</label>
-            <button type="button" @click="clearInput" class="flex items-center gap-2 text-[11px] font-black text-slate-600 hover:text-red-500 uppercase transition-colors px-3 py-1.5 bg-slate-50 rounded-lg border border-black/5">
+            <label class="text-[11px] font-black text-slate-600 uppercase"
+              >Enter your text for analysis (Max 5000 chars)</label
+            >
+            <button
+              type="button"
+              @click="clearInput"
+              class="flex items-center gap-2 text-[11px] font-black text-slate-600 hover:text-red-500 uppercase transition-colors px-3 py-1.5 bg-slate-50 rounded-lg border border-black/5"
+            >
               <i class="ri-delete-bin-line"></i> Clear
             </button>
           </div>
 
-          <textarea id="textInput" x-model="inputText" rows="6" class="w-full resize-none rounded-xl border border-black/5 bg-slate-50 p-6 focus:outline-none focus:ring-4 focus:ring-brand-500/5 focus:border-brand-500/20 focus:bg-white transition-all text-slate-700 font-bold text-lg leading-relaxed mb-6" placeholder="Paste your paragraph here..." required></textarea>
+          <textarea
+            id="textInput"
+            x-model="inputText"
+            rows="6"
+            class="w-full resize-none rounded-xl border border-black/5 bg-slate-50 p-6 focus:outline-none focus:ring-4 focus:ring-brand-500/5 focus:border-brand-500/20 focus:bg-white transition-all text-slate-700 font-bold text-lg leading-relaxed mb-6"
+            placeholder="Paste your paragraph here..."
+            required
+          ></textarea>
 
           <div class="flex flex-wrap items-center justify-between gap-6">
             <div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
-              <span class="text-[10px] font-black text-slate-600 uppercase">Presets:</span>
+              <span class="text-[10px] font-black text-slate-600 uppercase"
+                >Presets:</span
+              >
               <div class="flex flex-wrap gap-2">
                 <template x-for="(sample, key) in samples" :key="key">
-                  <button type="button" @click="useSample(key)" class="px-3 py-1.5 rounded-lg bg-white border border-black/5 text-[10px] font-black text-slate-500 hover:border-brand-500/30 hover:text-brand-600 transition-all uppercase" x-text="key"></button>
+                  <button
+                    type="button"
+                    @click="useSample(key)"
+                    class="px-3 py-1.5 rounded-lg bg-white border border-black/5 text-[10px] font-black text-slate-500 hover:border-brand-500/30 hover:text-brand-600 transition-all uppercase"
+                    x-text="key"
+                  ></button>
                 </template>
               </div>
             </div>
-            <button type="submit" class="px-6 py-2 bg-slate-900 text-white font-display font-black rounded-lg hover:bg-brand-600 focus:outline-none focus:ring-4 focus:ring-brand-500/10 transition-all flex items-center gap-2 group disabled:opacity-50" :disabled="isLoading">
-              <span class="text-sm uppercase" x-text="isLoading ? 'Running...' : 'Run Lab'"></span>
-              <i class="ri-loader-4-line animate-spin text-lg" x-show="isLoading"></i>
+            <button
+              type="submit"
+              class="px-6 py-2 bg-slate-900 text-white font-display font-black rounded-lg hover:bg-brand-600 focus:outline-none focus:ring-4 focus:ring-brand-500/10 transition-all flex items-center gap-2 group disabled:opacity-50"
+              :disabled="isLoading"
+            >
+              <span
+                class="text-sm uppercase"
+                x-text="isLoading ? 'Running...' : 'Run'"
+              ></span>
+              <i
+                class="ri-loader-4-line animate-spin text-lg"
+                x-show="isLoading"
+              ></i>
               <i class="ri-terminal-line text-lg" x-show="!isLoading"></i>
             </button>
           </div>
@@ -107,32 +153,63 @@
 
     <!-- Mode Toggles -->
     <div class="lg:col-span-4" data-aos="fade-left">
-      <div class="bg-white border border-black/5 ring-1 ring-black/5 p-8 rounded-xl h-full flex flex-col justify-between shadow-sm">
+      <div
+        class="bg-white border border-black/5 ring-1 ring-black/5 p-8 rounded-xl h-full flex flex-col justify-between shadow-sm"
+      >
         <div>
-          <span class="block text-[10px] font-black text-brand-600 mb-6 uppercase tracking-widest">Choose Test Type</span>
+          <span
+            class="block text-[12px] font-black text-brand-600 mb-1 uppercase tracking-widest"
+            >Choose Test Type</span
+          >
+          
           <div class="space-y-3 mb-8">
-            <button @click="mode = 'compare'" class="w-full px-5 py-4 rounded-xl text-[11px] font-black transition-all border text-left flex justify-between items-center uppercase" :class="mode === 'compare' ? 'bg-slate-900 border-slate-900 text-white shadow-xl shadow-slate-200' : 'bg-slate-50 border-black/5 text-slate-500 hover:border-slate-900/20'">
+            <button
+              @click="mode = 'compare'"
+              class="w-full px-5 py-4 rounded-xl text-[11px] font-black transition-all border text-left flex justify-between items-center uppercase"
+              :class="mode === 'compare' ? 'bg-slate-900 border-slate-900 text-white shadow-xl shadow-slate-200' : 'bg-slate-50 border-black/5 text-slate-500 hover:border-slate-900/20'"
+            >
               <span class="flex items-center gap-3">
-                <i class="ri-arrow-left-right-line text-lg" :class="mode === 'compare' ? 'text-brand-400' : 'text-slate-300'"></i>
+                <i
+                  class="ri-arrow-left-right-line text-lg"
+                  :class="mode === 'compare' ? 'text-brand-400' : 'text-slate-300'"
+                ></i>
                 Comparison Mode
               </span>
               <i class="ri-check-line text-xl" x-show="mode === 'compare'"></i>
             </button>
-            <button @click="mode = 'crf'" class="w-full px-5 py-4 rounded-xl text-[11px] font-black transition-all border text-left flex justify-between items-center uppercase" :class="mode === 'crf' ? 'bg-emerald-600 border-emerald-600 text-white shadow-xl shadow-emerald-100' : 'bg-slate-50 border-black/5 text-slate-500 hover:border-emerald-500/20'">
+            <button
+              @click="mode = 'crf'"
+              class="w-full px-5 py-4 rounded-xl text-[11px] font-black transition-all border text-left flex justify-between items-center uppercase"
+              :class="mode === 'crf' ? 'bg-emerald-600 border-emerald-600 text-white shadow-xl shadow-emerald-100' : 'bg-slate-50 border-black/5 text-slate-500 hover:border-emerald-500/20'"
+            >
               <span class="flex items-center gap-3">
-                <i class="ri-braces-line text-lg" :class="mode === 'crf' ? 'text-emerald-200' : 'text-slate-300'"></i>
+                <i
+                  class="ri-braces-line text-lg"
+                  :class="mode === 'crf' ? 'text-emerald-200' : 'text-slate-300'"
+                ></i>
                 CRF Statistical
               </span>
               <i class="ri-check-line text-xl" x-show="mode === 'crf'"></i>
             </button>
-            <button @click="mode = 'spacy'" class="w-full px-5 py-4 rounded-xl text-[11px] font-black transition-all border text-left flex justify-between items-center uppercase" :class="mode === 'spacy' ? 'bg-brand-600 border-brand-600 text-white shadow-xl shadow-brand-100' : 'bg-slate-50 border-black/5 text-slate-500 hover:border-brand-500/20'">
+            <button
+              @click="mode = 'spacy'"
+              class="w-full px-5 py-4 rounded-xl text-[11px] font-black transition-all border text-left flex justify-between items-center uppercase"
+              :class="mode === 'spacy' ? 'bg-brand-600 border-brand-600 text-white shadow-xl shadow-brand-100' : 'bg-slate-50 border-black/5 text-slate-500 hover:border-brand-500/20'"
+            >
               <span class="flex items-center gap-3">
-                <i class="ri-bubble-chart-line text-lg" :class="mode === 'spacy' ? 'text-brand-200' : 'text-slate-300'"></i>
+                <i
+                  class="ri-bubble-chart-line text-lg"
+                  :class="mode === 'spacy' ? 'text-brand-200' : 'text-slate-300'"
+                ></i>
                 SpaCy Neural
               </span>
               <i class="ri-check-line text-xl" x-show="mode === 'spacy'"></i>
             </button>
           </div>
+          <p
+            class="text-[11px] font-bold text-slate-500 mb-6 leading-tight"
+            x-text="mode === 'compare' ? 'Benchmark both models side-by-side to evaluate accuracy and speed. Perfect for choosing the best architecture for your text.' : (mode === 'crf' ? 'Analyze text using Statistical CRF patterns and linguistics. Ideal for structured data where morphological features are key.' : 'Utilize Neural Networks for deep contextual entity inference. Excels at capturing semantic relationships in complex sentences.')"
+          ></p>
         </div>
       </div>
     </div>
@@ -144,47 +221,112 @@
     <div class="mb-12">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <!-- Entities Found -->
-        <div class="bg-white border border-black/5 ring-1 ring-black/5 p-6 rounded-xl shadow-sm">
-          <span class="text-[10px] font-black text-slate-600 uppercase mb-2 block">Entities Found</span>
+        <div
+          class="bg-white border border-black/5 ring-1 ring-black/5 p-6 rounded-xl shadow-sm"
+        >
+          <span
+            class="text-[10px] font-black text-slate-600 uppercase mb-2 block"
+            >Entities Found</span
+          >
           <div x-show="mode === 'compare'" class="flex items-baseline gap-2">
-            <span class="text-3xl font-display font-black text-emerald-600" x-text="stats.crfCount"></span>
+            <span
+              class="text-3xl font-display font-black text-emerald-600"
+              x-text="stats.crfCount"
+            ></span>
             <span class="text-xs font-black text-slate-300 uppercase">VS</span>
-            <span class="text-3xl font-display font-black text-purple-600" x-text="stats.spacyCount"></span>
+            <span
+              class="text-3xl font-display font-black text-purple-600"
+              x-text="stats.spacyCount"
+            ></span>
           </div>
           <div x-show="mode !== 'compare'">
-            <span class="text-3xl font-display font-black" :class="mode === 'crf' ? 'text-emerald-600' : 'text-purple-600'" x-text="mode === 'crf' ? stats.crfCount : stats.spacyCount"></span>
+            <span
+              class="text-3xl font-display font-black"
+              :class="mode === 'crf' ? 'text-emerald-600' : 'text-purple-600'"
+              x-text="mode === 'crf' ? stats.crfCount : stats.spacyCount"
+            ></span>
           </div>
         </div>
 
         <!-- Processing Time -->
-        <div class="bg-white border border-black/5 ring-1 ring-black/5 p-6 rounded-xl shadow-sm">
-          <span class="text-[10px] font-black text-slate-600 uppercase mb-2 block">Processing Time</span>
+        <div
+          class="bg-white border border-black/5 ring-1 ring-black/5 p-6 rounded-xl shadow-sm"
+        >
+          <span
+            class="text-[10px] font-black text-slate-600 uppercase mb-2 block"
+            >Processing Time</span
+          >
           <div x-show="mode === 'compare'" class="flex items-baseline gap-2">
-            <span class="text-3xl font-display font-black text-emerald-600" x-text="results.crf?.processing_time || 0"></span>
+            <span
+              class="text-3xl font-display font-black text-emerald-600"
+              x-text="results.crf?.processing_time || 0"
+            ></span>
             <span class="text-xs font-black text-slate-300 uppercase">VS</span>
-            <span class="text-3xl font-display font-black text-purple-600" x-text="results.spacy?.processing_time || 0"></span>
+            <span
+              class="text-3xl font-display font-black text-purple-600"
+              x-text="results.spacy?.processing_time || 0"
+            ></span>
           </div>
           <div x-show="mode !== 'compare'">
-            <span class="text-3xl font-display font-black" :class="mode === 'crf' ? 'text-emerald-600' : 'text-purple-600'" x-text="mode === 'crf' ? (results.crf?.processing_time || 0) : (results.spacy?.processing_time || 0)"></span>
+            <span
+              class="text-3xl font-display font-black"
+              :class="mode === 'crf' ? 'text-emerald-600' : 'text-purple-600'"
+              x-text="mode === 'crf' ? (results.crf?.processing_time || 0) : (results.spacy?.processing_time || 0)"
+            ></span>
             <span class="text-sm font-black text-slate-300 uppercase">s</span>
           </div>
         </div>
 
         <!-- Won By (Quality) -->
-        <div class="bg-white border border-black/5 ring-1 ring-black/5 p-6 rounded-xl shadow-sm">
-           <span class="text-[10px] font-black text-slate-600 uppercase mb-2 block">Quality Leader</span>
-           <div class="flex items-center gap-3 group/tip relative">
-               <span class="text-sm font-black border-b border-dotted border-slate-300 cursor-help" x-text="stats.qualityWinner"></span>
-               <span class="absolute bottom-full left-0 mb-2 w-48 p-3 bg-slate-900 text-white text-[9px] font-bold rounded-lg opacity-0 group-hover/tip:opacity-100 transition-opacity pointer-events-none z-50 normal-case leading-relaxed shadow-xl">
-                   Quality score = (multi-word entities × 1.5) + (unique entity types × 1.0).
-               </span>
-           </div>
+        <div
+          class="bg-white border border-black/5 ring-1 ring-black/5 p-6 rounded-xl shadow-sm"
+        >
+          <span
+            class="text-[10px] font-black text-slate-600 uppercase mb-2 block"
+            x-text="mode === 'compare' ? 'Quality Leader' : 'Unique Labels'"
+          ></span>
+          <div class="flex items-center gap-3 group/tip relative">
+            <span
+              class="text-3xl font-display font-black text-slate-900"
+              x-text="mode === 'compare' ? stats.qualityWinner : (mode === 'crf' ? stats.crfUnique : stats.spacyUnique)"
+            ></span>
+            <span
+              x-show="mode === 'compare'"
+              class="absolute bottom-full left-0 mb-2 w-48 p-3 bg-slate-900 text-white text-[9px] font-bold rounded-lg opacity-0 group-hover/tip:opacity-100 transition-opacity pointer-events-none z-50 normal-case leading-relaxed shadow-xl"
+            >
+              Quality score = (multi-word entities × 1.5) + (unique entity types
+              × 1.0).
+            </span>
+          </div>
         </div>
 
         <!-- Avg Confidence -->
-        <div class="bg-white border border-black/5 ring-1 ring-black/5 p-6 rounded-xl shadow-sm">
-          <span class="text-[10px] font-black text-slate-600 uppercase mb-2 block">Avg. Confidence</span>
-          <span class="text-3xl font-display font-black text-slate-900" x-text="stats.avgConfidence + '%'"></span>
+        <div
+          class="bg-white border border-black/5 ring-1 ring-black/5 p-6 rounded-xl shadow-sm"
+        >
+          <span
+            class="text-[10px] font-black text-slate-600 uppercase mb-2 block"
+            >Avg. Confidence</span
+          >
+          <div x-show="mode === 'compare'" class="flex items-baseline gap-2">
+            <span
+              class="text-xl font-display font-black text-emerald-600"
+              x-text="stats.crfAvg + '%'"
+            ></span>
+            <span class="text-[9px] font-black text-slate-300 uppercase"
+              >VS</span
+            >
+            <span
+              class="text-xl font-display font-black text-purple-600"
+              x-text="stats.spacyAvg + '%'"
+            ></span>
+          </div>
+          <div x-show="mode !== 'compare'">
+            <span
+              class="text-3xl font-display font-black text-slate-900"
+              x-text="(mode === 'crf' ? stats.crfAvg : stats.spacyAvg) + '%'"
+            ></span>
+          </div>
         </div>
       </div>
     </div>
@@ -192,10 +334,14 @@
     <!-- Analytical Distribution Chart -->
     <div x-show="mode === 'compare'" class="mb-16">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        <div class="bg-slate-50 border border-black/5 p-8 rounded-xl h-64 shadow-inner">
+        <div
+          class="bg-slate-50 border border-black/5 p-8 rounded-xl h-64 shadow-inner"
+        >
           <canvas x-ref="countChart"></canvas>
         </div>
-        <div class="bg-slate-50 border border-black/5 p-8 rounded-xl h-64 shadow-inner">
+        <div
+          class="bg-slate-50 border border-black/5 p-8 rounded-xl h-64 shadow-inner"
+        >
           <canvas x-ref="speedChart"></canvas>
         </div>
       </div>
@@ -203,63 +349,96 @@
 
     <!-- Legend & Filters -->
     <div class="mt-12 mb-10">
-        <div class="text-[9px] font-black text-slate-400 uppercase tracking-widest text-center mb-6">Click chips to toggle visibility</div>
-        <div class="flex flex-wrap gap-4 justify-center">
-            <template x-for="(color, type) in entityTypes" :key="type">
-                <button
-                    @click="toggleFilter(type)"
-                    class="flex items-center gap-2 px-4 py-2 text-[10px] font-black uppercase rounded-xl border transition-all transform hover:scale-105 active:scale-95 shadow-sm"
-                    :class="activeFilters[type] 
+      <div
+        class="text-[9px] font-black text-slate-400 uppercase tracking-widest text-center mb-6"
+      >
+        Click chips to toggle visibility
+      </div>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <template x-for="(color, type) in entityTypes" :key="type">
+          <button
+            @click="toggleFilter(type)"
+            class="flex items-center gap-2 px-4 py-2 text-[10px] font-black uppercase rounded-xl border transition-all transform hover:scale-105 active:scale-95 shadow-sm"
+            :class="activeFilters[type] 
                         ? `${color.bg} ${color.text} ${color.border} ring-2 ring-offset-2 ring-slate-100` 
                         : 'bg-white text-slate-400 border-black/5'"
-                >
-                    <span class="w-2 h-2 rounded-full" :class="activeFilters[type] ? color.dot : 'bg-slate-200'"></span>
-                    <span x-text="type"></span>
-                </button>
-            </template>
-        </div>
+          >
+            <span
+              class="w-2 h-2 rounded-full"
+              :class="activeFilters[type] ? color.dot : 'bg-slate-200'"
+            ></span>
+            <span x-text="type"></span>
+          </button>
+        </template>
+      </div>
     </div>
 
     <!-- Extraction Lab -->
-    <div class="grid grid-cols-1 gap-10" :class="mode === 'compare' ? 'lg:grid-cols-2' : ''">
+    <div
+      class="grid grid-cols-1 gap-10"
+      :class="mode === 'compare' ? 'lg:grid-cols-2' : ''"
+    >
       <!-- CRF Results -->
       <div x-show="mode === 'compare' || mode === 'crf'" x-transition>
-        <div class="flex items-center justify-between mb-4 border-b border-black/5 pb-4">
-          <h3 class="text-xl font-display font-black text-slate-900 uppercase">CRF Model</h3>
-          <span class="text-[10px] font-black text-emerald-600 uppercase">Statistical Analysis</span>
+        <div
+          class="flex items-center justify-between mb-4 border-b border-black/5 pb-4"
+        >
+          <h3 class="text-xl font-display font-black text-slate-900 uppercase">
+            CRF Model
+          </h3>
+          <span class="text-[10px] font-black text-emerald-600 uppercase"
+            >Statistical Analysis</span
+          >
         </div>
-        <div class="bg-white border border-black/5 p-10 rounded-2xl text-slate-600 leading-relaxed font-bold text-xl min-h-[300px] shadow-sm" x-html="crfHtml"></div>
+        <div
+          class="bg-white border border-black/5 p-10 rounded-2xl text-slate-600 leading-relaxed font-bold text-xl min-h-[300px] shadow-sm"
+          x-html="crfHtml"
+        ></div>
       </div>
 
       <!-- SpaCy Results -->
       <div x-show="mode === 'compare' || mode === 'spacy'" x-transition>
-        <div class="flex items-center justify-between mb-4 border-b border-black/5 pb-4">
-          <h3 class="text-xl font-display font-black text-slate-900 uppercase">SpaCy Model</h3>
-          <span class="text-[10px] font-black text-purple-600 uppercase">Neural Network</span>
+        <div
+          class="flex items-center justify-between mb-4 border-b border-black/5 pb-4"
+        >
+          <h3 class="text-xl font-display font-black text-slate-900 uppercase">
+            SpaCy Model
+          </h3>
+          <span class="text-[10px] font-black text-purple-600 uppercase"
+            >Neural Network</span
+          >
         </div>
-        <div class="bg-white border border-black/5 p-10 rounded-2xl text-slate-600 leading-relaxed font-bold text-xl min-h-[300px] shadow-sm" x-html="spacyHtml"></div>
+        <div
+          class="bg-white border border-black/5 p-10 rounded-2xl text-slate-600 leading-relaxed font-bold text-xl min-h-[300px] shadow-sm"
+          x-html="spacyHtml"
+        ></div>
       </div>
     </div>
 
     <!-- Export Actions -->
     <div class="mt-16 flex justify-center gap-4">
-        <button @click="exportJson" class="flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-xl font-display font-black text-xs uppercase hover:bg-slate-800 transition-colors shadow-lg">
-            <i class="ri-file-code-line text-lg"></i> Export JSON
-        </button>
-        <button @click="exportTxt" class="flex items-center gap-2 px-6 py-3 bg-white border border-slate-900 text-slate-900 rounded-xl font-display font-black text-xs uppercase hover:bg-slate-50 transition-colors shadow-md">
-            <i class="ri-file-text-line text-lg"></i> Download Text
-        </button>
+      <button
+        @click="exportJson"
+        class="flex items-center gap-2 px-6 py-3 bg-slate-900 text-white rounded-xl font-display font-black text-xs uppercase hover:bg-slate-800 transition-colors shadow-lg"
+      >
+        <i class="ri-file-code-line text-lg"></i> Export JSON
+      </button>
+      <button
+        @click="exportTxt"
+        class="flex items-center gap-2 px-6 py-3 bg-white border border-slate-900 text-slate-900 rounded-xl font-display font-black text-xs uppercase hover:bg-slate-50 transition-colors shadow-md"
+      >
+        <i class="ri-file-text-line text-lg"></i> Download Text
+      </button>
     </div>
   </div>
 </div>
-{% endblock %} 
-
-{% block extra_js %}
+{% endblock %} {% block extra_js %}
 <script>
   function nerTool() {
     return {
       mode: "compare",
-      inputText: "Elon Musk, the CEO of SpaceX, announced today that the company will launch a new rocket from Florida next Friday at 10 AM, costing roughly $500 million.",
+      inputText:
+        "The State Bank of Pakistan reported a significant increase in foreign remittances, reaching $3 billion in the month of March.",
       isLoading: false,
       hasResults: false,
       results: {
@@ -267,35 +446,89 @@
         spacy: { entities: [], processing_time: 0 },
       },
       stats: {
-        crfCount: 0, spacyCount: 0,
-        crfUnique: 0, spacyUnique: 0,
-        qualityWinner: "-", timeWinner: "-",
-        avgConfidence: 0,
+        crfCount: 0,
+        spacyCount: 0,
+        crfUnique: 0,
+        spacyUnique: 0,
+        qualityWinner: "-",
+        timeWinner: "-",
+        crfAvg: 0,
+        spacyAvg: 0,
       },
-      activeFilters: { PER: true, LOC: true, ORG: true, DATE: true, MONEY: true, TIME: true, MISC: true },
+      activeFilters: {
+        PER: true,
+        LOC: true,
+        ORG: true,
+        DATE: true,
+        MONEY: true,
+        TIME: true,
+        MISC: true,
+      },
       entityTypes: {
-        PER: { bg: 'bg-blue-50', text: 'text-blue-800', border: 'border-blue-200', dot: 'bg-blue-500' },
-        LOC: { bg: 'bg-emerald-50', text: 'text-emerald-800', border: 'border-emerald-200', dot: 'bg-emerald-500' },
-        ORG: { bg: 'bg-amber-50', text: 'text-amber-800', border: 'border-amber-200', dot: 'bg-amber-500' },
-        DATE: { bg: 'bg-purple-50', text: 'text-purple-800', border: 'border-purple-200', dot: 'bg-purple-500' },
-        MONEY: { bg: 'bg-rose-50', text: 'text-rose-800', border: 'border-rose-200', dot: 'bg-rose-500' },
-        TIME: { bg: 'bg-cyan-50', text: 'text-cyan-800', border: 'border-cyan-200', dot: 'bg-cyan-500' },
-        MISC: { bg: 'bg-slate-50', text: 'text-slate-800', border: 'border-slate-200', dot: 'bg-slate-500' }
+        PER: {
+          bg: "bg-blue-50",
+          text: "text-blue-800",
+          border: "border-blue-200",
+          dot: "bg-blue-500",
+        },
+        LOC: {
+          bg: "bg-emerald-50",
+          text: "text-emerald-800",
+          border: "border-emerald-200",
+          dot: "bg-emerald-500",
+        },
+        ORG: {
+          bg: "bg-amber-50",
+          text: "text-amber-800",
+          border: "border-amber-200",
+          dot: "bg-amber-500",
+        },
+        DATE: {
+          bg: "bg-purple-50",
+          text: "text-purple-800",
+          border: "border-purple-200",
+          dot: "bg-purple-500",
+        },
+        MONEY: {
+          bg: "bg-rose-50",
+          text: "text-rose-800",
+          border: "border-rose-200",
+          dot: "bg-rose-500",
+        },
+        TIME: {
+          bg: "bg-cyan-50",
+          text: "text-cyan-800",
+          border: "border-cyan-200",
+          dot: "bg-cyan-500",
+        },
+        MISC: {
+          bg: "bg-slate-50",
+          text: "text-slate-800",
+          border: "border-slate-200",
+          dot: "bg-slate-500",
+        },
       },
       crfHtml: "",
       spacyHtml: "",
       samples: {
-        news: "Breaking: Microsoft CEO Satya Nadella announced a new partnership with OpenAI in San Francisco to expand Azure cloud capabilities.",
-        tech: "The new iPhone 16 Pro, launched by Apple in California, features an A18 chip and improved camera sensors costing roughly $999.",
-        finance: "NVIDIA stock soared by 8% today in the London Stock Exchange after reporting record-breaking revenue of $30 billion from GPU sales.",
-        business: "Hammad Ali from {{ APP_NAME }} Corp reported that the annual Q3 merger between Google and DeepMind in London saved nearly $4 billion.",
+        news: "Prime Minister Shehbaz Sharif chaired a high-level meeting in Islamabad today to discuss the ongoing economic challenges and the progress of CPEC projects.",
+        tech: "Systems Limited and NetSol Technologies are leading the digital transformation in Karachi, creating thousands of jobs for local youth.",
+        finance:
+          "The State Bank of Pakistan reported a significant increase in foreign remittances, reaching $3 billion in the month of March.",
+        business:
+          "Engro Corporation and Lucky Cement announced a joint venture to explore renewable energy sectors in Sindh, targeting a total investment of $2 billion.",
       },
 
-      clearInput() { this.inputText = ""; this.hasResults = false; },
-      useSample(key) { this.inputText = this.samples[key]; },
-      toggleFilter(type) { 
-          this.activeFilters[type] = !this.activeFilters[type]; 
-          this.updateVisualization();
+      clearInput() {
+        this.inputText = "";
+        this.hasResults = false;
+      },
+      useSample(key) {
+        this.inputText = this.samples[key];
+      },
+      toggleFilter(type) {
+        this.activeFilters[type] = !this.activeFilters[type];
+        this.updateVisualization();
       },
 
       async runComparison() {
@@ -320,7 +553,11 @@
             setTimeout(() => {
               if (this.mode === "compare") this.renderSummaryCharts();
               const dest = document.getElementById("resultsContainer");
-              if (dest) window.scrollTo({ top: dest.offsetTop - 100, behavior: "smooth" });
+              if (dest)
+                window.scrollTo({
+                  top: dest.offsetTop - 100,
+                  behavior: "smooth",
+                });
             }, 300);
           });
         } catch (error) {
@@ -335,29 +572,51 @@
         const spa = data.spacy?.entities || [];
         this.stats.crfCount = crf.length;
         this.stats.spacyCount = spa.length;
-        this.stats.crfUnique = new Set(crf.map(e => e.label)).size;
-        this.stats.spacyUnique = new Set(spa.map(e => e.label)).size;
+        this.stats.crfUnique = new Set(crf.map((e) => e.label)).size;
+        this.stats.spacyUnique = new Set(spa.map((e) => e.label)).size;
 
-        const crfComp = crf.filter(e => e.text.includes(" ")).length;
-        const spaComp = spa.filter(e => e.text.includes(" ")).length;
-        const crfQuality = (crfComp * 1.5) + (this.stats.crfUnique * 1.0);
-        const spaQuality = (spaComp * 1.5) + (this.stats.spacyUnique * 1.0);
-        
-        if (this.mode === 'compare') {
-            if (crfQuality > spaQuality) this.stats.qualityWinner = "CRF Leads";
-            else if (spaQuality > crfQuality) this.stats.qualityWinner = "SpaCy Leads";
-            else this.stats.qualityWinner = "Draw";
+        const crfComp = crf.filter((e) => e.text.includes(" ")).length;
+        const spaComp = spa.filter((e) => e.text.includes(" ")).length;
+        const crfQuality = crfComp * 1.5 + this.stats.crfUnique * 1.0;
+        const spaQuality = spaComp * 1.5 + this.stats.spacyUnique * 1.0;
+
+        if (this.mode === "compare") {
+          if (crfQuality > spaQuality) this.stats.qualityWinner = "CRF Leads";
+          else if (spaQuality > crfQuality)
+            this.stats.qualityWinner = "SpaCy Leads";
+          else this.stats.qualityWinner = "Draw";
         } else {
-            this.stats.qualityWinner = this.mode === 'crf' ? "CRF Active" : "SpaCy Active";
+          this.stats.qualityWinner =
+            this.mode === "crf" ? "CRF Active" : "SpaCy Active";
         }
 
-        const confValues = crf.map(e => e.confidence || 0);
-        this.stats.avgConfidence = confValues.length ? Math.round(confValues.reduce((a, b) => a + b, 0) / confValues.length) : (this.mode === 'spacy' ? 'N/A' : 95);
+        const crfConf = crf.map((e) => e.confidence || 0);
+        const spaConf = spa.map((e) => e.confidence || 0);
+        this.stats.crfAvg = crfConf.length
+          ? Math.round(crfConf.reduce((a, b) => a + b, 0) / crfConf.length)
+          : this.mode === "spacy"
+            ? "N/A"
+            : crf.length
+              ? 95
+              : 0;
+        this.stats.spacyAvg = spaConf.length
+          ? Math.round(spaConf.reduce((a, b) => a + b, 0) / spaConf.length)
+          : this.mode === "crf"
+            ? "N/A"
+            : spa.length
+              ? 94
+              : 0;
       },
 
       updateVisualization() {
-          this.crfHtml = this.generateOutput(this.inputText, this.results.crf?.entities || []);
-          this.spacyHtml = this.generateOutput(this.inputText, this.results.spacy?.entities || []);
+        this.crfHtml = this.generateOutput(
+          this.inputText,
+          this.results.crf?.entities || [],
+        );
+        this.spacyHtml = this.generateOutput(
+          this.inputText,
+          this.results.spacy?.entities || [],
+        );
       },
 
       generateOutput(text, entities) {
@@ -367,16 +626,22 @@
         let result = "";
         let cursor = 0;
 
-        sorted.forEach(ent => {
-          if (!this.activeFilters[ent.label.toUpperCase().replace('GPE', 'LOC')]) {
-             // Handle visibility based on filters
-             return;
+        sorted.forEach((ent) => {
+          const type = ent.label
+            .toUpperCase()
+            .replace("GPE", "LOC")
+            .replace("PERSON", "PER");
+
+          if (!this.activeFilters[type]) {
+            // Handle visibility based on filters
+            if (!this.activeFilters["MISC"]) return; // If MISC is off, hide everything else
           }
-          
+
           result += text.substring(cursor, ent.start);
-          const type = ent.label.toUpperCase().replace('GPE', 'LOC');
           const config = this.entityTypes[type] || this.entityTypes.MISC;
-          const conf = ent.confidence ? `<span class="ml-1 opacity-40 text-[7px]">${ent.confidence}%</span>` : '';
+          const conf = ent.confidence
+            ? `<span class="ml-1 opacity-60 text-[9px] font-black">${ent.confidence}%</span>`
+            : "";
 
           result += `<span class="inline-flex items-center px-2 py-0.5 rounded-lg border ${config.bg} ${config.text} ${config.border} font-black mx-1 relative group cursor-help transition-all hover:scale-105">
                         ${text.substring(ent.start, ent.end)}
@@ -391,49 +656,105 @@
       },
 
       exportJson() {
-          const blob = new Blob([JSON.stringify(this.results, null, 2)], { type: 'application/json' });
-          const a = document.createElement('a');
-          a.href = URL.createObjectURL(blob);
-          a.download = 'entify_results.json';
-          a.click();
+        const blob = new Blob([JSON.stringify(this.results, null, 2)], {
+          type: "application/json",
+        });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "entify_results.json";
+        a.click();
       },
 
       exportTxt() {
-          let text = `ENTIFY NER RESULTS\n==================\n\nINPUT: ${this.inputText}\n\n`;
-          if (this.results.crf) {
-            text += `CRF ENTITIES:\n`;
-            this.results.crf.entities.forEach(e => text += `- ${e.text} (${e.label}) [Conf: ${e.confidence}%]\n`);
-          }
-          if (this.results.spacy) {
-            text += `\nSPACY ENTITIES:\n`;
-            this.results.spacy.entities.forEach(e => text += `- ${e.text} (${e.label})\n`);
-          }
-          
-          const blob = new Blob([text], { type: 'text/plain' });
-          const a = document.createElement('a');
-          a.href = URL.createObjectURL(blob);
-          a.download = 'entify_results.txt';
-          a.click();
+        let text = `ENTIFY NER RESULTS\n==================\n\nINPUT: ${this.inputText}\n\n`;
+        if (this.results.crf) {
+          text += `CRF ENTITIES:\n`;
+          this.results.crf.entities.forEach(
+            (e) =>
+              (text += `- ${e.text} (${e.label}) [Conf: ${e.confidence}%]\n`),
+          );
+        }
+        if (this.results.spacy) {
+          text += `\nSPACY ENTITIES:\n`;
+          this.results.spacy.entities.forEach(
+            (e) => (text += `- ${e.text} (${e.label})\n`),
+          );
+        }
+
+        const blob = new Blob([text], { type: "text/plain" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "entify_results.txt";
+        a.click();
       },
 
       renderSummaryCharts() {
         if (!this.results.crf || !this.results.spacy) return; // Only show comparison charts
         if (this.countChartInstance) this.countChartInstance.destroy();
         if (this.speedChartInstance) this.speedChartInstance.destroy();
-        const common = { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, title: { display: true, font: { weight: "black", size: 10 } } }, scales: { y: { beginAtZero: true, grid: { color: "rgba(0,0,0,0.03)" } }, x: { grid: { display: false } } } };
-        
+        const common = {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            title: { display: true, font: { weight: "black", size: 10 } },
+          },
+          scales: {
+            y: { beginAtZero: true, grid: { color: "rgba(0,0,0,0.03)" } },
+            x: { grid: { display: false } },
+          },
+        };
+
         this.countChartInstance = new Chart(this.$refs.countChart, {
           type: "bar",
-          data: { labels: ["CRF", "SpaCy"], datasets: [{ data: [this.stats.crfCount, this.stats.spacyCount], backgroundColor: ["#10b981", "#9333ea"], borderRadius: 10, barThickness: 40 }] },
-          options: { ...common, plugins: { ...common.plugins, title: { ...common.plugins.title, text: "Entities Lead" } } }
+          data: {
+            labels: ["CRF", "SpaCy"],
+            datasets: [
+              {
+                data: [this.stats.crfCount, this.stats.spacyCount],
+                backgroundColor: ["#10b981", "#9333ea"],
+                borderRadius: 10,
+                barThickness: 40,
+              },
+            ],
+          },
+          options: {
+            ...common,
+            plugins: {
+              ...common.plugins,
+              title: { ...common.plugins.title, text: "Entities Lead" },
+            },
+          },
         });
 
         this.speedChartInstance = new Chart(this.$refs.speedChart, {
           type: "bar",
-          data: { labels: ["CRF", "SpaCy"], datasets: [{ data: [this.results.crf.processing_time, this.results.spacy.processing_time], backgroundColor: ["#10b981", "#9333ea"], borderRadius: 10, barThickness: 40 }] },
-          options: { ...common, plugins: { ...common.plugins, title: { ...common.plugins.title, text: "Processing Lead (Seconds)" } } }
+          data: {
+            labels: ["CRF", "SpaCy"],
+            datasets: [
+              {
+                data: [
+                  this.results.crf.processing_time,
+                  this.results.spacy.processing_time,
+                ],
+                backgroundColor: ["#10b981", "#9333ea"],
+                borderRadius: 10,
+                barThickness: 40,
+              },
+            ],
+          },
+          options: {
+            ...common,
+            plugins: {
+              ...common.plugins,
+              title: {
+                ...common.plugins.title,
+                text: "Processing Lead (Seconds)",
+              },
+            },
+          },
         });
-      }
+      },
     };
   }
 </script>

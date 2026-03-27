@@ -15,20 +15,27 @@ from models.crf.features import extract_features
 
 app = Flask(__name__)
 
+
 @app.context_processor
 def inject_config():
     return {
-        'APP_NAME': os.getenv('APP_NAME', 'Entify'),
-        'APP_MODE': os.getenv('APP_MODE', 'PROD').upper(),
-        'APP_GITHUB_REPO_URL': os.getenv('APP_GITHUB_REPO_URL', 'https://github.com/softdevhassan/entify'),
-        'CONTACT_EMAIL': os.getenv('CONTACT_EMAIL', 'softdevhassan.biz@gmail.com'),
-        'UOS_URL': os.getenv('UOS_URL', 'https://su.edu.pk'),
-        'ILM_URL': os.getenv('ILM_URL', 'https://ilm.edu.pk/campuses/index.php?campus=ILM-College-Sargodha'),
-        'PROJECT_VERSION': os.getenv('PROJECT_VERSION', 'v2.8.0'),
-        'TEAM_MEMBERS': os.getenv('TEAM_MEMBERS', '').split(','),
-        'TEAM_HANDLES': os.getenv('TEAM_HANDLES', '').split(','),
-        'DEPLOY_DOMAIN': os.getenv('DEPLOY_DOMAIN', 'entify.orbin.dev'),
+        "APP_NAME": os.getenv("APP_NAME", "Entify"),
+        "APP_MODE": os.getenv("APP_MODE", "PROD").upper(),
+        "APP_GITHUB_REPO_URL": os.getenv(
+            "APP_GITHUB_REPO_URL", "https://github.com/softdevhassan/entify"
+        ),
+        "CONTACT_EMAIL": os.getenv("CONTACT_EMAIL", "softdevhassan.biz@gmail.com"),
+        "UOS_URL": os.getenv("UOS_URL", "https://su.edu.pk"),
+        "ILM_URL": os.getenv(
+            "ILM_URL",
+            "https://ilm.edu.pk/campuses/index.php?campus=ILM-College-Sargodha",
+        ),
+        "PROJECT_VERSION": os.getenv("PROJECT_VERSION", "v4.1.0"),
+        "TEAM_MEMBERS": os.getenv("TEAM_MEMBERS", "").split(","),
+        "TEAM_HANDLES": os.getenv("TEAM_HANDLES", "").split(","),
+        "DEPLOY_DOMAIN": os.getenv("DEPLOY_DOMAIN", "entify.orbin.dev"),
     }
+
 
 # --- Global Model Variables (Initialized Lazily) ---
 _spacy_model = None
@@ -140,7 +147,9 @@ def sitemap_page():
 @app.route("/robots.txt")
 def robots():
     base_url = f"https://{os.getenv('DEPLOY_DOMAIN', 'entify.orbin.dev')}"
-    content = f"User-agent: *\nAllow: /\nDisallow: /api/\nSitemap: {base_url}/sitemap.xml\n"
+    content = (
+        f"User-agent: *\nAllow: /\nDisallow: /api/\nSitemap: {base_url}/sitemap.xml\n"
+    )
     return content, 200, {"Content-Type": "text/plain"}
 
 
@@ -162,7 +171,7 @@ def sitemap():
     ]
     base_url = f"https://{os.getenv('DEPLOY_DOMAIN', 'entify.orbin.dev')}"
     today = time.strftime("%Y-%m-%d")
-    
+
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
     xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     for page, priority, freq in pages:
@@ -194,7 +203,8 @@ def api_compare():
 
     # Simple HTML stripping
     import re
-    text = re.sub(r'<[^>]*>', '', text)
+
+    text = re.sub(r"<[^>]*>", "", text)
 
     results = {
         "text": text,
@@ -243,10 +253,13 @@ def api_compare():
                 # Reconstruct character offsets for CRF based purely on word splits (approximate)
                 current_char_idx = 0
 
-                for i, (word, pred, prob_dist) in enumerate(zip(sentence, predictions, marginals)):
+                for i, (word, pred, prob_dist) in enumerate(
+                    zip(sentence, predictions, marginals)
+                ):
                     # Find start char index of the word in original text
                     start_char = text.find(word, current_char_idx)
-                    if start_char == -1: start_char = current_char_idx
+                    if start_char == -1:
+                        start_char = current_char_idx
                     end_char = start_char + len(word)
                     current_char_idx = end_char
 
@@ -269,14 +282,16 @@ def api_compare():
                                 "label": label,
                                 "start": start_char,
                                 "end": end_char,
-                                "confidence": confidence
+                                "confidence": confidence,
                             }
                         else:
                             # Append to current entity
                             current_entity["text"] += " " + word
                             current_entity["end"] = end_char
                             # Track minimum confidence in multi-word entity
-                            current_entity["confidence"] = min(current_entity.get("confidence", 100), confidence)
+                            current_entity["confidence"] = min(
+                                current_entity.get("confidence", 100), confidence
+                            )
                     else:
                         if current_entity:
                             entities.append(current_entity)
@@ -291,7 +306,9 @@ def api_compare():
             except Exception as e:
                 results["crf"]["error"] = str(e)
         else:
-            results["crf"]["error"] = "CRF model is not trained yet. Run trainer.py first."
+            results["crf"][
+                "error"
+            ] = "CRF model is not trained yet. Run trainer.py first."
     else:
         results["crf"] = None  # Remove key if not requested
 
